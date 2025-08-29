@@ -8,12 +8,12 @@ import Footer from "@/components/ui/Footer";
 
 import { Kirang_Haerang, Montserrat } from "next/font/google";
 
-// Highlight-Font (Kirang Haerang) + Standardschrift (Montserrat)
-const highlight = Kirang_Haerang({
+// Highlight-Font + Standardschrift (Montserrat)
+const highlight = Montserrat({
   subsets: ["latin"],
-  weight: "400",
   display: "swap",
-  variable: "--font-highlight",
+  variable: "--font-montserrat",
+  weight: ["600"],
 });
 
 const montserrat = Montserrat({
