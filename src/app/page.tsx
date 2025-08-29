@@ -88,7 +88,7 @@ className="object-cover"
 <div className="w-full px-6 sm:px-10 py-8">
 {/* Weiße Box vor dem Bild */}
 <div
-className="max-w-xl bg-white/95 border rounded-2xl shadow-md p-5 sm:p-6"
+className="max-w-xl bg-white/75 border rounded-2xl shadow-md p-5 sm:p-6"
 style={{ borderColor: "var(--sage,#CDE6DF)" }}
 >
 <h1
