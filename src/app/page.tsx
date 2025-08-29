@@ -1,10 +1,11 @@
-// src/app/(magazin)/BlogLanding.tsx
+// src/app/page.tsx
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-export type BlogPost = {
+// --- Lokale Typen (nicht exportieren, damit Next die Page korrekt erkennt) ---
+type BlogPost = {
   slug: string;
   title: string;
   excerpt?: string;
@@ -12,11 +13,12 @@ export type BlogPost = {
   date: string;
 };
 
-export type BlogLandingProps = {
+type BlogLandingProps = {
   featured?: BlogPost | null;
   rest: BlogPost[];
 };
 
+// --- Hilfsfunktionen ---
 function formatDate(d: string) {
   const date = new Date(d);
   return isNaN(date.getTime())
@@ -24,7 +26,8 @@ function formatDate(d: string) {
     : date.toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" });
 }
 
-export default function BlogLanding({ featured = null, rest = [] }: BlogLandingProps) {
+// --- Präsentationskomponente ---
+function BlogLanding({ featured = null, rest = [] }: BlogLandingProps) {
   return (
     <>
       {/* Highlight-Artikel – volle Breite */}
@@ -163,4 +166,29 @@ export default function BlogLanding({ featured = null, rest = [] }: BlogLandingP
       </section>
     </>
   );
+}
+
+// --- Databeschaffung (Stub) ---
+// Passe diese Funktion an dein CMS/API an.
+// Bewusst defensiv (immer []), damit der Build auf Vercel sicher durchläuft.
+async function getPosts(): Promise<BlogPost[]> {
+  // Beispiel: Hole aus /api/posts (später anpassen)
+  // try {
+  //   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL ?? ""}/api/posts`, {
+  //     next: { revalidate: 300 },
+  //   });
+  //   if (!res.ok) return [];
+  //   return (await res.json()) as BlogPost[];
+  // } catch {
+  //   return [];
+  // }
+  return [];
+}
+
+// --- Page (Default Export) ---
+export default async function Page() {
+  const posts = await getPosts();
+  const [featured, ...rest] = posts;
+
+  return <BlogLanding featured={featured ?? null} rest={rest} />;
 }
