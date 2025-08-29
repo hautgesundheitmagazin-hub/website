@@ -1,4 +1,4 @@
-// app/(magazin)/BlogLanding.tsx
+// src/app/(magazin)/BlogLanding.tsx
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
@@ -86,7 +86,7 @@ export default function BlogLanding({ featured = null, rest = [] }: BlogLandingP
         </div>
       </section>
 
-      {/* Kopfzeile „Neu im Magazin“ – exakt auf gewünschte Breite */}
+      {/* Kopfzeile – exakt gewünschte Breite */}
       <div className="w-full max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
         <h3 className="font-highlight text-xl sm:text-2xl" style={{ color: "var(--graphite,#243236)" }}>
           Neu im Magazin
@@ -96,7 +96,7 @@ export default function BlogLanding({ featured = null, rest = [] }: BlogLandingP
         </Button>
       </div>
 
-      {/* Letzte 9 Artikel – Raster bleibt, Container auf max-w-4xl */}
+      {/* Letzte 9 Artikel – Container auf max-w-4xl */}
       <section className="w-full">
         <div className="w-full max-w-4xl mx-auto px-6 py-12 sm:py-16">
           {rest.length === 0 ? (
