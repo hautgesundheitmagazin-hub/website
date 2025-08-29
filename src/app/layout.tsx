@@ -5,13 +5,14 @@ import AnalyticsProvider from "@/components/ui/AnalyticsProvider";
 import Header from "@/components/ui/Header";
 import Footer from "@/components/ui/Footer";
 
-import { Fraunces, Montserrat } from "next/font/google";
+import { Kirang_Haerang, Montserrat } from "next/font/google";
 
-// CI-Fonts (display swap für bessere UX). Variablen optional für Tailwind-Mapping.
-const fraunces = Fraunces({
+// Highlight-Font (Kirang Haerang) + Standardschrift (Montserrat)
+const highlight = Kirang_Haerang({
   subsets: ["latin"],
+  weight: "400",
   display: "swap",
-  variable: "--font-fraunces",
+  variable: "--font-highlight",
 });
 
 const montserrat = Montserrat({
@@ -22,8 +23,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "findbar – KI-optimierte Blog-Artikel",
-  description: "Skaliere Dein Unternehmen mit KI-optimierten Blog-Artikeln.",
+  title: "Gesunde Haut leben - Dein Ratgeber",
+  description: "Entdecke fundiertes Wissen zu Neurodermitis, Hautgesundheit und all den Themen, die damit zusammenhängen.",
   icons: {
     icon: "/icon.png", // liegt in /public
     shortcut: "/icon.png",
@@ -34,10 +35,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="de" className={`${fraunces.variable} ${montserrat.variable}`}>
+    <html lang="de" className={`${highlight.variable} ${montserrat.variable}`}>
       <body
         className={`${montserrat.className} bg-[var(--sand,#F5EDE6)] text-[var(--graphite,#243236)] antialiased min-h-screen`}
       >
+        {/* Globale Utility-Klasse für die Highlight-Schrift */}
+        <style jsx global>{`
+          .font-highlight { font-family: var(--font-highlight), 'Kirang Haerang', cursive; }
+        `}</style>
+
         {/* Layout-Frame */}
         <div className="flex min-h-screen flex-col">
           <Header />
