@@ -43,13 +43,60 @@ function sortByDateDesc(posts: BlogPost[]) {
   });
 }
 
+// --- UI: Hero ---
+function HeroBanner() {
+  return (
+    <section className="relative w-full">
+      {/* Hero-Image */}
+      <div className="relative w-full min-h-[320px] sm:min-h-[420px] md:min-h-[520px]">
+        <Image
+          src="/hero-picture-gesunde-haut.jpg" // <— passe den Pfad an, falls nötig
+          alt="Gesunde Haut – Hero"
+          fill
+          priority
+          unoptimized
+          sizes="100vw"
+          className="object-cover opacity-80"
+        />
+        {/* leichte Abdunklung + Lesbarkeits-Overlay */}
+        <div className="absolute inset-0 bg-black/10" />
+        {/* Text-Overlay */}
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-full max-w-4xl mx-auto px-6">
+            <h1
+              className="font-highlight text-3xl sm:text-4xl md:text-5xl leading-tight"
+              style={{
+                color: "var(--graphite,#243236)",
+                fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)",
+              }}
+            >
+              Gesunde Haut beginnt hier
+            </h1>
+            <p className="mt-3 max-w-2xl text-base sm:text-lg" style={{ color: "var(--graphite,#243236)" }}>
+              Evidence-based Tipps, Routinen und Produktempfehlungen – verständlich erklärt.
+            </p>
+            <div className="mt-6">
+              <Button asChild>
+                <Link href="/blog">Zum Magazin</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // --- UI ---
 function BlogLanding({ featured, rest }: BlogLandingProps) {
   return (
-    <>
+    <main className="bg-white">
+      {/* HERO */}
+      <HeroBanner />
+
       {/* Highlight-Artikel */}
       <section className="w-full">
-        <div className="w-full max-w-4xl mx-auto px-6 py-4">
+        <div className="w-full max-w-4xl mx-auto px-6 py-8 sm:py-10">
           {featured ? (
             <Card
               className="relative overflow-hidden border rounded-2xl min-h-[280px] sm:min-h-[360px]"
@@ -198,7 +245,7 @@ function BlogLanding({ featured, rest }: BlogLandingProps) {
           )}
         </div>
       </section>
-    </>
+    </main>
   );
 }
 
