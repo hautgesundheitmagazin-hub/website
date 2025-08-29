@@ -66,12 +66,12 @@ function HeroBanner() {
           <div className="absolute inset-0 flex items-center">
             <div className="w-full px-6 sm:px-10 py-8">
               <h1
-                className="font-highlight text-3xl sm:text-4xl md:text-5xl leading-tight text-white"
-                style={{
-                  fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)",
-                  textShadow: "0 2px 12px rgba(0,0,0,0.35)",
-                }}
-              >
+  className="font-highlight font-bold text-3xl sm:text-4xl md:text-5xl leading-tight text-white"
+  style={{
+    fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)",
+    textShadow: "0 2px 12px rgba(0,0,0,0.35)",
+  }}
+>
                 Gesunde Haut beginnt hier
               </h1>
 
