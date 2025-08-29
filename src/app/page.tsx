@@ -68,55 +68,58 @@ function SectionHeading({ title, kicker, description }: { title: string; kicker?
 }
 
 function HeroBanner() {
-  return (
-    <section className="w-full">
-      <div className="w-full max-w-4xl mx-auto px-6 pt-6">
-        <div className="relative min-h-[320px] sm:min-h-[420px] md:min-h-[520px] rounded-2xl overflow-hidden shadow-sm">
-          {/* Bild */}
-          <Image
-            src="/hero-picture-gesunde-haut.jpg"
-            alt="Gesunde Haut – Hero"
-            fill
-            priority
-            unoptimized
-            sizes="100vw"
-            className="object-cover"
-          />
+return (
+<section className="w-full">
+<div className="w-full max-w-4xl mx-auto px-6 pt-6">
+<div className="relative min-h-[320px] sm:min-h-[420px] md:min-h-[520px] rounded-2xl overflow-hidden shadow-sm">
+{/* Bild */}
+<Image
+src="/hero-picture-gesunde-haut.jpg"
+alt="Gesunde Haut – Hero"
+fill
+priority
+unoptimized
+sizes="100vw"
+className="object-cover"
+/>
 
-          {/* Weißes Overlay für höhere Durchsichtigkeit */}
-          <div className="absolute inset-0 bg-white/60" />
+{/* Text-Overlay */}
+<div className="absolute inset-0 flex items-center">
+<div className="w-full px-6 sm:px-10 py-8">
+{/* Weiße Box vor dem Bild */}
+<div
+className="max-w-xl bg-white/95 border rounded-2xl shadow-md p-5 sm:p-6"
+style={{ borderColor: "var(--sage,#CDE6DF)" }}
+>
+<h1
+className="font-highlight font-extrabold text-3xl sm:text-4xl md:text-5xl leading-tight"
+style={{
+color: "var(--graphite,#243236)",
+fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)",
+}}
+>
+Gesunde Haut beginnt hier
+</h1>
 
-          {/* Text-Overlay */}
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full px-6 sm:px-10 py-8">
-              <h1
-                className="font-highlight font-extrabold text-3xl sm:text-4xl md:text-5xl leading-tight text-white"
-                style={{
-                  fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)",
-                  textShadow: "0 2px 12px rgba(0,0,0,0.35)",
-                }}
-              >
-                Gesunde Haut beginnt hier
-              </h1>
+<p
+className="mt-3 max-w-2xl text-base sm:text-lg"
+style={{ color: "var(--graphite,#243236)" }}
+>
+Evidence-based Tipps, Routinen und Produktempfehlungen – verständlich erklärt.
+</p>
 
-              <p
-                className="mt-3 max-w-2xl text-base sm:text-lg text-white"
-                style={{ textShadow: "0 1px 8px rgba(0,0,0,0.30)" }}
-              >
-                Evidence-based Tipps, Routinen und Produktempfehlungen – verständlich erklärt.
-              </p>
-
-              <div className="mt-6">
-                <Button asChild>
-                  <Link href="/blog">Zum Magazin</Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+<div className="mt-6">
+<Button asChild>
+<Link href="/blog">Zum Magazin</Link>
+</Button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+);
 }
 
 /**
@@ -184,10 +187,7 @@ function TrustSection() {
           <Link href="/quellen" className="inline-flex items-center gap-2 text-sm font-medium underline-offset-4 hover:underline" style={{ color: "var(--graphite,#243236)" }}>
             <FlaskConical className="w-4 h-4" /> Quellenangaben
           </Link>
-          <span className="hidden sm:inline" style={{ color: "var(--fog,#9AA7AE)" }}>|</span>
-          <Link href="/methodik" className="inline-flex items-center gap-2 text-sm font-medium underline-offset-4 hover:underline" style={{ color: "var(--graphite,#243236)" }}>
-            <ShieldCheck className="w-4 h-4" /> So testen wir Produkte
-          </Link>
+         
         </div>
       </div>
     </section>
