@@ -10,7 +10,7 @@ a { text-decoration: none; }
 
 /* Optional: CI-Farben als CSS-Variablen */
 :root {
-  --sand: #ffffff;
+  --sand: #28A392;
   --graphite: #243236;
 }
 
