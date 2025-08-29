@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-// --- Lokale Typen (nicht exportieren, damit Next die Page korrekt erkennt) ---
+// --- Lokale Typen ---
 type BlogPost = {
   slug: string;
   title: string;
@@ -18,7 +18,7 @@ type BlogLandingProps = {
   rest: BlogPost[];
 };
 
-// --- Hilfsfunktionen ---
+// --- Helpers ---
 function formatDate(d: string) {
   const date = new Date(d);
   return isNaN(date.getTime())
@@ -26,36 +26,38 @@ function formatDate(d: string) {
     : date.toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" });
 }
 
-// --- Präsentationskomponente ---
+// --- UI ---
 function BlogLanding({ featured = null, rest = [] }: BlogLandingProps) {
   return (
     <>
-      {/* Highlight-Artikel – volle Breite */}
+      {/* Highlight-Artikel */}
       <section className="w-full">
         <div className="w-full max-w-4xl mx-auto px-6 py-4">
           {featured ? (
             <Card
-              className="relative overflow-hidden border rounded-2xl"
+              className="relative overflow-hidden border rounded-2xl min-h-[280px] sm:min-h-[360px]"
               style={{ borderColor: "var(--sage,#CDE6DF)" }}
             >
-              {/* Hero-Bild mit mehr Transparenz für bessere Lesbarkeit */}
+              {/* Hintergrundbild */}
               {featured.cover ? (
-                <div className="absolute inset-0">
+                <div className="absolute inset-0 z-0">
                   <Image
                     src={featured.cover}
                     alt={featured.title}
                     fill
                     priority
+                    unoptimized
                     sizes="100vw"
-                    className="object-cover opacity-50"
+                    className="object-cover opacity-60"
                   />
                 </div>
               ) : null}
 
-              {/* Leichte Aufhellung für Lesbarkeit */}
-              <div className="absolute inset-0 bg-white/20" />
+              {/* Overlay für Lesbarkeit */}
+              <div className="absolute inset-0 z-10 bg-white/20" />
 
-              <div className="relative p-6 sm:p-10">
+              {/* Inhalt */}
+              <div className="relative z-20 p-6 sm:p-10">
                 <CardHeader className="p-0 space-y-3">
                   <div className="mb-2 text-xs" style={{ color: "var(--fog,#9AA7AE)" }}>
                     {formatDate(featured.date)}
@@ -89,7 +91,7 @@ function BlogLanding({ featured = null, rest = [] }: BlogLandingProps) {
         </div>
       </section>
 
-      {/* Kopfzeile – exakt gewünschte Breite */}
+      {/* Kopfzeile */}
       <div className="w-full max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
         <h3 className="font-highlight text-xl sm:text-2xl" style={{ color: "var(--graphite,#243236)" }}>
           Neu im Magazin
@@ -99,7 +101,7 @@ function BlogLanding({ featured = null, rest = [] }: BlogLandingProps) {
         </Button>
       </div>
 
-      {/* Letzte 9 Artikel – Container auf max-w-4xl */}
+      {/* Letzte 9 Artikel */}
       <section className="w-full">
         <div className="w-full max-w-4xl mx-auto px-6 py-12 sm:py-16">
           {rest.length === 0 ? (
@@ -126,6 +128,7 @@ function BlogLanding({ featured = null, rest = [] }: BlogLandingProps) {
                         src={post.cover}
                         alt={post.title}
                         fill
+                        unoptimized
                         sizes="(max-width: 1024px) 100vw, 33vw"
                         className="object-cover"
                       />
@@ -168,27 +171,14 @@ function BlogLanding({ featured = null, rest = [] }: BlogLandingProps) {
   );
 }
 
-// --- Databeschaffung (Stub) ---
-// Passe diese Funktion an dein CMS/API an.
-// Bewusst defensiv (immer []), damit der Build auf Vercel sicher durchläuft.
+// --- Daten (Stub) ---
 async function getPosts(): Promise<BlogPost[]> {
-  // Beispiel: Hole aus /api/posts (später anpassen)
-  // try {
-  //   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL ?? ""}/api/posts`, {
-  //     next: { revalidate: 300 },
-  //   });
-  //   if (!res.ok) return [];
-  //   return (await res.json()) as BlogPost[];
-  // } catch {
-  //   return [];
-  // }
   return [];
 }
 
-// --- Page (Default Export) ---
+// --- Default Page ---
 export default async function Page() {
   const posts = await getPosts();
   const [featured, ...rest] = posts;
-
   return <BlogLanding featured={featured ?? null} rest={rest} />;
 }
