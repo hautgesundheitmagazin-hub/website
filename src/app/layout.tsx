@@ -1,3 +1,4 @@
+// app/layout.tsx
 import "./globals.css";
 import type { Metadata } from "next";
 import CookieBanner from "@/components/ui/CookieBanner";
@@ -24,13 +25,14 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "Gesunde Haut leben - Dein Ratgeber",
-  description: "Entdecke fundiertes Wissen zu Neurodermitis, Hautgesundheit und all den Themen, die damit zusammenhängen.",
+  description:
+    "Entdecke fundiertes Wissen zu Neurodermitis, Hautgesundheit und all den Themen, die damit zusammenhängen.",
   icons: {
-    icon: "/icon.png", // liegt in /public
+    icon: "/icon.png",
     shortcut: "/icon.png",
-    apple: "/apple-touch-icon.png", // optional – falls vorhanden, hier ersetzen
+    apple: "/apple-touch-icon.png",
   },
-  themeColor: "#F5EDE6", // CI Sand
+  themeColor: "#F5EDE6",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -39,12 +41,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={`${montserrat.className} bg-[var(--sand,#F5EDE6)] text-[var(--graphite,#243236)] antialiased min-h-screen`}
       >
-        {/* Globale Utility-Klasse für die Highlight-Schrift */}
-        <style jsx global>{`
-          .font-highlight { font-family: var(--font-highlight), 'Kirang Haerang', cursive; }
-        `}</style>
-
-        {/* Layout-Frame */}
         <div className="flex min-h-screen flex-col">
           <Header />
 
