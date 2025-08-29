@@ -17,11 +17,11 @@ export default function Header() {
             <Image
               src="/Logo Gesunde Haut leben.png"
               alt="Gesunde Haut leben – Logo"
-              width={48}
-              height={48}
+              width={480}
+              height={480}
               priority
               className="h-10 w-auto md:h-12"
-              sizes="(min-width: 768px) 48px, 40px"
+              sizes="(min-width: 768px) 480px, 400px"
             />
           </a>
 
