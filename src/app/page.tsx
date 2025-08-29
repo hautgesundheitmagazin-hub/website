@@ -253,7 +253,7 @@ function TopicsSection() {
                     <h3 className="font-medium" style={{ color: "var(--graphite,#243236)" }}>{t.title}</h3>
                     <p className="text-sm mt-1" style={{ color: "var(--graphite,#243236)" }}>{t.desc}</p>
                     <div className="mt-3">
-                      <Button size="sm" variant="secondary" asChild>
+                      <Button size="sm" variant="outline" asChild>
                         <span>Öffnen</span>
                       </Button>
                     </div>
