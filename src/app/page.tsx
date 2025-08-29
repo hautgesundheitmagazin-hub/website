@@ -4,6 +4,9 @@ import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
+// Diese Page soll NICHT statisch gecacht werden.
+export const dynamic = "force-dynamic";
+
 // --- Lokale Typen ---
 type BlogPost = {
   slug: string;
@@ -14,11 +17,17 @@ type BlogPost = {
 };
 
 type BlogLandingProps = {
-  featured?: BlogPost | null;
+  featured: BlogPost | null;
   rest: BlogPost[];
 };
 
 // --- Helpers ---
+function isValidDateString(d?: string) {
+  if (!d) return false;
+  const t = new Date(d).getTime();
+  return Number.isFinite(t);
+}
+
 function formatDate(d: string) {
   const date = new Date(d);
   return isNaN(date.getTime())
@@ -26,8 +35,16 @@ function formatDate(d: string) {
     : date.toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" });
 }
 
+function sortByDateDesc(posts: BlogPost[]) {
+  return [...posts].sort((a, b) => {
+    const ta = new Date(a.date).getTime();
+    const tb = new Date(b.date).getTime();
+    return (Number.isFinite(tb) ? tb : 0) - (Number.isFinite(ta) ? ta : 0);
+  });
+}
+
 // --- UI ---
-function BlogLanding({ featured = null, rest = [] }: BlogLandingProps) {
+function BlogLanding({ featured, rest }: BlogLandingProps) {
   return (
     <>
       {/* Highlight-Artikel */}
@@ -46,6 +63,7 @@ function BlogLanding({ featured = null, rest = [] }: BlogLandingProps) {
                     alt={featured.title}
                     fill
                     priority
+                    // Entferne 'unoptimized', falls du die Domain in next.config freigibst
                     unoptimized
                     sizes="100vw"
                     className="object-cover opacity-60"
@@ -59,9 +77,11 @@ function BlogLanding({ featured = null, rest = [] }: BlogLandingProps) {
               {/* Inhalt */}
               <div className="relative z-20 p-6 sm:p-10">
                 <CardHeader className="p-0 space-y-3">
-                  <div className="mb-2 text-xs" style={{ color: "var(--fog,#9AA7AE)" }}>
-                    {formatDate(featured.date)}
-                  </div>
+                  {isValidDateString(featured.date) && (
+                    <div className="mb-2 text-xs" style={{ color: "var(--fog,#9AA7AE)" }}>
+                      {formatDate(featured.date)}
+                    </div>
+                  )}
 
                   <CardTitle
                     className="font-highlight text-2xl sm:text-3xl"
@@ -87,7 +107,17 @@ function BlogLanding({ featured = null, rest = [] }: BlogLandingProps) {
                 </CardContent>
               </div>
             </Card>
-          ) : null}
+          ) : (
+            <div
+              className="rounded-xl border bg-white p-6"
+              style={{ borderColor: "var(--sage,#CDE6DF)" }}
+            >
+              <p className="text-[15px]" style={{ color: "var(--graphite,#243236)" }}>
+                Keine Artikel gefunden. Lege welche in deinem CMS an – oder stelle eine API unter
+                <code className="ml-1">/api/posts</code> bereit.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -110,8 +140,7 @@ function BlogLanding({ featured = null, rest = [] }: BlogLandingProps) {
               style={{ borderColor: "var(--sage,#CDE6DF)" }}
             >
               <p className="text-[15px]" style={{ color: "var(--graphite,#243236)" }}>
-                Noch keine Artikel gefunden. Lege welche in deinem CMS an – oder stelle eine API unter
-                <code className="ml-1">/api/posts</code> bereit.
+                Noch keine weiteren Artikel vorhanden.
               </p>
             </div>
           ) : (
@@ -154,9 +183,11 @@ function BlogLanding({ featured = null, rest = [] }: BlogLandingProps) {
                   </CardHeader>
 
                   <CardContent>
-                    <div className="mb-3 text-xs" style={{ color: "var(--fog,#9AA7AE)" }}>
-                      {formatDate(post.date)}
-                    </div>
+                    {isValidDateString(post.date) && (
+                      <div className="mb-3 text-xs" style={{ color: "var(--fog,#9AA7AE)" }}>
+                        {formatDate(post.date)}
+                      </div>
+                    )}
                     <Button asChild size="sm">
                       <Link href={`/blog/${post.slug}`}>Lesen</Link>
                     </Button>
@@ -171,14 +202,61 @@ function BlogLanding({ featured = null, rest = [] }: BlogLandingProps) {
   );
 }
 
-// --- Daten (Stub) ---
+// --- Datenbeschaffung ---
 async function getPosts(): Promise<BlogPost[]> {
-  return [];
+  try {
+    // Absolute URL, wenn NEXT_PUBLIC_SITE_URL gesetzt ist, sonst relative.
+    const base = process.env.NEXT_PUBLIC_SITE_URL;
+    const url = base ? new URL("/api/posts", base).toString() : "/api/posts";
+
+    const res = await fetch(url, {
+      // Keine Response-Caches – immer frische Daten.
+      cache: "no-store",
+      // next.revalidate wird hier explizit auf 0 gesetzt, falls Next intern noch ISR aktiv hätte.
+      next: { revalidate: 0 },
+      // Falls du Auth brauchst, hier Header ergänzen.
+      // headers: { Authorization: `Bearer ${process.env.CMS_TOKEN}` }
+    });
+
+    if (!res.ok) {
+      console.error("[getPosts] HTTP Error:", res.status, res.statusText);
+      return [];
+    }
+
+    const raw = (await res.json()) as unknown;
+
+    // Vorsichtige Normalisierung des Ergebnisses
+    const arr = Array.isArray(raw) ? raw : (Array.isArray((raw as any)?.posts) ? (raw as any).posts : []);
+    const normalized: BlogPost[] = arr
+      .map((p: any): BlogPost | null => {
+        if (!p) return null;
+        const slug = String(p.slug ?? p.id ?? "").trim();
+        const title = String(p.title ?? "").trim();
+        const date = String(p.date ?? p.publishedAt ?? p.createdAt ?? "");
+        if (!slug || !title) return null;
+        return {
+          slug,
+          title,
+          excerpt: p.excerpt ?? p.summary ?? p.description ?? "",
+          cover: p.cover ?? p.image ?? p.thumbnail ?? "",
+          date,
+        };
+      })
+      .filter(Boolean) as BlogPost[];
+
+    return sortByDateDesc(normalized);
+  } catch (e) {
+    console.error("[getPosts] Fehler:", e);
+    return [];
+  }
 }
 
 // --- Default Page ---
 export default async function Page() {
   const posts = await getPosts();
-  const [featured, ...rest] = posts;
-  return <BlogLanding featured={featured ?? null} rest={rest} />;
+
+  const featured = posts[0] ?? null;
+  const rest = posts.slice(1);
+
+  return <BlogLanding featured={featured} rest={rest} />;
 }
