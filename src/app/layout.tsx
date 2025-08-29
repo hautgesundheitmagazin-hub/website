@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     shortcut: "/icon.png",
     apple: "/apple-touch-icon.png",
   },
-  themeColor: "#F5EDE6",
+  themeColor: "#FFFFFF",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
