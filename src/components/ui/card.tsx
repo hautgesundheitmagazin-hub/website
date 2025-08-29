@@ -32,7 +32,7 @@ export const CardTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttrib
     <h3
       ref={ref as any}
       className={cn("text-lg md:text-xl font-semibold tracking-tight", className)}
-      style={{ fontFamily: 'Fraunces, serif', color: 'var(--graphite,#243236)', ...(style || {}) }}
+      style={{ fontFamily: 'Montserrat', color: 'var(--graphite,#243236)', ...(style || {}) }}
       {...props}
     />
   )
