@@ -2,8 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import CookieBanner from "@/components/ui/CookieBanner";
 import AnalyticsProvider from "@/components/ui/AnalyticsProvider";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/ui/Header";
+import Footer from "@/components/ui/Footer";
 
 import { Fraunces, Montserrat } from "next/font/google";
 
