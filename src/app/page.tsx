@@ -126,8 +126,8 @@ function HeroBanner() {
 function TrustSection() {
   return (
     <section
-      className="w-full border-y"
-      style={{ borderColor: "var(--sage,#CDE6DF)", background: "radial-gradient(1200px 300px at 50% -100px, var(--sage,#CDE6DF)/35%, white 60%)" }}
+      className="w-full"
+      style={{ background: "radial-gradient(1200px 300px at 50% -100px, var(--sage,#CDE6DF)/35%, white 60%)" }}
     >
       <div className="max-w-4xl mx-auto py-10 sm:py-14">
         <SectionHeading
@@ -228,40 +228,43 @@ function TopicsSection() {
 
   return (
     <section className="w-full">
-      <div className="max-w-4xl mx-auto py-10 sm:py-14">
+      <div className="max-w-4xl mx-auto py-10 sm:py-14 px-6">
         <SectionHeading
           kicker="Dein Einstieg"
           title="Starte hier: Leitfäden & Themen"
           description="Unsere meistgelesenen Ressourcen – kompakt, klar und direkt anwendbar."
         />
 
-        <div className="mt-6 px-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {tiles.map((t) => (
-            <Link key={t.title} href={t.href} className="group">
-              <div
-                className="relative overflow-hidden rounded-2xl border p-5 h-full transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:shadow-sm"
-                style={{ borderColor: "var(--sage,#CDE6DF)", background: "linear-gradient(180deg, rgba(205,230,223,0.18), rgba(255,255,255,0.9))" }}
-              >
-                {/* Accent */}
-                <div className="absolute -top-16 -right-16 w-40 h-40 rounded-full opacity-40" style={{ background: "radial-gradient(closest-side, var(--sage,#CDE6DF), transparent)" }} />
+        {/* Wrapper mit leicht grauem Hintergrund in Content-Breite */}
+        <div className="mt-6 rounded-2xl border bg-slate-50" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
+          <div className="p-5 sm:p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {tiles.map((t) => (
+              <Link key={t.title} href={t.href} className="group">
+                <div
+                  className="relative overflow-hidden rounded-2xl border p-5 h-full transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:shadow-sm"
+                  style={{ borderColor: "var(--sage,#CDE6DF)", background: "linear-gradient(180deg, rgba(205,230,223,0.18), rgba(255,255,255,0.9))" }}
+                >
+                  {/* Accent */}
+                  <div className="absolute -top-16 -right-16 w-40 h-40 rounded-full opacity-40" style={{ background: "radial-gradient(closest-side, var(--sage,#CDE6DF), transparent)" }} />
 
-                <div className="relative z-10 flex items-start gap-3">
-                  <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl border bg-white" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
-                    {t.icon}
-                  </div>
-                  <div>
-                    <h3 className="font-medium" style={{ color: "var(--graphite,#243236)" }}>{t.title}</h3>
-                    <p className="text-sm mt-1" style={{ color: "var(--graphite,#243236)" }}>{t.desc}</p>
-                    <div className="mt-3">
-                      <Button size="sm" variant="outline" asChild>
-                        <span>Öffnen</span>
-                      </Button>
+                  <div className="relative z-10 flex items-start gap-3">
+                    <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl border bg-white" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
+                      {t.icon}
+                    </div>
+                    <div>
+                      <h3 className="font-medium" style={{ color: "var(--graphite,#243236)" }}>{t.title}</h3>
+                      <p className="text-sm mt-1" style={{ color: "var(--graphite,#243236)" }}>{t.desc}</p>
+                      <div className="mt-3">
+                        <Button size="sm" variant="outline" asChild>
+                          <span>Öffnen</span>
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </section>
