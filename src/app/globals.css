@@ -5,3 +5,17 @@
 html, body { height: 100%; }
 body { background: #ffffff; color: #0f172a; }
 a { text-decoration: none; }
+
+/* globals.css */
+
+/* Optional: CI-Farben als CSS-Variablen */
+:root {
+  --sand: #F5EDE6;
+  --graphite: #243236;
+}
+
+/* Globale Utility-Klasse für die Highlight-Schrift */
+.font-highlight {
+  font-family: var(--font-highlight), "Kirang Haerang", cursive;
+}
+
