@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { FlaskConical, ShieldCheck, Sun, Sparkles, BookOpenText, ListChecks } from "lucide-react";
 
 // Diese Page soll NICHT statisch gecacht werden.
 export const dynamic = "force-dynamic";
@@ -43,6 +44,29 @@ function sortByDateDesc(posts: BlogPost[]) {
   });
 }
 
+function SectionHeading({ title, kicker, description }: { title: string; kicker?: string; description?: string }) {
+  return (
+    <div className="max-w-4xl mx-auto px-6">
+      {kicker ? (
+        <p className="text-xs uppercase tracking-wide" style={{ color: "var(--fog,#9AA7AE)" }}>
+          {kicker}
+        </p>
+      ) : null}
+      <h2
+        className="mt-2 font-highlight text-2xl sm:text-3xl"
+        style={{ color: "var(--graphite,#243236)", fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)" }}
+      >
+        {title}
+      </h2>
+      {description ? (
+        <p className="mt-2 text-[15px] sm:text-base" style={{ color: "var(--graphite,#243236)" }}>
+          {description}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
 function HeroBanner() {
   return (
     <section className="w-full">
@@ -66,12 +90,12 @@ function HeroBanner() {
           <div className="absolute inset-0 flex items-center">
             <div className="w-full px-6 sm:px-10 py-8">
               <h1
-  className="font-highlight font-extrabold text-3xl sm:text-4xl md:text-5xl leading-tight text-white"
-  style={{
-    fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)",
-    textShadow: "0 2px 12px rgba(0,0,0,0.35)",
-  }}
->
+                className="font-highlight font-extrabold text-3xl sm:text-4xl md:text-5xl leading-tight text-white"
+                style={{
+                  fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)",
+                  textShadow: "0 2px 12px rgba(0,0,0,0.35)",
+                }}
+              >
                 Gesunde Haut beginnt hier
               </h1>
 
@@ -95,7 +119,154 @@ function HeroBanner() {
   );
 }
 
+/**
+ * SECTION 1 — Trust & Kompetenz
+ * Brandige, luftige Section mit Stats/Badges & Links zu Richtlinien/Quellen.
+ */
+function TrustSection() {
+  return (
+    <section
+      className="w-full border-y"
+      style={{ borderColor: "var(--sage,#CDE6DF)", background: "radial-gradient(1200px 300px at 50% -100px, var(--sage,#CDE6DF)/35%, white 60%)" }}
+    >
+      <div className="max-w-4xl mx-auto py-10 sm:py-14">
+        <SectionHeading
+          kicker="Kompetenz"
+          title="Wissen, dem du vertrauen kannst"
+          description="Wir verbinden dermatologisches Know-how mit verständlichen Erklärungen. Transparent, sorgfältig recherchiert und verantwortungsvoll vermittelt."
+        />
 
+        {/* Stat/Badge-Grid */}
+        <div className="mt-6 px-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <Card className="rounded-2xl border" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
+            <CardContent className="p-5 flex items-start gap-3">
+              <div className="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-xl border bg-white" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
+                <FlaskConical className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="font-medium" style={{ color: "var(--graphite,#243236)" }}>Evidenz-basiert</div>
+                <p className="text-sm mt-1" style={{ color: "var(--graphite,#243236)" }}>Wir verlinken Quellen und erklären Studien klar verständlich.</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="rounded-2xl border" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
+            <CardContent className="p-5 flex items-start gap-3">
+              <div className="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-xl border bg-white" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="font-medium" style={{ color: "var(--graphite,#243236)" }}>Praxisnah & verantwortungsvoll</div>
+                <p className="text-sm mt-1" style={{ color: "var(--graphite,#243236)" }}>Tipps, die im Alltag funktionieren – ohne Hype oder Angstmacherei.</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="rounded-2xl border" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
+            <CardContent className="p-5 flex items-start gap-3">
+              <div className="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-xl border bg-white" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
+                <ListChecks className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="font-medium" style={{ color: "var(--graphite,#243236)" }}>Transparente Empfehlungen</div>
+                <p className="text-sm mt-1" style={{ color: "var(--graphite,#243236)" }}>Klare Kriterien, warum wir Produkte empfehlen – nachvollziehbar erklärt.</p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Richtlinien/Quellenlinks */}
+        <div className="mt-6 px-6 flex flex-wrap items-center gap-3">
+          <Link href="/richtlinien" className="inline-flex items-center gap-2 text-sm font-medium underline-offset-4 hover:underline" style={{ color: "var(--graphite,#243236)" }}>
+            <BookOpenText className="w-4 h-4" /> Redaktionsrichtlinien
+          </Link>
+          <span className="hidden sm:inline" style={{ color: "var(--fog,#9AA7AE)" }}>|</span>
+          <Link href="/quellen" className="inline-flex items-center gap-2 text-sm font-medium underline-offset-4 hover:underline" style={{ color: "var(--graphite,#243236)" }}>
+            <FlaskConical className="w-4 h-4" /> Quellenangaben
+          </Link>
+          <span className="hidden sm:inline" style={{ color: "var(--fog,#9AA7AE)" }}>|</span>
+          <Link href="/methodik" className="inline-flex items-center gap-2 text-sm font-medium underline-offset-4 hover:underline" style={{ color: "var(--graphite,#243236)" }}>
+            <ShieldCheck className="w-4 h-4" /> So testen wir Produkte
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/**
+ * SECTION 2 — Themen/Guides Navigator
+ * Große Kacheln, die direkt in die wichtigsten Bereiche führen.
+ */
+function TopicsSection() {
+  const tiles = [
+    {
+      title: "Sonnenschutz 101",
+      href: "/magazin/sonnenschutz",
+      icon: <Sun className="w-5 h-5" />,
+      desc: "Warum SPF das wichtigste Skincare-Tool ist – inklusive Praxis-Tipps.",
+    },
+    {
+      title: "Akne & Unreinheiten",
+      href: "/magazin/akne",
+      icon: <Sparkles className="w-5 h-5" />,
+      desc: "Ursachen verstehen, Trigger vermeiden und Pflegeroutinen aufbauen.",
+    },
+    {
+      title: "Hautbarriere stärken",
+      href: "/magazin/hautbarriere",
+      icon: <ShieldCheck className="w-5 h-5" />,
+      desc: "Rötungen, Trockenheit & Irritationen nachhaltig in den Griff bekommen.",
+    },
+    {
+      title: "Inhaltsstoffe-Lexikon",
+      href: "/magazin/inhaltsstoffe",
+      icon: <FlaskConical className="w-5 h-5" />,
+      desc: "Retinol, Niacinamid & Co. – was sie können und wie du sie kombinierst.",
+    },
+  ];
+
+  return (
+    <section className="w-full">
+      <div className="max-w-4xl mx-auto py-10 sm:py-14">
+        <SectionHeading
+          kicker="Dein Einstieg"
+          title="Starte hier: Leitfäden & Themen"
+          description="Unsere meistgelesenen Ressourcen – kompakt, klar und direkt anwendbar."
+        />
+
+        <div className="mt-6 px-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {tiles.map((t) => (
+            <Link key={t.title} href={t.href} className="group">
+              <div
+                className="relative overflow-hidden rounded-2xl border p-5 h-full transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:shadow-sm"
+                style={{ borderColor: "var(--sage,#CDE6DF)", background: "linear-gradient(180deg, rgba(205,230,223,0.18), rgba(255,255,255,0.9))" }}
+              >
+                {/* Accent */}
+                <div className="absolute -top-16 -right-16 w-40 h-40 rounded-full opacity-40" style={{ background: "radial-gradient(closest-side, var(--sage,#CDE6DF), transparent)" }} />
+
+                <div className="relative z-10 flex items-start gap-3">
+                  <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl border bg-white" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
+                    {t.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-medium" style={{ color: "var(--graphite,#243236)" }}>{t.title}</h3>
+                    <p className="text-sm mt-1" style={{ color: "var(--graphite,#243236)" }}>{t.desc}</p>
+                    <div className="mt-3">
+                      <Button size="sm" variant="secondary" asChild>
+                        <span>Öffnen</span>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 // --- UI ---
 function BlogLanding({ featured, rest }: BlogLandingProps) {
@@ -103,6 +274,12 @@ function BlogLanding({ featured, rest }: BlogLandingProps) {
     <main className="bg-white">
       {/* HERO */}
       <HeroBanner />
+
+      {/* NEW: Trust & Kompetenz */}
+      <TrustSection />
+
+      {/* NEW: Themen/Guides Navigator */}
+      <TopicsSection />
 
       {/* Highlight-Artikel */}
       <section className="w-full">
