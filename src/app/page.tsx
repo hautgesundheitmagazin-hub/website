@@ -48,7 +48,7 @@ function HeroBanner() {
     <section className="w-full">
       <div className="w-full max-w-4xl mx-auto px-6 pt-6">
         <div className="relative min-h-[320px] sm:min-h-[420px] md:min-h-[520px] rounded-2xl overflow-hidden shadow-sm">
-          {/* Bild (keine zusätzliche Opacity, wir arbeiten mit weißem Overlay) */}
+          {/* Bild */}
           <Image
             src="/hero-picture-gesunde-haut.jpg"
             alt="Gesunde Haut – Hero"
@@ -59,29 +59,25 @@ function HeroBanner() {
             className="object-cover"
           />
 
-          {/* Weißes Overlay -> höhere Durchsichtigkeit des Bildes */}
+          {/* Weißes Overlay für höhere Durchsichtigkeit */}
           <div className="absolute inset-0 bg-white/60" />
 
           {/* Text-Overlay */}
           <div className="absolute inset-0 flex items-center">
             <div className="w-full px-6 sm:px-10 py-8">
               <h1
-                className="font-highlight text-3xl sm:text-4xl md:text-5xl leading-tight"
+                className="font-highlight text-3xl sm:text-4xl md:text-5xl leading-tight text-white"
                 style={{
-                  color: "var(--graphite,#243236)",
                   fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)",
-                  textShadow: "0 2px 10px rgba(0,0,0,0.20)",
+                  textShadow: "0 2px 12px rgba(0,0,0,0.35)",
                 }}
               >
                 Gesunde Haut beginnt hier
               </h1>
 
               <p
-                className="mt-3 max-w-2xl text-base sm:text-lg"
-                style={{
-                  color: "var(--graphite,#243236)",
-                  textShadow: "0 1px 6px rgba(0,0,0,0.15)",
-                }}
+                className="mt-3 max-w-2xl text-base sm:text-lg text-white"
+                style={{ textShadow: "0 1px 8px rgba(0,0,0,0.30)" }}
               >
                 Evidence-based Tipps, Routinen und Produktempfehlungen – verständlich erklärt.
               </p>
@@ -98,6 +94,7 @@ function HeroBanner() {
     </section>
   );
 }
+
 
 
 // --- UI ---
