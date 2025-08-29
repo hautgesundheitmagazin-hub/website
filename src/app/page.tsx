@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -18,10 +17,8 @@ export type Post = {
 };
 
 // --- Data loader ---
-// Versucht, die letzten Posts über eine API zu laden (falls vorhanden).
-// Fällt andernfalls auf ein leeres Array zurück – die Seite rendert trotzdem ohne Fehler.
+// Lädt die letzten Posts über eine API. Fallback: leeres Array.
 async function getLatestPosts(limit = 9): Promise<Post[]> {
-  // Versuche, eine Basis-URL zu bestimmen
   const baseUrl =
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined);
@@ -30,12 +27,10 @@ async function getLatestPosts(limit = 9): Promise<Post[]> {
 
   try {
     const res = await fetch(`${baseUrl}/api/posts?limit=${limit}`, {
-      // ISR unterstützen
       next: { revalidate: 60 },
     });
     if (!res.ok) return [];
     const data = (await res.json()) as Post[];
-    // Defensive: nur erforderliche Felder mitnehmen
     return (data || [])
       .filter((p) => p && p.slug && p.title)
       .slice(0, limit);
@@ -49,7 +44,7 @@ function formatDate(d?: string) {
   try {
     return new Intl.DateTimeFormat("de-DE", { dateStyle: "medium" }).format(new Date(d));
   } catch {
-    return d;
+    return d || "";
   }
 }
 
@@ -72,21 +67,25 @@ export default async function HomePage() {
             sizes="100vw"
             className="object-cover"
           />
-          {/* Leichte Aufhellung/Transparenz über dem Bild (CI: hero-gradient + Weißschleier) */}
-          <div className="absolute inset-0" style={{
-            background: "var(--hero-gradient, linear-gradient(135deg, #F5EDE6 0%, #CDE6DF 60%, #2FB7A2 100%))",
-            opacity: 0.65,
-          }} />
+          {/* CI-Hero-Overlay mit leichter Transparenz */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "var(--hero-gradient, linear-gradient(135deg, #F5EDE6 0%, #CDE6DF 60%, #2FB7A2 100%))",
+              opacity: 0.65,
+            }}
+          />
         </div>
 
         <div className="mx-auto max-w-6xl px-4 py-24 sm:py-28 md:py-32">
           <h1
-            className="mb-4 text-4xl font-semibold leading-tight tracking-tight sm:text-5xl md:text-6xl"
-            style={{ fontFamily: 'Fraunces, serif', color: 'var(--graphite,#243236)' }}
+            className="font-highlight mb-4 text-4xl font-semibold leading-tight tracking-tight sm:text-5xl md:text-6xl"
+            style={{ color: "var(--graphite,#243236)" }}
           >
             Wir machen Hautgesundheit verständlich.
           </h1>
-          <p className="max-w-2xl text-base sm:text-lg" style={{ color: 'var(--graphite,#243236)' }}>
+          <p className="max-w-2xl text-base sm:text-lg" style={{ color: "var(--graphite,#243236)" }}>
             Evidenzbasiert, empathisch und alltagstauglich – für alle, die ihre Haut langfristig pflegen
             und verstehen wollen.
           </p>
@@ -103,11 +102,14 @@ export default async function HomePage() {
 
       {/* Danke & Willkommen */}
       <section id="willkommen" className="mx-auto max-w-5xl px-4 py-12 sm:py-16">
-        <div className="rounded-2xl border bg-white p-6 sm:p-8" style={{ borderColor: 'var(--sage,#CDE6DF)' }}>
-          <h2 className="text-2xl sm:text-3xl font-semibold" style={{ fontFamily: 'Fraunces, serif', color: 'var(--graphite,#243236)' }}>
+        <div className="rounded-2xl border bg-white p-6 sm:p-8" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
+          <h2
+            className="font-highlight text-2xl sm:text-3xl font-semibold"
+            style={{ color: "var(--graphite,#243236)" }}
+          >
             Danke & willkommen!
           </h2>
-          <p className="mt-3 text-[15px] leading-relaxed" style={{ color: 'var(--graphite,#243236)' }}>
+          <p className="mt-3 text-[15px] leading-relaxed" style={{ color: "var(--graphite,#243236)" }}>
             Schön, dass du hier bist. Dieses Magazin will dir Orientierung geben – ohne Hype, ohne Druck.
             Nimm dir Zeit, stöbere durch unsere Artikel und finde deine persönliche Pflegeroutine.
           </p>
@@ -118,22 +120,28 @@ export default async function HomePage() {
       <section className="mx-auto max-w-6xl px-4 py-8 sm:py-10">
         <div className="grid gap-6 md:grid-cols-2">
           <div className="flex flex-col justify-center">
-            <h3 className="text-xl sm:text-2xl font-semibold" style={{ fontFamily: 'Fraunces, serif', color: 'var(--graphite,#243236)' }}>
+            <h3
+              className="font-highlight text-xl sm:text-2xl font-semibold"
+              style={{ color: "var(--graphite,#243236)" }}
+            >
               Highlight des Monats
             </h3>
             {featured ? (
               <>
-                <h4 className="mt-3 text-2xl sm:text-3xl font-semibold" style={{ fontFamily: 'Fraunces, serif', color: 'var(--graphite,#243236)' }}>
+                <h4
+                  className="font-highlight mt-3 text-2xl sm:text-3xl font-semibold"
+                  style={{ color: "var(--graphite,#243236)" }}
+                >
                   {featured.title}
                 </h4>
                 {featured.excerpt ? (
-                  <p className="mt-2 text-[15px]" style={{ color: 'var(--graphite,#243236)' }}>{featured.excerpt}</p>
+                  <p className="mt-2 text-[15px]" style={{ color: "var(--graphite,#243236)" }}>
+                    {featured.excerpt}
+                  </p>
                 ) : null}
-                <div className="mt-4 flex items-center gap-4 text-sm" style={{ color: 'var(--fog,#9AA7AE)' }}>
+                <div className="mt-4 flex items-center gap-4 text-sm" style={{ color: "var(--fog,#9AA7AE)" }}>
                   <span>{formatDate(featured.date)}</span>
-                  {featured.tags?.length ? (
-                    <span>• {featured.tags.slice(0, 3).join(', ')}</span>
-                  ) : null}
+                  {featured.tags?.length ? <span>• {featured.tags.slice(0, 3).join(", ")}</span> : null}
                 </div>
                 <div className="mt-6">
                   <Button asChild>
@@ -142,14 +150,14 @@ export default async function HomePage() {
                 </div>
               </>
             ) : (
-              <p className="mt-3 text-[15px]" style={{ color: 'var(--graphite,#243236)' }}>
+              <p className="mt-3 text-[15px]" style={{ color: "var(--graphite,#243236)" }}>
                 Noch kein Highlight gesetzt. Markiere einen Artikel als <code>featured</code> oder füge einen
                 neuen hinzu.
               </p>
             )}
           </div>
 
-          <Card className="overflow-hidden border" style={{ borderColor: 'var(--sage,#CDE6DF)' }}>
+          <Card className="overflow-hidden border" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
             {featured?.cover ? (
               <div className="relative h-64 sm:h-80">
                 <Image
@@ -162,17 +170,23 @@ export default async function HomePage() {
               </div>
             ) : (
               <div className="flex h-64 items-center justify-center bg-[var(--sand,#F5EDE6)]">
-                <span className="text-sm" style={{ color: 'var(--fog,#9AA7AE)' }}>
+                <span className="text-sm" style={{ color: "var(--fog,#9AA7AE)" }}>
                   Kein Coverbild vorhanden
                 </span>
               </div>
             )}
             <CardHeader>
-              <CardTitle className="text-lg" style={{ color: 'var(--graphite,#243236)' }}>
+              <CardTitle
+                className="font-highlight text-lg"
+                style={{
+                  color: "var(--graphite,#243236)",
+                  fontFamily: 'var(--font-highlight), "Kirang Haerang", cursive',
+                }}
+              >
                 {featured ? featured.title : "Highlight Artikel"}
               </CardTitle>
               {featured?.excerpt ? (
-                <CardDescription className="text-[15px]" style={{ color: 'var(--graphite,#243236)' }}>
+                <CardDescription className="text-[15px]" style={{ color: "var(--graphite,#243236)" }}>
                   {featured.excerpt}
                 </CardDescription>
               ) : null}
@@ -189,7 +203,10 @@ export default async function HomePage() {
       {/* Letzte 9 Artikel */}
       <section className="mx-auto max-w-6xl px-4 py-12 sm:py-16">
         <div className="mb-6 flex items-end justify-between">
-          <h3 className="text-xl sm:text-2xl font-semibold" style={{ fontFamily: 'Fraunces, serif', color: 'var(--graphite,#243236)' }}>
+          <h3
+            className="font-highlight text-xl sm:text-2xl font-semibold"
+            style={{ color: "var(--graphite,#243236)" }}
+          >
             Neu im Magazin
           </h3>
           <Button variant="ghost" asChild>
@@ -198,8 +215,8 @@ export default async function HomePage() {
         </div>
 
         {rest.length === 0 ? (
-          <div className="rounded-xl border bg-white p-6" style={{ borderColor: 'var(--sage,#CDE6DF)' }}>
-            <p className="text-[15px]" style={{ color: 'var(--graphite,#243236)' }}>
+          <div className="rounded-xl border bg-white p-6" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
+            <p className="text-[15px]" style={{ color: "var(--graphite,#243236)" }}>
               Noch keine Artikel gefunden. Lege welche in deinem CMS an – oder stelle eine API unter
               <code className="ml-1">/api/posts</code> bereit.
             </p>
@@ -207,7 +224,7 @@ export default async function HomePage() {
         ) : (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {rest.map((post) => (
-              <Card key={post.slug} className="overflow-hidden border" style={{ borderColor: 'var(--sage,#CDE6DF)' }}>
+              <Card key={post.slug} className="overflow-hidden border" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
                 {post.cover ? (
                   <div className="relative h-40">
                     <Image
@@ -220,17 +237,23 @@ export default async function HomePage() {
                   </div>
                 ) : null}
                 <CardHeader>
-                  <CardTitle className="text-base" style={{ color: 'var(--graphite,#243236)' }}>
+                  <CardTitle
+                    className="font-highlight text-base"
+                    style={{
+                      color: "var(--graphite,#243236)",
+                      fontFamily: 'var(--font-highlight), "Kirang Haerang", cursive',
+                    }}
+                  >
                     <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                   </CardTitle>
                   {post.excerpt ? (
-                    <CardDescription className="text-[13px]" style={{ color: 'var(--graphite,#243236)' }}>
+                    <CardDescription className="text-[13px]" style={{ color: "var(--graphite,#243236)" }}>
                       {post.excerpt}
                     </CardDescription>
                   ) : null}
                 </CardHeader>
                 <CardContent>
-                  <div className="mb-3 text-xs" style={{ color: 'var(--fog,#9AA7AE)' }}>
+                  <div className="mb-3 text-xs" style={{ color: "var(--fog,#9AA7AE)" }}>
                     {formatDate(post.date)}
                   </div>
                   <Button asChild size="sm">
