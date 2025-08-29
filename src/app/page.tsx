@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-type Post = {
+export type BlogPost = {
   slug: string;
   title: string;
   excerpt?: string;
@@ -12,24 +12,19 @@ type Post = {
   date: string;
 };
 
-interface Props {
-  featured?: Post | null;
-  rest: Post[];
-}
+export type BlogLandingProps = {
+  featured?: BlogPost | null;
+  rest: BlogPost[];
+};
 
 function formatDate(d: string) {
-  try {
-    return new Date(d).toLocaleDateString("de-DE", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    });
-  } catch {
-    return d;
-  }
+  const date = new Date(d);
+  return isNaN(date.getTime())
+    ? d
+    : date.toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" });
 }
 
-export default function BlogLanding({ featured, rest }: Props) {
+export default function BlogLanding({ featured = null, rest = [] }: BlogLandingProps) {
   return (
     <>
       {/* Highlight-Artikel – volle Breite */}
@@ -54,7 +49,7 @@ export default function BlogLanding({ featured, rest }: Props) {
                 </div>
               ) : null}
 
-              {/* Leichte Aufhellung, damit dunkler Text immer gut lesbar bleibt */}
+              {/* Leichte Aufhellung für Lesbarkeit */}
               <div className="absolute inset-0 bg-white/20" />
 
               <div className="relative p-6 sm:p-10">
@@ -104,7 +99,7 @@ export default function BlogLanding({ featured, rest }: Props) {
       {/* Letzte 9 Artikel – Raster bleibt, Container auf max-w-4xl */}
       <section className="w-full">
         <div className="w-full max-w-4xl mx-auto px-6 py-12 sm:py-16">
-          {(!rest || rest.length === 0) ? (
+          {rest.length === 0 ? (
             <div
               className="rounded-xl border bg-white p-6"
               style={{ borderColor: "var(--sage,#CDE6DF)" }}
