@@ -1,20 +1,48 @@
 "use client";
+
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 export default function Header() {
-  return (
-    <header className="border-b border-slate-100 bg-white">
-      <div className="w-full max-w-4xl mx-auto px-6 py-4">
-        {/* Zentrierte Gruppe: Link — Logo — Link */}
-        <div className="flex items-center justify-center gap-6 md:gap-8">
-          {/* Linker Menüpunkt */}
-          <nav className="text-sm text-slate-700">
-            <a href="/blog" className="transition-colors hover:text-slate-900">
-              Blog
-            </a>
-          </nav>
+  // Mobile "Mehr"-Menü
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
-          {/* Logo (wieder etwas größer) */}
+  // Klick außerhalb/ESC schließt das Menü
+  useEffect(() => {
+    function onDown(e: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, []);
+
+  // Menüpunkte
+  const items = [
+    { href: "/blog", label: "Blog" },
+    { href: "/glossar", label: "Glossar" },
+    { href: "#thema-1", label: "Thema 1" }, // Platzhalter
+    { href: "#thema-2", label: "Thema 2" }, // Platzhalter
+    { href: "#thema-3", label: "Thema 3" }, // Platzhalter
+  ];
+
+  const primary = items.slice(0, 2); // auf Mobile sichtbar
+  const more = items.slice(2);       // im Hamburger-Menü auf Mobile
+
+  return (
+    <header className="w-full text-white">
+      {/* Obere Leiste: dunkler Ton + Logo */}
+      <div className="bg-[#1c8e7e]">
+        <div className="mx-auto flex max-w-6xl items-center px-4 py-3">
           <a
             href="/"
             aria-label="Gesunde Haut leben – Startseite"
@@ -22,22 +50,95 @@ export default function Header() {
             title="Gesunde Haut leben"
           >
             <Image
-              src="/Gesunde Haut leben.png"
+              src="/gesunde_haut_leben.png"
               alt="Gesunde Haut leben – Logo"
               width={480}
               height={480}
               priority
-              className="h-10 w-auto md:h-12"
-              sizes="(min-width: 768px) 300px, 240px"
+              className="h-8 w-auto md:h-10"
+              sizes="(min-width: 768px) 300px, 180px"
             />
           </a>
+        </div>
+      </div>
 
-          {/* Rechter Menüpunkt */}
-          <nav className="text-sm text-slate-700">
-            <a href="/glossar" className="transition-colors hover:text-slate-900">
-              Glossar
-            </a>
+      {/* Untere Leiste: etwas hellerer Ton + Navigation */}
+      <div className="bg-[#28A392]">
+        <div className="relative mx-auto max-w-6xl px-4">
+          {/* Desktop/Tablet: alle 5 Menüpunkte */}
+          <nav
+            className="hidden md:flex items-center justify-start gap-6 py-3"
+            aria-label="Hauptnavigation"
+          >
+            {items.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="text-sm font-semibold uppercase tracking-wide opacity-95 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-white/60"
+              >
+                {item.label}
+              </a>
+            ))}
           </nav>
+
+          {/* Mobile: nur 2 Menüpunkte + Hamburger */}
+          <div className="flex items-center justify-between py-3 md:hidden" ref={menuRef}>
+            <nav aria-label="Hauptnavigation (reduziert)" className="flex items-center gap-5">
+              {primary.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="text-sm font-semibold uppercase tracking-wide opacity-95 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-white/60"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+
+            {/* Hamburger öffnet die restlichen 3 Punkte */}
+            <div className="relative">
+              <button
+                type="button"
+                aria-haspopup="menu"
+                aria-expanded={open}
+                aria-controls="mobile-more-menu"
+                onClick={() => setOpen((v) => !v)}
+                className="inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-white/60"
+              >
+                <span className="sr-only">Weitere Menüpunkte öffnen</span>
+                {/* Icon */}
+                <svg width="24" height="24" viewBox="0 0 24 24" role="img" aria-hidden="true">
+                  <path
+                    d="M3 6h18M3 12h18M3 18h18"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </button>
+
+              {/* Dropdown */}
+              {open && (
+                <div
+                  id="mobile-more-menu"
+                  role="menu"
+                  className="absolute right-0 z-50 mt-2 w-44 overflow-hidden rounded-lg bg-[#083a54] shadow-lg ring-1 ring-black/10"
+                >
+                  {more.map((item) => (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      role="menuitem"
+                      onClick={() => setOpen(false)}
+                      className="block px-4 py-2 text-sm uppercase tracking-wide hover:bg-white/10 focus:bg-white/10 focus:outline-none"
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </header>
