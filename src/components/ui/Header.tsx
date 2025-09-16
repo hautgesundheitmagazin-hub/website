@@ -50,7 +50,7 @@ export default function Header() {
             title="Gesunde Haut leben"
           >
             <Image
-              src="/gesunde_haut_leben.png"
+              src="/hautsache_gesund.jpg"
               alt="Gesunde Haut leben – Logo"
               width={480}
               height={480}
