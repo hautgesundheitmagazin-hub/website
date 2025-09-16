@@ -47,13 +47,13 @@ function HeroBanner() {
           />
 
           {/* Text-Overlay: zentriert unten */}
-          <div className="absolute inset-x-0 bottom-0 flex items-end justify-center pb-6 px-6">
+          <div className="absolute inset-x-0 bottom-0 flex items-end justify-start pb-6 px-6">
             <div
               className="w-full max-w-xl bg-white/75 backdrop-blur border rounded-2xl shadow-md p-5 sm:p-6"
               style={{ borderColor: "var(--sage,#CDE6DF)" }}
             >
               <h1
-                className="font-highlight font-extrabold text-3xl sm:text-4xl md:text-5xl leading-tight text-center"
+                className="font-highlight font-extrabold text-3xl sm:text-4xl md:text-5xl leading-tight text-left"
                 style={{
                   color: "var(--graphite,#243236)",
                   fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)",
@@ -69,11 +69,7 @@ function HeroBanner() {
                 Evidence-based Tipps, Routinen und Produktempfehlungen – verständlich erklärt.
               </p>
 
-              <div className="mt-6 flex justify-center">
-                <Button asChild>
-                  <Link href="/blog">Zum Magazin</Link>
-                </Button>
-              </div>
+           
             </div>
           </div>
         </div>
