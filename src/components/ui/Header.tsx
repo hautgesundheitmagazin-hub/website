@@ -42,7 +42,7 @@ export default function Header() {
     <header className="w-full text-white">
       {/* Obere Leiste: dunkler Ton + Logo */}
       <div className="bg-[#1c8e7e]">
-        <div className="mx-auto flex max-w-6xl items-center px-4 py-3">
+        <div className="mx-auto flex max-w-4xl items-center px-4 py-3">
           <a
             href="/"
             aria-label="Gesunde Haut leben – Startseite"
@@ -64,7 +64,7 @@ export default function Header() {
 
       {/* Untere Leiste: etwas hellerer Ton + Navigation */}
       <div className="bg-[#28A392]">
-        <div className="relative mx-auto max-w-6xl px-4">
+        <div className="relative mx-auto max-w-4xl px-4">
           {/* Desktop/Tablet: alle 5 Menüpunkte */}
           <nav
             className="hidden md:flex items-center justify-start gap-6 py-3"
