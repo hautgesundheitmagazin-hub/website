@@ -53,7 +53,7 @@ export default function CookieBanner() {
             id="cookie-title"
             className="font-semibold tracking-tight"
             style={{
-              fontFamily: 'Fraunces, serif',
+              
               color: COLORS.graphite,
             }}
           >
