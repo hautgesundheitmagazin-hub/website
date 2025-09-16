@@ -63,7 +63,7 @@ function HeroBanner() {
               </h1>
 
               <p
-                className="mt-3 max-w-2xl mx-auto text-base sm:text-lg text-center"
+                className="mt-3 max-w-2xl mx-auto text-base sm:text-lg text-left"
                 style={{ color: "var(--graphite,#243236)" }}
               >
                 Evidence-based Tipps, Routinen und Produktempfehlungen – verständlich erklärt.
