@@ -26,7 +26,7 @@ export default function Header() {
     };
   }, []);
 
-  // Menüpunkte
+  // Menüpunkte (links auf Desktop)
   const items = [
     { href: "/blog", label: "Blog" },
     { href: "/glossar", label: "Glossar" },
@@ -35,8 +35,11 @@ export default function Header() {
     { href: "#thema-3", label: "Thema 3" }, // Platzhalter
   ];
 
+  // Kontakt separat: Desktop als Button rechts, Mobile im Hamburger
+  const contact = { href: "/kontakt", label: "Kontakt" };
+
   const primary = items.slice(0, 2); // auf Mobile sichtbar
-  const more = items.slice(2);       // im Hamburger-Menü auf Mobile
+  const more = items.slice(2);       // im Hamburger-Menü auf Mobile (3 Punkte) + Kontakt als 4.
 
   return (
     <header className="w-full text-white">
@@ -65,21 +68,31 @@ export default function Header() {
       {/* Untere Leiste: etwas hellerer Ton + Navigation */}
       <div className="bg-[#28A392]">
         <div className="relative mx-auto max-w-4xl px-4">
-          {/* Desktop/Tablet: alle 5 Menüpunkte */}
-          <nav
-            className="hidden md:flex items-center justify-start gap-6 py-3"
-            aria-label="Hauptnavigation"
-          >
-            {items.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-sm font-semibold uppercase tracking-wide opacity-95 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-white/60"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
+          {/* Desktop/Tablet: Links die regulären Punkte, rechts der Kontakt-Button */}
+          <div className="hidden md:flex items-center justify-between py-3">
+            <nav
+              aria-label="Hauptnavigation"
+              className="flex items-center gap-6"
+            >
+              {items.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="text-sm font-semibold uppercase tracking-wide opacity-95 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-white/60"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+
+            {/* Kontakt: umrandeter Button rechtsbündig */}
+            <a
+              href={contact.href}
+              className="inline-flex items-center rounded-md border-2 border-white/80 px-3 py-1.5 text-sm font-semibold uppercase tracking-wide opacity-95 transition-[background,opacity] hover:opacity-100 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/60"
+            >
+              {contact.label}
+            </a>
+          </div>
 
           {/* Mobile: nur 2 Menüpunkte + Hamburger */}
           <div className="flex items-center justify-between py-3 md:hidden" ref={menuRef}>
@@ -95,7 +108,7 @@ export default function Header() {
               ))}
             </nav>
 
-            {/* Hamburger öffnet die restlichen 3 Punkte */}
+            {/* Hamburger öffnet die restlichen 3 Punkte + Kontakt als 4. */}
             <div className="relative">
               <button
                 type="button"
@@ -135,6 +148,16 @@ export default function Header() {
                       {item.label}
                     </a>
                   ))}
+                  {/* 4. Punkt: Kontakt */}
+                  <a
+                    key={contact.label}
+                    href={contact.href}
+                    role="menuitem"
+                    onClick={() => setOpen(false)}
+                    className="block px-4 py-2 text-sm uppercase tracking-wide hover:bg-white/10 focus:bg-white/10 focus:outline-none"
+                  >
+                    {contact.label}
+                  </a>
                 </div>
               )}
             </div>
