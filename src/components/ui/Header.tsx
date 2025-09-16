@@ -122,7 +122,7 @@ export default function Header() {
                 <div
                   id="mobile-more-menu"
                   role="menu"
-                  className="absolute right-0 z-50 mt-2 w-44 overflow-hidden rounded-lg bg-[#083a54] shadow-lg ring-1 ring-black/10"
+                  className="absolute right-0 z-50 mt-2 w-44 overflow-hidden rounded-lg bg-[#1c8e7e] shadow-lg ring-1 ring-black/10"
                 >
                   {more.map((item) => (
                     <a
