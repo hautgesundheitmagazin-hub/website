@@ -37,7 +37,7 @@ function HeroBanner() {
         <div className="relative min-h-[320px] sm:min-h-[420px] md:min-h-[520px] rounded-2xl overflow-hidden shadow-sm">
           {/* Bild */}
           <Image
-            src="/hero-picture-gesunde-haut.jpg"
+            src="/hautsache_gesund_hero_banner.jpg"
             alt="Gesunde Haut – Hero"
             fill
             priority
