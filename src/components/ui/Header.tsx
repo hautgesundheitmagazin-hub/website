@@ -30,9 +30,9 @@ export default function Header() {
   const items = [
     { href: "/blog", label: "Blog" },
     { href: "/glossar", label: "Glossar" },
-    { href: "#thema-1", label: "Thema 1" }, // Platzhalter
-    { href: "#thema-2", label: "Thema 2" }, // Platzhalter
-    { href: "#thema-3", label: "Thema 3" }, // Platzhalter
+    { href: "/neurodermitis", label: "Neurodermitis" }, // Platzhalter
+    { href: "/rosacea", label: "Rosacea" }, // Platzhalter
+    { href: "/akne", label: "Akne" }, // Platzhalter
   ];
 
   // Kontakt separat: Desktop als Button rechts, Mobile im Hamburger
