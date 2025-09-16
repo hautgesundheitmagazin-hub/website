@@ -8,7 +8,14 @@ export default function Footer() {
         <a href="/blog" className="transition-colors hover:text-white/80">Blog</a>
         <a href="/sitemap.xml" className="transition-colors hover:text-white/80">Sitemap</a>
       </div>
-      <p className="mt-3">© {new Date().getFullYear()} Gesunde Haut leben. Alle Rechte vorbehalten.</p>
+      <p className="mt-3">© {new Date().getFullYear()} Hautsache gesund. Alle Rechte vorbehalten.</p>
+      <p className="mt-2 text-xs opacity-70 max-w-2xl mx-auto">
+        Hinweis / Disclaimer: Die Inhalte auf diesem Blog dienen ausschließlich allgemeinen
+        Informationszwecken und spiegeln persönliche Erfahrungen und Recherchen wider. Sie stellen
+        keine medizinische Beratung dar und ersetzen keine professionelle Diagnose oder Behandlung
+        durch Ärztinnen und Ärzte. Bei gesundheitlichen Fragen oder Hautproblemen solltest du dich
+        stets an eine qualifizierte Fachperson wenden.
+      </p>
     </footer>
   );
 }
