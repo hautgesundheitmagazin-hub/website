@@ -48,9 +48,9 @@ export default function Header() {
         <div className="mx-auto flex max-w-4xl items-center px-4 py-3">
           <a
             href="/"
-            aria-label="Gesunde Haut leben – Startseite"
+            aria-label="Hautsache gesund – Startseite"
             className="inline-flex items-center"
-            title="Gesunde Haut leben"
+            title="Hautsache gesund - Dein Blog zu Hautgesundheit"
           >
             <Image
               src="/hautsache_gesund_logo.jpg"
