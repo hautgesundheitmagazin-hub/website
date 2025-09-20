@@ -128,7 +128,7 @@ export default function Page() {
         </p>
 
         <div className="mt-2 text-sm text-zinc-600">
-          Zuletzt aktualisiert am <time dateTime="2025-08-20">20.08</time>
+          Zuletzt aktualisiert am <time dateTime="2025-09-20">20.09</time>
           {" · "}Lesedauer: <span className="tabular-nums">10 Minuten</span>
         </div>
 
