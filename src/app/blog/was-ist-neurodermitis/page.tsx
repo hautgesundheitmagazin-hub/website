@@ -1,54 +1,111 @@
-// src/app/was-ist-neurodermitis/page.tsx
+// src/app/blog/was-ist-neurodermitis/page.tsx
 import type { Metadata } from "next";
+
+const canonical = "https://www.hautwissen-kompakt.de/blog/was-ist-neurodermitis";
 
 export const metadata: Metadata = {
   title:
-    "Was ist Neurodermitis? Einfach erklärt – Ursachen, Symptome & Behandlung (2025)",
+    "Was ist Neurodermitis? Symptome, Ursachen & Behandlung einfach erklärt",
   description:
-    "Neurodermitis (atopische Dermatitis) leicht verständlich: Ursachen, typische Symptome, Auslöser, Diagnose, Behandlung & Pflege. Mit praxisnahen Tipps für den Alltag.",
-  alternates: {
-    canonical: "https://www.hautsache-gesund.de/blog/was-ist-neurodermitis",
-  },
+    "Neurodermitis verständlich erklärt: typische Symptome, Auslöser, Diagnose und aktuelle Therapien – mit praktischen Alltagstipps und Checkliste.",
+  alternates: { canonical },
+  robots: { index: true, follow: true },
   openGraph: {
     type: "article",
+    url: canonical,
     title:
-      "Was ist Neurodermitis? Einfach erklärt – Ursachen, Symptome & Behandlung",
+      "Was ist Neurodermitis? Symptome, Ursachen & Behandlung einfach erklärt",
     description:
-      "Ein klarer Leitfaden zu Neurodermitis: Von den Ursachen bis zur Therapie – wissenschaftlich fundiert, verständlich erklärt.",
-    url: "https://www.hautsache-gesund.de/blog/was-ist-neurodermitis",
+      "Ein umfassender, leicht verständlicher Leitfaden zu Neurodermitis: von Symptomen &gt; Therapie &gt; Alltagstipps.",
     images: [
       {
         url: "/herobild_was_ist_neurodermitis.jpg",
         width: 1600,
         height: 600,
-        alt: "Juckende Hautstelle am Arm – Symbolbild für Neurodermitis",
+        alt: "Neurodermitis einfach erklärt – Haut mit trockenen Ekzemen in Nahaufnahme",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title:
-      "Was ist Neurodermitis? Einfach erklärt – Ursachen, Symptome & Behandlung",
+      "Was ist Neurodermitis? Symptome, Ursachen & Behandlung einfach erklärt",
     description:
-      "Die wichtigsten Fakten, Symptome, Trigger und Behandlungsoptionen bei Neurodermitis – kompakt & verständlich.",
+      "Neurodermitis verstehen – von Auslösern bis Therapie, mit Checkliste für den Alltag.",
     images: ["/herobild_was_ist_neurodermitis.jpg"],
-  },
-  robots: {
-    index: true,
-    follow: true,
   },
 };
 
-const accent =
-  "text-emerald-700 hover:text-emerald-800 focus:text-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-300 rounded";
-
+const accent = "text-emerald-700";
 const author = {
   name: "Jennifer Krause",
   role: "Expertin für Hautgesundheit",
-  image: "/autorenbild_jennifer.jpg",
+  avatar: "/autorenbild_jennifer.jpg",
 };
 
 export default function Page() {
+  const faq = [
+    {
+      q: "Was ist Neurodermitis in einfachen Worten?",
+      a: "Neurodermitis (atopische Dermatitis) ist eine chronische, schubweise verlaufende Hauterkrankung. Typisch sind trockene, juckende Ekzeme. Sie ist nicht ansteckend.",
+    },
+    {
+      q: "Welche typischen Symptome hat Neurodermitis?",
+      a: "Starker Juckreiz, trockene Haut, Rötungen, nässende oder schuppende Ekzeme und verdickte Hautareale bei längerem Kratzen. Häufig an Beugen, Hals und Händen.",
+    },
+    {
+      q: "Wie wird Neurodermitis behandelt?",
+      a: "Basis ist tägliches Eincremen (Emollienzien). In Schüben: entzündungshemmende Cremes wie Kortikosteroide oder Calcineurin-Inhibitoren. Bei schwerem Verlauf kommen Phototherapie, Biologika oder JAK-Inhibitoren in Frage – immer ärztlich begleitet.",
+    },
+    {
+      q: "Sind Neurodermitis und Allergien dasselbe?",
+      a: "Nein. Viele Betroffene haben Allergien, aber nicht alle. Allergien können Schübe verstärken, sind jedoch nicht die Ursache der Erkrankung.",
+    },
+    {
+      q: "Hilft eine spezielle Diät?",
+      a: "Nur bei nachgewiesenen Unverträglichkeiten. Pauschale Verbote (z. B. Milch, Gluten) ohne Diagnose bringen selten Nutzen und können schaden.",
+    },
+    {
+      q: "Ist Neurodermitis heilbar?",
+      a: "Heilbar nicht, aber sehr gut behandelbar. Viele Kinder verbessern sich mit dem Alter deutlich. Ziel ist Kontrolle: wenige Schübe, wenig Juckreiz, gute Hautbarriere.",
+    },
+  ];
+
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
+  const articleLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline:
+      "Was ist Neurodermitis? Symptome, Ursachen & Behandlung einfach erklärt",
+    description:
+      "Leicht verständlicher Leitfaden: Symptome, Ursachen, Diagnose, Therapie und Alltagstipps zu Neurodermitis (atopischer Dermatitis).",
+    inLanguage: "de",
+    image: `${canonical}/herobild_was_ist_neurodermitis.jpg`.replace(
+      canonical,
+      ""
+    ),
+    datePublished: "2025-08-20",
+    dateModified: "2025-08-20",
+    author: {
+      "@type": "Person",
+      name: author.name,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Hautsache Gesund",
+    },
+    mainEntityOfPage: canonical,
+  };
+
   return (
     <article
       className="
@@ -60,23 +117,21 @@ export default function Page() {
       {/* Header */}
       <header className="mb-10">
         <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight">
-          Was ist Neurodermitis? Einfach erklärt
+          Was ist Neurodermitis? Einfach erklärt – Symptome, Ursachen &amp;
+          Behandlung
         </h1>
         <p className="mt-3 text-lg text-zinc-700">
-          Du willst endlich verstehen, was hinter Neurodermitis steckt, welche
-          Auslöser (Trigger) Schübe begünstigen und wie moderne Behandlungen
-          helfen können? Hier bekommst Du alles Wichtige – klar, kompakt und
-          alltagsnah.
+          Du willst endlich verstehen, was hinter trockener, juckender Haut
+          steckt – und was wirklich hilft? Hier findest du eine klare,
+          wissenschaftlich fundierte Erklärung zu Neurodermitis – plus
+          alltagstaugliche Tipps, die sofort Entlastung bringen.
         </p>
 
-        {/* Datum & Lesedauer separat in eigener Zeile (statisch) */}
         <div className="mt-2 text-sm text-zinc-600">
-          Zuletzt aktualisiert am{" "}
-          <time dateTime="2025-09-20">20.09.2025</time>
+          Zuletzt aktualisiert am <time dateTime="2025-08-20">20.08</time>
           {" · "}Lesedauer: <span className="tabular-nums">10 Minuten</span>
         </div>
 
-        {/* Hero 16:6 */}
         <figure className="mt-6 overflow-hidden rounded-2xl border border-zinc-200">
           <div className="relative w-full" style={{ aspectRatio: "16 / 6" }}>
             <picture>
@@ -88,21 +143,20 @@ export default function Page() {
                 loading="eager"
                 fetchPriority="high"
                 src="/herobild_was_ist_neurodermitis.jpg"
-                alt="Nahaufnahme einer trockenen, geröteten Hautstelle – Symbolbild für Neurodermitis"
+                alt="Neurodermitis: trockene, gerötete Haut in Nahaufnahme – Symbolbild für juckende Ekzeme"
                 className="absolute inset-0 h-full w-full object-cover"
               />
             </picture>
           </div>
           <figcaption className="sr-only">
-            Neurodermitis sichtbar als trockene, gerötete Haut mit Kratzspuren
+            Symbolbild für Neurodermitis: gerötete, trockene Haut
           </figcaption>
         </figure>
 
-        {/* Meta row – Autor */}
         <div className="mt-6 flex items-center gap-3 text-sm text-zinc-700">
           <img
             src="/autorenbild_jennifer.jpg"
-            alt="Autorin: Jennifer Krause"
+            alt="Autorin: Jennifer Krause, Expertin für Hautgesundheit"
             className="w-10 h-10 rounded-full object-cover"
             loading="lazy"
           />
@@ -120,30 +174,30 @@ export default function Page() {
         </h2>
         <ul className="list-disc ml-5 space-y-2 text-zinc-800">
           <li>
-            <strong>Neurodermitis</strong> (atopische Dermatitis) ist eine
-            <strong> chronisch-entzündliche, nicht ansteckende</strong>{" "}
-            Hauterkrankung mit <strong>starkem Juckreiz</strong> und trockener
-            Haut.
+            <strong>Neurodermitis</strong> ist eine nicht ansteckende,
+            chronisch-entzündliche Hauterkrankung mit Schüben. Ziel der Therapie
+            ist Kontrolle statt „Heilung“.
           </li>
           <li>
-            <strong>Typische Auslöser</strong> sind z.B. trockene Luft,
-            Schwitzen, Reizstoffe, Stress, Infekte und individuelle Allergene.
+            <strong>Typisch</strong>: trockene Haut, starker Juckreiz, rote bis
+            nässende Ekzeme. Kratzen verschlimmert die Entzündung &amp; führt
+            zu Verdickungen.
           </li>
           <li>
-            <strong>Diagnose</strong>: Blickdiagnose durch Ärzt:innen, unterstützt
-            durch Verlauf, Juckreiz-Score und ggf. Allergietests.
+            <strong>Ursachenmix</strong>: gestörte Hautbarriere, fehlgeleitete
+            Immunreaktionen, Veranlagung; Trigger wie Kälte, Schwitzen, Stress
+            oder Duftstoffe können Schübe auslösen.
           </li>
           <li>
-            <strong>Therapie</strong>: Basis ist{" "}
-            <strong>konsequente Pflege</strong> (Rückfetter/Emollienzien),
-            bei Schub <strong>anti-entzündliche</strong> Cremes (z.B. milde
-            Steroide, Calcineurin-Inhibitoren); bei stärkerer Ausprägung{" "}
-            <strong>Systemtherapien</strong> (z.B. Biologika, JAK-Inhibitoren)
-            durch Fachärzt:innen.
+            <strong>Behandlung</strong>: tägliche Basispflege (Emollienzien),
+            in Schüben entzündungshemmende Cremes; bei schwerem Verlauf
+            Phototherapie, Biologika oder JAK-Inhibitoren – ärztlich begleitet.
           </li>
           <li>
-            <strong>Alltag</strong>: Trigger kennen, Hautbarriere schützen,
-            Kratzalternativen nutzen, Schlaf und Stress im Blick behalten.
+            <strong>Alltag</strong>: clevere Dusch- und Cremeroutinen, weiche
+            Kleidung, kühle Schlafumgebung, Stressmanagement &amp; Fingernägel
+            kurz halten. Ernährung nur anpassen, wenn echte Unverträglichkeiten
+            gesichert sind.
           </li>
         </ul>
       </aside>
@@ -156,38 +210,56 @@ export default function Page() {
         <h2 className="text-base font-semibold mb-3">Inhaltsverzeichnis</h2>
         <ol className="list-decimal ml-5 space-y-2">
           <li>
-            <a className={`hover:underline ${accent} font-medium`} href="#was-ist-neurodermitis">
+            <a className={`hover:underline ${accent} font-medium`} href="#was">
               Was ist Neurodermitis?
             </a>
           </li>
           <li>
-            <a className={`hover:underline ${accent} font-medium`} href="#symptome">
-              Typische Symptome &amp; Schweregrade
+            <a
+              className={`hover:underline ${accent} font-medium`}
+              href="#symptome"
+            >
+              Symptome &amp; wie sich ein Schub anfühlt
             </a>
           </li>
           <li>
-            <a className={`hover:underline ${accent} font-medium`} href="#ursachen">
-              Ursachen &amp; Trigger: Warum flammt die Haut auf?
+            <a className={`hover:underline ${accent} font-medium`} href="#ursache">
+              Ursachen: Hautbarriere &amp; Immunsystem
+            </a>
+          </li>
+          <li>
+            <a className={`hover:underline ${accent} font-medium`} href="#trigger">
+              Häufige Trigger im Alltag
             </a>
           </li>
           <li>
             <a className={`hover:underline ${accent} font-medium`} href="#diagnose">
-              Diagnose: So gehen Ärzt:innen vor
+              Diagnose &amp; wann zum Arzt
             </a>
           </li>
           <li>
-            <a className={`hover:underline ${accent} font-medium`} href="#behandlung">
-              Behandlung: Von Pflege bis Systemtherapie
+            <a className={`hover:underline ${accent} font-medium`} href="#therapie">
+              Therapie: Schritt für Schritt
             </a>
           </li>
           <li>
-            <a className={`hover:underline ${accent} font-medium`} href="#alltagstipps">
-              Alltagstipps: Pflege-Routine &amp; Trigger-Management
+            <a className={`hover:underline ${accent} font-medium`} href="#medikamente">
+              Medikamente verständlich erklärt
             </a>
           </li>
           <li>
-            <a className={`hover:underline ${accent} font-medium`} href="#vergleich">
-              Vergleich: Neurodermitis vs. trockene Haut
+            <a className={`hover:underline ${accent} font-medium`} href="#alltag">
+              Alltag: Pflegeroutinen, Kleidung, Schlaf
+            </a>
+          </li>
+          <li>
+            <a className={`hover:underline ${accent} font-medium`} href="#ernaehrung">
+              Ernährung &amp; Neurodermitis
+            </a>
+          </li>
+          <li>
+            <a className={`hover:underline ${accent} font-medium`} href="#kinder">
+              Kinder &amp; Babys: Besonderheiten
             </a>
           </li>
           <li>
@@ -196,7 +268,10 @@ export default function Page() {
             </a>
           </li>
           <li>
-            <a className={`hover:underline ${accent} font-medium`} href="#zusammenfassung">
+            <a
+              className={`hover:underline ${accent} font-medium`}
+              href="#zusammenfassung"
+            >
               Kurzfazit
             </a>
           </li>
@@ -204,474 +279,363 @@ export default function Page() {
       </nav>
 
       {/* Hauptteil */}
-      <section id="was-ist-neurodermitis" className="mt-8">
-        <h2 className="text-2xl font-bold mb-3">
-          Was ist Neurodermitis?
-        </h2>
+      <section id="was" className="mt-12">
+        <h2 className="text-2xl font-bold mb-2">Was ist Neurodermitis?</h2>
         <p className="leading-relaxed">
-          Neurodermitis – in der Fachsprache <strong>atopische Dermatitis</strong> – ist eine
-          <strong> chronische</strong> (länger andauernde) und oft{" "}
-          <strong>schubweise</strong> verlaufende Entzündung der Haut. Typisch
-          sind <strong>trockene, gerötete</strong> Hautstellen und{" "}
-          <strong>starker Juckreiz</strong>. Die Erkrankung ist{" "}
-          <strong>nicht ansteckend</strong>. Häufig beginnt sie im
-          <strong> Kindesalter</strong>, kann aber in jedem Alter auftreten und
-          wiederkehren.
+          Neurodermitis – auch <em>atopische Dermatitis</em> oder{" "}
+          <em>atopisches Ekzem</em> – ist eine entzündliche Hauterkrankung, die
+          in Schüben verläuft. Typisch sind trockene, juckende Hautstellen, die
+          sich röten, schuppen, manchmal nässen und bei längerem Kratzen
+          verdicken. Die Erkrankung ist <strong>nicht ansteckend</strong>. Sie
+          kann in jedem Alter auftreten, beginnt aber häufig im Kindesalter.
+          Viele Betroffene erleben Phasen mit sehr wenigen Beschwerden, gefolgt
+          von Schüben – mit der richtigen Pflege und Therapie lässt sich das
+          gut kontrollieren.
         </p>
 
-        <div className="mt-6 grid gap-5 md:grid-cols-3">
-          <div className="rounded-2xl border border-zinc-200 p-4 bg-white">
-            <h3 className="font-semibold mb-2">Kurzdefinition</h3>
-            <p className="text-zinc-700">
-              Entzündliche Hauterkrankung mit Juckreiz, trockener Haut und
-              Schüben; Teil des atopischen Formenkreises (z.B. Heuschnupfen,
-              Asthma).
-            </p>
-          </div>
-          <div className="rounded-2xl border border-zinc-200 p-4 bg-white">
-            <h3 className="font-semibold mb-2">Häufigkeit</h3>
-            <p className="text-zinc-700">
-              Häufigste chronisch-entzündliche Hauterkrankung; viele Kinder, aber
-              auch Erwachsene betroffen.
-            </p>
-          </div>
-          <div className="rounded-2xl border border-zinc-200 p-4 bg-white">
-            <h3 className="font-semibold mb-2">Prognose</h3>
-            <p className="text-zinc-700">
-              Verläuft in Wellen. Mit guter Pflege &amp; Behandlung lassen sich
-              Schübe meist deutlich reduzieren.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="symptome" className="mt-12">
-        <h2 className="text-2xl font-bold mb-3">
-          Typische Symptome &amp; Schweregrade
-        </h2>
-        <p className="leading-relaxed">
-          Die Beschwerden variieren mit dem Alter und der Aktivität der
-          Erkrankung. Zu den <strong>Kernsymptomen</strong> zählen:{" "}
-          trockene Haut (Xerose), Juckreiz, Rötung, raue Plaques, ggf. Nässen
-          und Krusten bei akuten Schüben. Durch Kratzen entstehen oft{" "}
-          <em>Schürfungen</em> und später <em>Verdickungen</em> der Haut
-          (Lichenifikation).
-        </p>
-
-        <div className="mt-6 rounded-2xl border border-zinc-200 bg-zinc-50 p-5">
-          <h3 className="font-semibold mb-2">
-            Häufig betroffene Körperstellen nach Alter
-          </h3>
-          <ul className="list-disc ml-5 space-y-1">
-            <li>
-              <strong>Säuglinge</strong>: Wangen, Stirn, streckseitige Arme/Beine.
-            </li>
-            <li>
-              <strong>Kinder</strong>: Beugen (Ellenbeugen, Kniekehlen), Hals,
-              Handgelenke.
-            </li>
-            <li>
-              <strong>Jugendliche/Erwachsene</strong>: Beugen, Hände, Augenlider,
-              Hals/Nacken; oft chronisch-trockene Haut.
-            </li>
-          </ul>
-        </div>
-
-        <div className="mt-6 grid md:grid-cols-2 gap-5">
-          <div className="rounded-2xl border border-zinc-200 p-5">
-            <h3 className="font-semibold mb-2">Wie wird die Schwere eingeschätzt?</h3>
-            <p className="text-zinc-700">
-              In der Praxis nutzen Dermatolog:innen Scores wie{" "}
-              <strong>SCORAD</strong> oder <strong>EASI</strong>, die Ausmaß,
-              Rötung, Krusten/Nässen und Juckreiz berücksichtigen. Für Dich als
-              Betroffene:r ist hilfreich, in 3 Stufen zu denken:{" "}
-              <strong>mild</strong> (lokal begrenzt, eher trocken),{" "}
-              <strong>moderat</strong> (häufigere Schübe, größere Areale),{" "}
-              <strong>schwer</strong> (weit ausgedehnt, stark beeinträchtigender
-              Juckreiz, Schlafstörung).
-            </p>
-          </div>
-          <div className="rounded-2xl border border-zinc-200 p-5">
-            <h3 className="font-semibold mb-2">Zeichen für einen akuten Schub</h3>
-            <ul className="list-disc ml-5 space-y-1 text-zinc-700">
-              <li>Plötzlich stärkerer Juckreiz</li>
-              <li>Mehr Rötung, Wärme, eventuell Nässen</li>
-              <li>Neue Kratzspuren, schlechter Schlaf</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="ursachen" className="mt-12">
-        <h2 className="text-2xl font-bold mb-3">
-          Ursachen &amp; Trigger: Warum flammt die Haut auf?
-        </h2>
-        <p className="leading-relaxed">
-          Neurodermitis entsteht durch ein <strong>Zusammenspiel</strong> aus{" "}
-          <strong>genetischer Veranlagung</strong> (z.B. Barrierestörung der
-          Haut) und <strong>äußeren Faktoren</strong>. Die Hautbarriere lässt
-          leichter Feuchtigkeit entweichen, Reizstoffe und Keime gelangen
-          einfacher hinein – die Haut entzündet sich schneller.
-        </p>
-
-        <div className="mt-6 grid md:grid-cols-3 gap-5">
-          <div className="rounded-2xl border border-zinc-200 p-4 bg-white">
-            <h3 className="font-semibold mb-1">Innere Faktoren</h3>
-            <ul className="list-disc ml-5 text-zinc-700 space-y-1">
-              <li>Genetik (z.B. Filaggrin-Mutationen)</li>
-              <li>Immunsystem (überaktive Entzündungswege)</li>
-              <li>Atopie: familiäre Neigung zu Allergien</li>
-            </ul>
-          </div>
-          <div className="rounded-2xl border border-zinc-200 p-4 bg-white">
-            <h3 className="font-semibold mb-1">Äußere Trigger</h3>
-            <ul className="list-disc ml-5 text-zinc-700 space-y-1">
-              <li>Trockene Luft, Kälte/Hitze, Schwitzen</li>
-              <li>Wolle/kratzige Kleidung, Duftstoffe/Reinigungsmittel</li>
-              <li>Stress, Schlafmangel, Infekte</li>
-              <li>Individuelle Allergene (z.B. Hausstaub, Pollen)</li>
-            </ul>
-          </div>
-          <div className="rounded-2xl border border-zinc-200 p-4 bg-white">
-            <h3 className="font-semibold mb-1">Mikrobiom der Haut</h3>
-            <p className="text-zinc-700">
-              Bei Schüben findet sich häufig mehr <em>Staphylococcus aureus</em>.
-              Gute Pflege und Anti-Entzündung helfen, das Gleichgewicht
-              wiederherzustellen.
-            </p>
-          </div>
-        </div>
-
-        {/* Expertenzitat */}
-        <figure className="mt-6 rounded-2xl border-l-4 border-emerald-600 bg-emerald-50 p-5">
-          <blockquote className="text-lg font-medium">
-            „Bei Neurodermitis ist die Hautbarriere wie eine Mauer mit
-            Lücken&colon; Feuchtigkeit entweicht, Reizstoffe dringen leichter
-            ein. Eine konsequente Pflege plus entzündungshemmende Therapie
-            schließt diese Lücken – und die Haut kann sich beruhigen.“
-          </blockquote>
-          <figcaption className="mt-2 text-sm text-zinc-600">
-            — Jennifer Krause (indirektes Zitat aus der Beratungspraxis)
-          </figcaption>
-        </figure>
-      </section>
-
-      <section id="diagnose" className="mt-12">
-        <h2 className="text-2xl font-bold mb-3">
-          Diagnose: So gehen Ärzt:innen vor
-        </h2>
-        <p className="leading-relaxed">
-          Die Diagnose ist in erster Linie eine <strong>Klinische Diagnose</strong> – also
-          anhand von <strong>Hautbild, Verlauf und Juckreiz</strong>. Bei
-          unklaren Fällen werden Differenzialdiagnosen ausgeschlossen
-          (z.B. Psoriasis, Kontaktekzem, Krätze).
-        </p>
-
-        <div className="mt-6 grid md:grid-cols-2 gap-5">
-          <div className="rounded-2xl border border-zinc-200 p-5">
-            <h3 className="font-semibold mb-2">Typische Schritte</h3>
-            <ul className="list-disc ml-5 text-zinc-700 space-y-1">
-              <li>Anamnese (wann, wo, wie oft, familiäre Atopie?)</li>
-              <li>Inspektion der Haut (typische Lokalisationen)</li>
-              <li>Juckreiz-/Schmerz-Skala, Schlafqualität</li>
-              <li>
-                Bei Bedarf: Allergietests, Abstriche, selten Hautbiopsie
-              </li>
-            </ul>
-          </div>
-          <div className="rounded-2xl border border-zinc-200 p-5 bg-zinc-50">
-            <h3 className="font-semibold mb-2">Wann zur Dermatologie?</h3>
-            <p className="text-zinc-700">
-              Bei <strong>häufigen Schüben</strong>, <strong>großen Arealen</strong>,
-              <strong> starkem Juckreiz</strong>, <strong>Schlafstörungen</strong> oder
-              wenn Hausmittel nicht helfen. Auch wenn <strong>Hände/Gesicht</strong> stark
-              betroffen sind, ist fachärztliche Begleitung sinnvoll.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="behandlung" className="mt-12">
-        <h2 className="text-2xl font-bold mb-3">
-          Behandlung: Von Pflege bis Systemtherapie
-        </h2>
-        <p className="leading-relaxed">
-          Die Therapie richtet sich nach der <strong>Schwere</strong>,
-          den <strong>betroffenen Arealen</strong> und Deinen{" "}
-          <strong>Vorlieben</strong>. Ziel ist es, die Hautbarriere zu stärken,
-          Entzündung zu stoppen und Juckreiz zu lindern.
-        </p>
-
-        <div className="mt-6 grid gap-5 md:grid-cols-3">
-          <div className="rounded-2xl border border-zinc-200 p-5">
-            <h3 className="font-semibold mb-2">1) Basispflege (täglich)</h3>
-            <ul className="list-disc ml-5 text-zinc-700 space-y-1">
-              <li>
-                <strong>Emollienzien</strong> (Rückfetter) 1–2×/Tag, mehr bei
-                Trockenheit
-              </li>
-              <li>Lauwarme, kurze Duschen/Bad, milde Reinigungsprodukte</li>
-              <li>Nach dem Waschen innerhalb 3 Min. eincremen</li>
-              <li>Baumwolle/Seide nah an der Haut, keine Wolle</li>
-            </ul>
-          </div>
-          <div className="rounded-2xl border border-zinc-200 p-5">
-            <h3 className="font-semibold mb-2">2) Schubtherapie (lokal)</h3>
-            <ul className="list-disc ml-5 text-zinc-700 space-y-1">
-              <li>
-                <strong>Topische Steroide</strong> (kurzzeitig, passende Stärke)
-              </li>
-              <li>
-                <strong>Calcineurin-Inhibitoren</strong> (Tacrolimus/Pimecrolimus),
-                besonders für Gesicht/Beugen
-              </li>
-              <li>
-                <strong>Proaktive Therapie</strong>: 2–3×/Woche dünn auf
-                Problemstellen, um Rückfälle zu verhindern
-              </li>
-            </ul>
-          </div>
-          <div className="rounded-2xl border border-zinc-200 p-5">
-            <h3 className="font-semibold mb-2">3) Bei moderat bis schwer</h3>
-            <ul className="list-disc ml-5 text-zinc-700 space-y-1">
-              <li>UV-Therapie (fachärztlich)</li>
-              <li>
-                <strong>Systemtherapien</strong>: z.B. Biologika (IL-4/IL-13-Hemmung)
-                oder <strong>JAK-Inhibitoren</strong> – individuell durch
-                Dermatolog:innen
-              </li>
-              <li>Begleitend: Juckreizmanagement, Schlaf, Stress</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
-          <h3 className="font-semibold mb-2">
-            Wichtig zu wissen
-          </h3>
-          <p className="text-zinc-700">
-            Moderne Leitlinien empfehlen eine <strong>Stufentherapie</strong>:
-            Erst die Basis stabilisieren, dann bei Bedarf anti-entzündlich
-            auffangen und nur bei anhaltenden, ausgeprägten Beschwerden
-            systemisch behandeln – immer ärztlich begleitet.
+        <div className="mt-6 rounded-2xl border border-zinc-200 p-5 bg-zinc-50">
+          <p className="m-0">
+            <strong>Kurzdefinition:</strong> Chronisch-entzündliche
+            Hauterkrankung mit gestörter Hautbarriere und starkem Juckreiz;
+            ausgelöst bzw. verschlimmert durch individuelle Trigger; verläuft in
+            Schüben; sehr gut behandelbar.
           </p>
         </div>
       </section>
 
-      <section id="alltagstipps" className="mt-12">
-        <h2 className="text-2xl font-bold mb-3">
-          Alltagstipps: Pflege-Routine &amp; Trigger-Management
+      <section id="symptome" className="mt-12">
+        <h2 className="text-2xl font-bold mb-2">
+          Symptome &amp; wie sich ein Schub anfühlt
         </h2>
-
-        <div className="grid md:grid-cols-3 gap-5">
-          <div className="rounded-2xl border border-zinc-200 p-5">
-            <h3 className="font-semibold mb-2">Deine tägliche Routine</h3>
-            <ol className="list-decimal ml-5 space-y-1 text-zinc-700">
-              <li>Sanft reinigen (max. 5–10 Min., lauwarm)</li>
-              <li>Abtupfen, nicht rubbeln</li>
-              <li>Innerhalb von 3 Min. reichhaltig eincremen</li>
-              <li>Bei Juckreiz: kühlende Umschläge, Kratzalternativen</li>
-            </ol>
-          </div>
-
-          <div className="rounded-2xl border border-zinc-200 p-5 bg-zinc-50">
-            <h3 className="font-semibold mb-2">Trigger im Blick</h3>
-            <ul className="list-disc ml-5 space-y-1 text-zinc-700">
-              <li>Schwitzen → atmungsaktive Kleidung, Pausen beim Sport</li>
-              <li>Kälte/Heizungsluft → Luft befeuchten, Pflege anpassen</li>
-              <li>Duft-/Farb-/Konservierungsstoffe meiden</li>
-              <li>Stressmanagement: Atmung, Bewegung, Schlafroutine</li>
+        <div className="grid md:grid-cols-3 gap-4">
+          <div className="md:col-span-2 space-y-3">
+            <p>
+              Häufige Zeichen sind starker Juckreiz (oft nachts), trockene
+              Haut, Rötungen und schuppende Ekzeme. Kratzen bringt kurzfristig
+              Erleichterung, verstärkt aber die Entzündung und kann die Haut
+              verdicken (sogenannte Lichenifikation).
+            </p>
+            <ul className="list-disc ml-5">
+              <li>
+                <strong>Typische Stellen</strong>: Armbeugen, Kniekehlen, Hals,
+                Handrücken, Augenlider; bei Babys oft Wangen &amp; Streckseiten.
+              </li>
+              <li>
+                <strong>Begleiter</strong>: Rissige Haut, Nässen, kleine
+                Bläschen; krustige Stellen durch Kratzen.
+              </li>
+              <li>
+                <strong>Infektionen</strong>: Durch aufgekratzte Haut leichter –
+                z. B. Bakterien (gelbliche Krusten) oder Herpes (schmerzhafte
+                Bläschen) – ärztlich abklären.
+              </li>
             </ul>
           </div>
+          <aside className="rounded-2xl border border-zinc-200 p-4 bg-white">
+            <h3 className="font-semibold mb-2">Mini-Check: Ist es ein Schub?</h3>
+            <ol className="list-decimal ml-5 space-y-1">
+              <li>Plötzlich mehr Juckreiz (&gt; abends/nachts)?</li>
+              <li>Neue gerötete, raue oder nässende Stellen?</li>
+              <li>Gewohnte Pflege lindert schlechter?</li>
+            </ol>
+            <p className="mt-2 text-sm text-zinc-600">
+              Wenn ja: kurzzeitig intensivere Therapie nach deinem Hautplan
+              erwägen und ärztlichen Rat einholen.
+            </p>
+          </aside>
+        </div>
+      </section>
 
-          <div className="rounded-2xl border border-zinc-200 p-5">
-            <h3 className="font-semibold mb-2">2&nbsp;zu&nbsp;1 – Schnellvergleich</h3>
-            <div className="grid grid-cols-3 gap-3 text-sm">
-              <div className="col-span-2">
-                <div className="rounded border border-zinc-200 p-3">
-                  <strong>Do</strong>
-                  <ul className="list-disc ml-5 mt-1 space-y-1">
-                    <li>Regelmäßig rückfetten</li>
-                    <li>Kratzalternativen (Knetball, Druck)</li>
-                    <li>Baumwolle/Seide, Schichtenprinzip</li>
-                  </ul>
-                </div>
-              </div>
-              <div>
-                <div className="rounded border border-zinc-200 p-3">
-                  <strong>Don&apos;t</strong>
-                  <ul className="list-disc ml-5 mt-1 space-y-1">
-                    <li>Heiß duschen</li>
-                    <li>Duftstoffmix</li>
-                    <li>Wolle direkt auf der Haut</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+      <section id="ursache" className="mt-12">
+        <h2 className="text-2xl font-bold mb-2">
+          Ursachen: Hautbarriere &amp; Immunsystem – was genau passiert?
+        </h2>
+        <p>
+          Bei Neurodermitis ist die äußere Schutzschicht der Haut – die
+          <em> Hautbarriere</em> – gestört. Wasser geht schneller verloren, die
+          Haut trocknet aus und Reizstoffe dringen leichter ein. Gleichzeitig
+          reagiert das Immunsystem überempfindlich. Beides zusammen führt zu
+          Entzündungen und Juckreiz. Die Veranlagung spielt eine Rolle; oft
+          finden sich in Familien auch Heuschnupfen oder Asthma (atopische
+          Trias).
+        </p>
+        <figure className="mt-6 rounded-2xl border-l-4 border-emerald-600 bg-emerald-50 p-5">
+          <blockquote className="text-lg font-medium">
+            „Die beste Therapie beginnt mit einer starken Hautbarriere: Wer
+            konsequent pflegt, braucht oft deutlich weniger entzündungshemmende
+            Cremes.“
+          </blockquote>
+          <figcaption className="mt-2 text-sm text-zinc-600">
+            — Jennifer Krause, indirektes Zitat aus der Beratungspraxis
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="trigger" className="mt-12">
+        <h2 className="text-2xl font-bold mb-2">Häufige Trigger im Alltag</h2>
+        <div className="grid md:grid-cols-3 gap-4">
+          <div className="rounded-2xl border border-zinc-200 p-4 bg-white">
+            <h3 className="font-semibold mb-1">Physikalisch</h3>
+            <p className="m-0">
+              Kälte, trockene Heizungsluft, Schwitzen, Wolle auf der Haut,
+              häufiges Händewaschen, lange heiße Duschen.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-zinc-200 p-4 bg-white">
+            <h3 className="font-semibold mb-1">Chemisch</h3>
+            <p className="m-0">
+              Duftstoffe, aggressive Reinigungsmittel, schäumende
+              Tensid-Shampoos, manche Desinfektionsmittel.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-zinc-200 p-4 bg-white">
+            <h3 className="font-semibold mb-1">Psychosozial</h3>
+            <p className="m-0">
+              Stress, Schlafmangel, starkes Kratzverlangen in Ruhephasen.
+            </p>
           </div>
         </div>
       </section>
 
-      <section id="vergleich" className="mt-12">
-        <h2 className="text-2xl font-bold mb-3">
-          Vergleich: Neurodermitis vs. trockene Haut
-        </h2>
-        <div className="rounded-2xl border border-zinc-200 overflow-hidden">
+      <section id="diagnose" className="mt-12">
+        <h2 className="text-2xl font-bold mb-2">Diagnose &amp; wann zum Arzt</h2>
+        <p>
+          Die Diagnose stellt die Dermatologie anhand von Krankengeschichte,
+          typischem Erscheinungsbild und Verteilung auf dem Körper.
+          Allergietests können sinnvoll sein, wenn der Verdacht besteht, dass
+          bestimmte Allergene Schübe auslösen. Suchtests „ins Blaue hinein“
+          sind jedoch selten hilfreich.
+        </p>
+        <div className="mt-4 rounded-2xl border border-zinc-200 overflow-hidden">
           <table className="w-full text-sm">
             <thead className="bg-zinc-50">
               <tr>
-                <th className="text-left font-semibold p-3 w-56">
-                  Merkmal
-                </th>
+                <th className="text-left font-semibold p-3">Situation</th>
                 <th className="text-left font-semibold p-3">
-                  Trockene Haut
-                </th>
-                <th className="text-left font-semibold p-3">
-                  Neurodermitis
+                  Empfehlung &amp; nächster Schritt
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr className="border-t border-zinc-200">
-                <td className="p-3 font-medium text-zinc-900">Juckreiz</td>
-                <td className="p-3 text-zinc-700">Meist mild, situativ</td>
-                <td className="p-3 text-zinc-700">Oft stark, störend</td>
+                <td className="p-3">Erste Ekzeme, starker Juckreiz</td>
+                <td className="p-3">
+                  Hausarzt/Hautarzt: Diagnose, Pflegeplan, ggf. Rezeptcremes.
+                </td>
               </tr>
               <tr className="border-t border-zinc-200">
-                <td className="p-3 font-medium text-zinc-900">Rötung/Entzündung</td>
-                <td className="p-3 text-zinc-700">Gering</td>
-                <td className="p-3 text-zinc-700">Deutlich, schubweise</td>
+                <td className="p-3">Häufige Schübe trotz Pflege</td>
+                <td className="p-3">
+                  Therapie anpassen, Schulung, Phototherapie oder Systemtherapie
+                  prüfen.
+                </td>
               </tr>
               <tr className="border-t border-zinc-200">
-                <td className="p-3 font-medium text-zinc-900">Typische Areale</td>
-                <td className="p-3 text-zinc-700">Beliebig, eher diffus</td>
-                <td className="p-3 text-zinc-700">Beugen, Hände, Gesicht u.a.</td>
-              </tr>
-              <tr className="border-t border-zinc-200">
-                <td className="p-3 font-medium text-zinc-900">Therapie</td>
-                <td className="p-3 text-zinc-700">Pflege</td>
-                <td className="p-3 text-zinc-700">Pflege + anti-entzündlich</td>
+                <td className="p-3">Gelbliche Krusten, Fieber, Herpesverdacht</td>
+                <td className="p-3">
+                  Sofort ärztlich abklären – mögliche Infektion behandeln.
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section id="faq" className="mt-14">
-        <h2 className="text-2xl font-bold mb-4">FAQ</h2>
-        <div className="space-y-6 text-zinc-700">
-          <div>
-            <h3 className="font-semibold">
-              Ist Neurodermitis ansteckend?
-            </h3>
-            <p>
-              Nein. Neurodermitis ist eine <strong>nicht ansteckende</strong>
-              Entzündung der Haut. Nähe, Umarmungen oder gemeinsames Benutzen
-              von Gegenständen übertragen die Erkrankung nicht.
+      <section id="therapie" className="mt-12">
+        <h2 className="text-2xl font-bold mb-2">Therapie: Schritt für Schritt</h2>
+        <p>
+          Die Behandlung folgt dem Prinzip „Basis plus Bedarf“: tägliche
+          Barrierepflege für alle, entzündungshemmende Therapie in Schüben – und
+          bei Bedarf weitere Bausteine.
+        </p>
+
+        <div className="mt-6 grid md:grid-cols-3 gap-4">
+          <div className="rounded-2xl border border-zinc-200 p-4 bg-white">
+            <h3 className="font-semibold mb-1">1) Basispflege</h3>
+            <p className="m-0">
+              Emollienzien 1–2× täglich (mehr bei Trockenheit). Ziel: Feuchtig­
+              keit binden, Barriere stärken, Schübe reduzieren.
             </p>
           </div>
-          <div>
-            <h3 className="font-semibold">
-              Geht Neurodermitis wieder weg?
-            </h3>
-            <p>
-              Sie kann sich <strong>zurückbilden</strong>, besonders bei
-              Kindern. Grundsätzlich ist sie jedoch <strong>chronisch</strong>{" "}
-              und verläuft <strong>in Schüben</strong>. Mit der richtigen
-              Pflege und Therapie lassen sich Schübe deutlich reduzieren.
+          <div className="rounded-2xl border border-zinc-200 p-4 bg-white">
+            <h3 className="font-semibold mb-1">2) Akuttherapie</h3>
+            <p className="m-0">
+              Inflammationshemmer lokal: Kortikosteroide oder
+              Calcineurin-Inhibitoren nach ärztlichem Plan, „proaktiv“ 2–3×/W
+              an Problemstellen kann Rückfälle verhindern.
             </p>
           </div>
-          <div>
-            <h3 className="font-semibold">
-              Welche Creme hilft bei Neurodermitis?
-            </h3>
-            <p>
-              Täglich <strong>Emollienzien</strong> (Rückfetter) für die
-              Barriere. Bei Schub helfen <strong>entzündungshemmende</strong>{" "}
-              Cremes wie geeignete <strong>topische Steroide</strong> oder{" "}
-              <strong>Calcineurin-Inhibitoren</strong> – ärztlich anleiten
-              lassen.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-semibold">
-              Welche Rolle spielen Allergien?
-            </h3>
-            <p>
-              Allergien können <strong>Trigger</strong> sein, sind aber nicht
-              die Ursache. Ob Tests sinnvoll sind, entscheidet die Ärztin/der
-              Arzt anhand Deiner Beschwerden und Deines Verlaufs.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-semibold">
-              Was tun gegen nächtlichen Juckreiz?
-            </h3>
-            <p>
-              Raum kühl halten, Baumwollbettwäsche, kurze Nägel, rückfetten vor
-              dem Schlafen, Ablenkung/Entspannung. Bei hartnäckigem Juckreiz
-              Therapie überprüfen lassen.
+          <div className="rounded-2xl border border-zinc-200 p-4 bg-white">
+            <h3 className="font-semibold mb-1">3) Zusatzbausteine</h3>
+            <p className="m-0">
+              Phototherapie, Biologika oder JAK-Inhibitoren bei mittelschwerem
+              bis schwerem Verlauf; Schulungsprogramme &amp; Kratzmanagement.
             </p>
           </div>
         </div>
 
-        {/* FAQ Schema.org */}
+        <div className="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
+          <p className="m-0">
+            <strong>Pro-Tipp:</strong> „Wet-Wraps“ (feuchte Umschläge) können
+            bei starken Schüben beruhigen – nur mit Anleitung anwenden.
+          </p>
+        </div>
+      </section>
+
+      <section id="medikamente" className="mt-12">
+        <h2 className="text-2xl font-bold mb-2">Medikamente verständlich erklärt</h2>
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="rounded-2xl border border-zinc-200 p-4 bg-white">
+            <h3 className="font-semibold mb-1">Kortikosteroid-Cremes</h3>
+            <p className="m-0">
+              Wirken rasch gegen Entzündung und Juckreiz. Stärke und Dauer
+              auf das Areal abstimmen (Gesicht schwächer als Körper). Richtig
+              angewandt sicher; „Fingertip-Unit“ hilft bei der Dosierung.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-zinc-200 p-4 bg-white">
+            <h3 className="font-semibold mb-1">Calcineurin-Inhibitoren</h3>
+            <p className="m-0">
+              Tacrolimus/Pimecrolimus – steroidfrei, besonders für Gesicht,
+              Hals &amp; Falten geeignet. Anfangs mögliches Brennen klingt meist
+              ab.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-zinc-200 p-4 bg-white">
+            <h3 className="font-semibold mb-1">PDE-4 &amp; topische JAK</h3>
+            <p className="m-0">
+              Cremes wie PDE-4-Hemmer oder topische JAK-Inhibitoren zielen auf
+              Entzündungssignale; Option bei inadäquater Wirkung klassischer
+              Therapien.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-zinc-200 p-4 bg-white">
+            <h3 className="font-semibold mb-1">Systemtherapien</h3>
+            <p className="m-0">
+              Bei schwerer AD: Biologika (z. B. Anti-IL-4/13) oder JAK-Inhibitoren
+              als Tablette. Wirksam, aber kontrollbedürftig – ärztliche Führung
+              ist Pflicht.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-zinc-200 overflow-hidden">
+          <table className="w-full text-sm">
+            <thead className="bg-zinc-50">
+              <tr>
+                <th className="text-left font-semibold p-3 w-56">
+                  Maßnahme
+                </th>
+                <th className="text-left font-semibold p-3">Nutzen</th>
+                <th className="text-left font-semibold p-3">Hinweise</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-t border-zinc-200">
+                <td className="p-3">Basiscremes (Emollienzien)</td>
+                <td className="p-3">
+                  Barriere stärken, Trockenheit &amp; Schubrisiko senken
+                </td>
+                <td className="p-3">Täglich, ausreichend Menge, saisonal anpassen</td>
+              </tr>
+              <tr className="border-t border-zinc-200">
+                <td className="p-3">Kortikosteroid-Cremes</td>
+                <td className="p-3">Schnell entzündungshemmend</td>
+                <td className="p-3">
+                  Stärke/Dauer begrenzen; Kinder &amp; Gesicht extra vorsichtig
+                </td>
+              </tr>
+              <tr className="border-t border-zinc-200">
+                <td className="p-3">Calcineurin-Inhibitoren</td>
+                <td className="p-3">Steroidfreie Option</td>
+                <td className="p-3">Anfangs Brennen möglich</td>
+              </tr>
+              <tr className="border-t border-zinc-200">
+                <td className="p-3">Phototherapie</td>
+                <td className="p-3">Gute Option bei flächiger AD</td>
+                <td className="p-3">Serienweise, nicht in jeder Praxis</td>
+              </tr>
+              <tr className="border-t border-zinc-200">
+                <td className="p-3">Biologika/JAK-Inhibitoren</td>
+                <td className="p-3">Wirksam bei schwerer AD</td>
+                <td className="p-3">Regelmäßige Kontrollen nötig</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="alltag" className="mt-12">
+        <h2 className="text-2xl font-bold mb-2">Alltag: Pflegeroutinen, Kleidung, Schlaf</h2>
+        <div className="grid md:grid-cols-3 gap-4">
+          <div className="md:col-span-2 space-y-3">
+            <p>
+              <strong>Duschen &amp; Baden:</strong> Kurz, lauwarm, milde
+              Reinigungsprodukte, direkt danach in 3 Min. eincremen
+              („3-Minuten-Regel“). Hände oft rückfetten.
+            </p>
+            <p>
+              <strong>Kleidung:</strong> Weiche, atmungsaktive Stoffe (Baumwolle,
+              Viskose). Wolle direkt auf der Haut meiden. Neue Kleidung vor dem
+              Tragen waschen, parfümfreie Waschmittel bevorzugen.
+            </p>
+            <p>
+              <strong>Schlaf:</strong> Kühl, leichtes Bettzeug, Fingernägel
+              kurz; Baumwollhandschuhe können nachts Kratzschäden vermindern.
+            </p>
+          </div>
+          <aside className="rounded-2xl border border-zinc-200 p-4 bg-white">
+            <h3 className="font-semibold mb-2">Dein 5-Punkte-Schnellplan</h3>
+            <ul className="list-disc ml-5">
+              <li>Täglich cremen</li>
+              <li>Schub-Plan griffbereit</li>
+              <li>Dusche kurz &amp; lauwarm</li>
+              <li>Weiche Kleidung</li>
+              <li>Stressabbau &amp; Schlaf</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section id="ernaehrung" className="mt-12">
+        <h2 className="text-2xl font-bold mb-2">Ernährung &amp; Neurodermitis</h2>
+        <p>
+          Eine allgemeine „Neurodermitis-Diät“ gibt es nicht. Entscheidend ist,
+          ob echte Allergien oder Unverträglichkeiten vorliegen. Wer ohne
+          Diagnose ganze Lebensmittelgruppen meidet, riskiert Mangelernährung –
+          besonders bei Kindern. Sinnvoll: ausgewogen essen, ausreichend Trinken
+          und ein Ernährungstagebuch, wenn der Verdacht auf Auslöser besteht.
+        </p>
+      </section>
+
+      <section id="kinder" className="mt-12">
+        <h2 className="text-2xl font-bold mb-2">
+          Kinder &amp; Babys: Was ist besonders wichtig?
+        </h2>
+        <p>
+          Bei Babys beginnt AD oft im Gesicht (Wangen, Stirn) und an
+          Streckseiten. Die Pflege sollte besonders mild sein; Kortikosteroide
+          nur in passender Stärke und Dauer nach ärztlicher Anleitung.
+          Eltern-Kind-Schulungen helfen im Alltag enorm, inklusive Kratzalternativen
+          und spielerischer Pflegeroutine.
+        </p>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="mt-14">
+        <h2 className="text-2xl font-bold mb-4">FAQ</h2>
+        <div className="space-y-6 text-zinc-700">
+          {faq.map((f) => (
+            <div key={f.q}>
+              <h3 className="font-semibold">{f.q}</h3>
+              <p>{f.a}</p>
+            </div>
+          ))}
+        </div>
+
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              mainEntity: [
-                {
-                  "@type": "Question",
-                  name: "Ist Neurodermitis ansteckend?",
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                      "Nein. Neurodermitis ist nicht ansteckend. Nähe, Umarmungen oder gemeinsames Benutzen von Gegenständen übertragen die Erkrankung nicht.",
-                  },
-                },
-                {
-                  "@type": "Question",
-                  name: "Geht Neurodermitis wieder weg?",
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                      "Neurodermitis ist chronisch und verläuft in Schüben, kann sich aber gerade im Kindesalter zurückbilden. Mit der passenden Therapie lassen sich Schübe deutlich reduzieren.",
-                  },
-                },
-                {
-                  "@type": "Question",
-                  name: "Welche Creme hilft bei Neurodermitis?",
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                      "Basis sind rückfettende Emollienzien. Bei Schub helfen anti-entzündliche Cremes wie geeignete topische Steroide oder Calcineurin-Inhibitoren – nach ärztlicher Anleitung.",
-                  },
-                },
-                {
-                  "@type": "Question",
-                  name: "Welche Rolle spielen Allergien?",
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                      "Allergien können Schübe triggern, sind aber nicht die alleinige Ursache. Ob Tests sinnvoll sind, entscheidet die Ärztin/der Arzt individuell.",
-                  },
-                },
-                {
-                  "@type": "Question",
-                  name: "Was tun gegen nächtlichen Juckreiz?",
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                      "Kühles Schlafzimmer, Baumwollbettwäsche, kurze Nägel, rückfetten vor dem Schlafen, Entspannung. Bei anhaltendem Juckreiz die Therapie überprüfen lassen.",
-                  },
-                },
-              ],
-            }),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
         />
       </section>
 
@@ -679,267 +643,130 @@ export default function Page() {
       <section id="zusammenfassung" className="mt-14">
         <h2 className="text-2xl font-bold mb-3">Kurzfazit</h2>
         <p className="leading-relaxed">
-          <strong>Was ist Neurodermitis?</strong> Eine häufige,
-          nicht ansteckende Entzündung der Haut mit starkem Juckreiz und
-          Schüben. <strong>Was hilft?</strong> Tägliche Basispflege,
-          rechtzeitig entzündungshemmend behandeln und persönliche Trigger
-          managen. So lassen sich Beschwerden in vielen Fällen gut kontrollieren.
+          <strong>Was ist Neurodermitis – und was hilft wirklich?</strong>{" "}
+          Neurodermitis ist eine chronisch-entzündliche, nicht ansteckende
+          Hauterkrankung. Mit täglicher Barrierepflege, kluger Akuttherapie und
+          dem Vermeiden persönlicher Trigger lässt sich der Verlauf in den
+          meisten Fällen sehr gut kontrollieren – für spürbar weniger Juckreiz
+          und mehr Lebensqualität.
         </p>
       </section>
 
-      {/* Call to Action */}
-      <section className="mt-14">
-        <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6">
-          <h2 className="text-2xl font-bold mb-2">
-            10 studienbasierte Tipps bei Neurodermitis – kostenlos als E-Mail
-          </h2>
-          <p className="text-zinc-700 mb-4">
-            Unser neuester Report bündelt evidenzbasierte Maßnahmen, die
-            Deiner Haut spürbar guttun.
-          </p>
-          <div className="not-prose">
-            {/* Begin Brevo Form */}
-            <style>
-              {`@font-face{font-display:block;font-family:Roboto;src:url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/7529907e9eaf8ebb5220c5f9850e3811.woff2) format("woff2"),url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/25c678feafdc175a70922a116c9be3e7.woff) format("woff")}
-              @font-face{font-display:fallback;font-family:Roboto;font-weight:600;src:url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/6e9caeeafb1f3491be3e32744bc30440.woff2) format("woff2"),url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/71501f0d8d5aa95960f6475d5487d4c2.woff) format("woff")}
-              @font-face{font-display:fallback;font-family:Roboto;font-weight:700;src:url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/3ef7cf158f310cf752d5ad08cd0e7e60.woff2) format("woff2"),url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/ece3a1d82f18b60bcce0211725c476aa.woff) format("woff")}
-              #sib-container input::placeholder{text-align:left;font-family:Helvetica,sans-serif;color:#c0ccda}
-              #sib-container textarea::placeholder{text-align:left;font-family:Helvetica,sans-serif;color:#c0ccda}
-              #sib-container a{text-decoration:underline;color:#2BB2FC}`}
-            </style>
-            <link
-              rel="stylesheet"
-              href="https://sibforms.com/forms/end-form/build/sib-styles.css"
-            />
-            <div
-              className="sib-form"
-              style={{ textAlign: "center", backgroundColor: "#EFF2F7" }}
-            >
-              <div id="sib-form-container" className="sib-form-container">
-                <div
-                  id="error-message"
-                  className="sib-form-message-panel"
-                  style={{
-                    fontSize: 16,
-                    textAlign: "left",
-                    fontFamily: "Helvetica, sans-serif",
-                    color: "#661d1d",
-                    backgroundColor: "#ffeded",
-                    borderRadius: 3,
-                    borderColor: "#ff4949",
-                    maxWidth: 540,
-                  }}
-                >
-                  <div className="sib-form-message-panel__text sib-form-message-panel__text--center">
-                    <span className="sib-form-message-panel__inner-text">
-                      Deine Anmeldung konnte nicht gespeichert werden. Bitte
-                      versuche es erneut.
-                    </span>
-                  </div>
-                </div>
-                <div></div>
-                <div
-                  id="success-message"
-                  className="sib-form-message-panel"
-                  style={{
-                    fontSize: 16,
-                    textAlign: "left",
-                    fontFamily: "Helvetica, sans-serif",
-                    color: "#085229",
-                    backgroundColor: "#e7faf0",
-                    borderRadius: 3,
-                    borderColor: "#13ce66",
-                    maxWidth: 540,
-                  }}
-                >
-                  <div className="sib-form-message-panel__text sib-form-message-panel__text--center">
-                    <span className="sib-form-message-panel__inner-text">
-                      Deine Anmeldung war erfolgreich.
-                    </span>
-                  </div>
-                </div>
-                <div></div>
-                <div
-                  id="sib-container"
-                  className="sib-container--large sib-container--vertical"
-                  style={{
-                    textAlign: "center",
-                    backgroundColor: "rgba(255,255,255,1)",
-                    maxWidth: 540,
-                    borderRadius: 3,
-                    borderWidth: 1,
-                    borderColor: "#C0CCD9",
-                    borderStyle: "solid",
-                    direction: "ltr",
-                  }}
-                >
-                  <form
-                    id="sib-form"
-                    method="POST"
-                    action="https://58a8e982.sibforms.com/serve/MUIFAAu67dU7m7jHkJHnSYjaQM-Go-LEt6pCHEcflaDv_K8hQQ8emSwcEz4jEEv6iGtpPoUX2wkdM0SHScgPCHivxNEwC_pzg3wni0Rlub0NvwGHjxUEG_icVa5-RMnJcLfkCunQzIVbN6_LC3ITRul-gVn212JWZgJr8uYXi-ecIAaLwdUEZ4yOwHMcjvOQ5zveRzRGkMnD9UIo"
-                    data-type="subscription"
-                  >
-                    <div style={{ padding: "8px 0" }}>
-                      <div
-                        className="sib-form-block"
-                        style={{
-                          fontSize: 20,
-                          textAlign: "left",
-                          fontWeight: 700,
-                          fontFamily: "Helvetica, sans-serif",
-                          color: "#090a0a",
-                          backgroundColor: "transparent",
-                          textAlignLast: "left",
-                        }}
-                      >
-                        <p>
-                          10 studienbasierte Tipps bei Neurodermitis direkt in
-                          deinem Postfach.
-                        </p>
-                      </div>
-                    </div>
-                    <div style={{ padding: "8px 0" }}>
-                      <div
-                        className="sib-form-block"
-                        style={{
-                          fontSize: 16,
-                          textAlign: "left",
-                          fontFamily: "Helvetica, sans-serif",
-                          color: "#3C4858",
-                          backgroundColor: "transparent",
-                          textAlignLast: "left",
-                        }}
-                      >
-                        <div className="sib-text-form-block">
-                          <p>Der neueste Report unserer Redaktion.</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div style={{ padding: "8px 0" }}>
-                      <div className="sib-input sib-form-block">
-                        <div className="form__entry entry_block">
-                          <div className="form__label-row ">
-                            <label
-                              className="entry__label"
-                              style={{
-                                fontWeight: 700,
-                                textAlign: "left",
-                                fontSize: 16,
-                                fontFamily: "Helvetica, sans-serif",
-                                color: "#3c4858",
-                              }}
-                              htmlFor="EMAIL"
-                              data-required="*"
-                            >
-                              Wohin dürfen wir Dir die 10 Tipps schicken?
-                            </label>
-                            <div className="entry__field">
-                              <input
-                                className="input "
-                                type="text"
-                                id="EMAIL"
-                                name="EMAIL"
-                                autoComplete="off"
-                                placeholder="EMAIL"
-                                data-required="true"
-                                required
-                              />
-                            </div>
-                          </div>
-                          <label
-                            className="entry__error entry__error--primary"
-                            style={{
-                              fontSize: 16,
-                              textAlign: "left",
-                              fontFamily: "Helvetica, sans-serif",
-                              color: "#661d1d",
-                              backgroundColor: "#ffeded",
-                              borderRadius: 3,
-                              borderColor: "#ff4949",
-                            }}
-                          ></label>
-                        </div>
-                      </div>
-                    </div>
-                    <div style={{ padding: "8px 0" }}>
-                      <div className="sib-input sib-form-block">
-                        <div className="form__entry entry_block">
-                          <div className="form__label-row ">
-                            <div className="entry__field">
-                              <input
-                                className="input "
-                                maxLength={200}
-                                type="text"
-                                id="VORNAME"
-                                name="VORNAME"
-                                autoComplete="off"
-                                placeholder="VORNAME"
-                                data-required="true"
-                                required
-                              />
-                            </div>
-                          </div>
-                          <label
-                            className="entry__error entry__error--primary"
-                            style={{
-                              fontSize: 16,
-                              textAlign: "left",
-                              fontFamily: "Helvetica, sans-serif",
-                              color: "#661d1d",
-                              backgroundColor: "#ffeded",
-                              borderRadius: 3,
-                              borderColor: "#ff4949",
-                            }}
-                          ></label>
-                        </div>
-                      </div>
-                    </div>
-                    <div style={{ padding: "8px 0" }}>
-                      <div className="sib-form-block" style={{ textAlign: "left" }}>
-                        <button
-                          className="sib-form-block__button sib-form-block__button-with-loader"
-                          style={{
-                            fontSize: 16,
-                            textAlign: "left",
-                            fontWeight: 700,
-                            fontFamily: "Helvetica, sans-serif",
-                            color: "#FFFFFF",
-                            backgroundColor: "#28a392",
-                            borderRadius: 3,
-                            borderWidth: 0,
-                          }}
-                          form="sib-form"
-                          type="submit"
-                        >
-                          JETZT 10 TIPPS SICHERN
-                        </button>
-                      </div>
-                    </div>
-                    <input
-                      type="text"
-                      name="email_address_check"
-                      value=""
-                      className="input--hidden"
-                    />
-                    <input type="hidden" name="locale" value="de" />
-                  </form>
-                </div>
-              </div>
-            </div>
-            <script>
-              {`window.REQUIRED_CODE_ERROR_MESSAGE='Wähle bitte einen Ländervorwahl aus.';window.LOCALE='de';window.EMAIL_INVALID_MESSAGE=window.SMS_INVALID_MESSAGE="Die eingegebenen Informationen sind nicht gültig. Bitte überprüfe das Feldformat und versuche es erneut.";window.REQUIRED_ERROR_MESSAGE="Dieses Feld darf nicht leer sein. ";window.GENERIC_INVALID_MESSAGE="Die eingegebenen Informationen sind nicht gültig. Bitte überprüfe das Feldformat und versuche es erneut.";window.translation={common:{selectedList:'{quantity} Liste ausgewählt',selectedLists:'{quantity} Listen ausgewählt',selectedOption:'{quantity} ausgewählt',selectedOptions:'{quantity} ausgewählt',}};var AUTOHIDE=Boolean(0);`}
-            </script>
-            <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
-            {/* End Brevo Form */}
+      {/* Call to Action – exakt wie Vorlage, ohne zusätzlichen Container */}
+      <section
+        className="mt-14"
+        dangerouslySetInnerHTML={{
+          __html: `
+<!-- Begin Brevo Form -->
+<!-- START - We recommend to place the below code in head tag of your website html  -->
+<style>
+  @font-face {
+    font-display: block;
+    font-family: Roboto;
+    src: url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/7529907e9eaf8ebb5220c5f9850e3811.woff2) format("woff2"), url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/25c678feafdc175a70922a116c9be3e7.woff) format("woff")
+  }
+  @font-face {
+    font-display: fallback;
+    font-family: Roboto;
+    font-weight: 600;
+    src: url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/6e9caeeafb1f3491be3e32744bc30440.woff2) format("woff2"), url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/71501f0d8d5aa95960f6475d5487d4c2.woff) format("woff")
+  }
+  @font-face {
+    font-display: fallback;
+    font-family: Roboto;
+    font-weight: 700;
+    src: url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/3ef7cf158f310cf752d5ad08cd0e7e60.woff2) format("woff2"), url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/ece3a1d82f18b60bcce0211725c476aa.woff) format("woff")
+  }
+  #sib-container input:-ms-input-placeholder { text-align: left; font-family: Helvetica, sans-serif; color: #c0ccda; }
+  #sib-container input::placeholder { text-align: left; font-family: Helvetica, sans-serif; color: #c0ccda; }
+  #sib-container textarea::placeholder { text-align: left; font-family: Helvetica, sans-serif; color: #c0ccda; }
+  #sib-container a { text-decoration: underline; color: #2BB2FC; }
+</style>
+<link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+<div class="sib-form" style="text-align: center; background-color: #EFF2F7;">
+  <div id="sib-form-container" class="sib-form-container">
+    <div id="error-message" class="sib-form-message-panel" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#661d1d; background-color:#ffeded; border-radius:3px; border-color:#ff4949;max-width:540px;">
+      <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+        <svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon"><path d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-11.49 120h22.979c6.823 0 12.274 5.682 11.99 12.5l-7 168c-.268 6.428-5.556 11.5-11.99 11.5h-8.979c-6.433 0-11.722-5.073-11.99-11.5l-7-168c-.283-6.818 5.167-12.5 11.99-12.5zM256 340c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28z"/></svg>
+        <span class="sib-form-message-panel__inner-text">Deine Anmeldung konnte nicht gespeichert werden. Bitte versuche es erneut.</span>
+      </div>
+    </div>
+    <div></div>
+    <div id="success-message" class="sib-form-message-panel" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#085229; background-color:#e7faf0; border-radius:3px; border-color:#13ce66;max-width:540px;">
+      <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+        <svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon"><path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z"/></svg>
+        <span class="sib-form-message-panel__inner-text">Deine Anmeldung war erfolgreich.</span>
+      </div>
+    </div>
+    <div></div>
+    <div id="sib-container" class="sib-container--large sib-container--vertical" style="text-align:center; background-color:rgba(255,255,255,1); max-width:540px; border-radius:3px; border-width:1px; border-color:#C0CCD9; border-style:solid; direction:ltr">
+      <form id="sib-form" method="POST" action="https://58a8e982.sibforms.com/serve/MUIFAAu67dU7m7jHkJHnSYjaQM-Go-LEt6pCHEcflaDv_K8hQQ8emSwcEz4jEEv6iGtpPoUX2wkdM0SHScgPCHivxNEwC_pzg3wni0Rlub0NvwGHjxUEG_icVa5-RMnJcLfkCunQzIVbN6_LC3ITRul-gVn212JWZgJr8uYXi-ecIAaLwdUEZ4yOwHMcjvOQ5zveRzRGkMnD9UIo" data-type="subscription">
+        <div style="padding: 8px 0;">
+          <div class="sib-form-block" style="font-size:20px; text-align:left; font-weight:700; font-family:Helvetica, sans-serif; color:#090a0a; background-color:transparent; text-align:left">
+            <p>10 studienbasierte Tipps bei Neurodermitis direkt in deinem Postfach.</p>
           </div>
         </div>
-      </section>
+        <div style="padding: 8px 0;">
+          <div class="sib-form-block" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#3C4858; background-color:transparent; text-align:left">
+            <div class="sib-text-form-block"><p>Der neueste Report unserer Redaktion, kostenlos für Dich.</p></div>
+          </div>
+        </div>
+        <div style="padding: 8px 0;">
+          <div class="sib-input sib-form-block">
+            <div class="form__entry entry_block">
+              <div class="form__label-row ">
+                <label class="entry__label" style="font-weight: 700; text-align:left; font-size:16px; text-align:left; font-weight:700; font-family:Helvetica, sans-serif; color:#3c4858;" for="EMAIL" data-required="*">Wohin dürfen wir Dir die 10 Tipps schicken?</label>
+                <div class="entry__field"><input class="input " type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="EMAIL" data-required="true" required /></div>
+              </div>
+              <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#661d1d; background-color:#ffeded; border-radius:3px; border-color:#ff4949;"></label>
+            </div>
+          </div>
+        </div>
+        <div style="padding: 8px 0;">
+          <div class="sib-input sib-form-block">
+            <div class="form__entry entry_block">
+              <div class="form__label-row ">
+                <div class="entry__field"><input class="input " maxlength="200" type="text" id="VORNAME" name="VORNAME" autocomplete="off" placeholder="VORNAME" data-required="true" required /></div>
+              </div>
+              <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#661d1d; background-color:#ffeded; border-radius:3px; border-color:#ff4949;"></label>
+            </div>
+          </div>
+        </div>
+        <div style="padding: 8px 0;">
+          <div class="sib-form-block" style="text-align: left">
+            <button class="sib-form-block__button sib-form-block__button-with-loader" style="font-size:16px; text-align:left; font-weight:700; font-family:Helvetica, sans-serif; color:#FFFFFF; background-color:#28a392; border-radius:3px; border-width:0px;" form="sib-form" type="submit">
+              <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512" style=""><path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z"/></svg>
+              JETZT 10 TIPPS SICHERN
+            </button>
+          </div>
+        </div>
+        <input type="text" name="email_address_check" value="" class="input--hidden">
+        <input type="hidden" name="locale" value="de">
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  window.REQUIRED_CODE_ERROR_MESSAGE = 'Wähle bitte einen Ländervorwahl aus.';
+  window.LOCALE = 'de';
+  window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "Die eingegebenen Informationen sind nicht gültig. Bitte überprüfe das Feldformat und versuche es erneut.";
+  window.REQUIRED_ERROR_MESSAGE = "Dieses Feld darf nicht leer sein. ";
+  window.GENERIC_INVALID_MESSAGE = "Die eingegebenen Informationen sind nicht gültig. Bitte überprüfe das Feldformat und versuche es erneut.";
+  window.translation = { common: { selectedList: '{quantity} Liste ausgewählt', selectedLists: '{quantity} Listen ausgewählt', selectedOption: '{quantity} ausgewählt', selectedOptions: '{quantity} ausgewählt' } };
+  var AUTOHIDE = Boolean(0);
+</script>
+<script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+<!-- End Brevo Form -->
+          `,
+        }}
+      />
 
       {/* Mini-Glossar */}
       <section className="mt-14 mb-20">
         <h2 className="text-2xl font-bold mb-3">
           Mini-Glossar - Die wichtigsten Begriffe zu Neurodermitis
         </h2>
+
         <div className="rounded-2xl border border-zinc-200 overflow-hidden">
           <table className="w-full text-sm">
             <thead className="bg-zinc-50">
@@ -950,38 +777,42 @@ export default function Page() {
             </thead>
             <tbody>
               <tr className="border-t border-zinc-200">
-                <td className="p-3 font-medium text-zinc-900">Atopische Dermatitis</td>
+                <td className="p-3 font-medium text-zinc-900">
+                  Atopische Dermatitis
+                </td>
                 <td className="p-3 text-zinc-700">
-                  Fachbegriff für Neurodermitis&colon; chronische, nicht
-                  ansteckende Entzündung der Haut mit Juckreiz.
+                  Medizinischer Begriff für Neurodermitis – eine chronische,
+                  juckende Entzündung der Haut mit Schüben.
                 </td>
               </tr>
               <tr className="border-t border-zinc-200">
                 <td className="p-3 font-medium text-zinc-900">Emollienzien</td>
                 <td className="p-3 text-zinc-700">
-                  Rückfettende Pflege, die die Hautbarriere stärkt und
-                  Feuchtigkeit bindet.
+                  Rückfettende Pflegeprodukte, die Wasser in der Haut halten und
+                  die Barriere stärken.
                 </td>
               </tr>
               <tr className="border-t border-zinc-200">
-                <td className="p-3 font-medium text-zinc-900">Calcineurin-Inhibitoren</td>
+                <td className="p-3 font-medium text-zinc-900">
+                  Calcineurin-Inhibitoren
+                </td>
                 <td className="p-3 text-zinc-700">
-                  Entzündungshemmende Wirkstoffe für die Haut (z.B. Tacrolimus),
-                  steroidfrei, besonders an empfindlichen Arealen.
+                  Rezeptpflichtige, steroidfreie Cremes (z. B. Tacrolimus), die
+                  die Entzündung lokal bremsen.
                 </td>
               </tr>
               <tr className="border-t border-zinc-200">
                 <td className="p-3 font-medium text-zinc-900">Biologika</td>
                 <td className="p-3 text-zinc-700">
-                  Moderne Antikörpertherapien, die gezielt Entzündungssignale
-                  blockieren.
+                  Hochspezifische Medikamente, die Entzündungssignale des
+                  Immunsystems blockieren und so schwere Verläufe kontrollieren.
                 </td>
               </tr>
               <tr className="border-t border-zinc-200">
-                <td className="p-3 font-medium text-zinc-900">JAK-Inhibitoren</td>
+                <td className="p-3 font-medium text-zinc-900">Wet-Wrap</td>
                 <td className="p-3 text-zinc-700">
-                  Medikamente, die bestimmte Entzündungswege (JAK-Signalwege)
-                  hemmen – als Creme oder Tablette verfügbar.
+                  Feuchte Umschlagtechnik über Creme; reduziert Juckreiz in
+                  Schüben – bitte mit Anleitung nutzen.
                 </td>
               </tr>
             </tbody>
@@ -989,149 +820,69 @@ export default function Page() {
         </div>
       </section>
 
-      {/* EEAT Section */}
+      {/* E-E-A-T */}
       <section className="mt-14">
-        <h2 className="text-2xl font-bold mb-3">Über die Autorin &amp; Qualitätssicherung</h2>
-        <div className="rounded-2xl border border-zinc-200 p-5">
-          <div className="flex items-center gap-4 mb-4">
-            <img
-              src="/autorenbild_jennifer.jpg"
-              alt="Autorin: Jennifer Krause"
-              className="w-14 h-14 rounded-full object-cover"
-              loading="lazy"
-            />
-            <div>
-              <div className="font-semibold text-zinc-900">{author.name}</div>
-              <div className="text-sm text-zinc-600">
-                {author.role} – Schwerpunkt Neurodermitis &amp; Hautbarriere
-              </div>
+        <h2 className="text-2xl font-bold mb-3">Über den Autor</h2>
+        <div className="flex items-center gap-4">
+          <img
+            src="/autorenbild_jennifer.jpg"
+            alt="Autorin: Jennifer Krause"
+            className="w-16 h-16 rounded-full object-cover"
+            loading="lazy"
+          />
+          <div>
+            <div className="font-semibold">{author.name}</div>
+            <div className="text-sm text-zinc-700">
+              {author.role} – Schwerpunkte: Barrierepflege, Patientenschulung,
+              alltagsnahe Therapie.
             </div>
           </div>
-          <p className="text-zinc-700">
-            Dieser Artikel wurde redaktionell geprüft (Reviewer&colon;{" "}
-            <em>Hautsache Gesund Redaktion</em>) und anhand aktueller
-            Leitlinien/Behörden- und Klinikseiten erstellt. Er ersetzt keine
-            individuelle ärztliche Beratung.
+        </div>
+
+        <div className="mt-4 flex items-center gap-3">
+          <span className={`${accent}`} aria-hidden="true">
+            →
+          </span>
+          <p className="text-sm text-zinc-700">
+            Überprüft von: <strong>Hautsache Gesund Redaktion</strong> – Medizin
+            &amp; Qualitätssicherung.
           </p>
         </div>
       </section>
 
-      {/* Article JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Article",
-            headline:
-              "Was ist Neurodermitis? Einfach erklärt – Ursachen, Symptome & Behandlung",
-            description:
-              "Neurodermitis verständlich erklärt: Ursachen, Symptome, Diagnose, Behandlung und Alltagstipps – wissenschaftlich fundiert.",
-            inLanguage: "de",
-            image: "https://www.hautsache-gesund.de/herobild_was_ist_neurodermitis.jpg",
-            dateModified: "2025-09-20",
-            author: {
-              "@type": "Person",
-              name: author.name,
-            },
-            publisher: {
-              "@type": "Organization",
-              name: "Hautsache Gesund",
-            },
-            mainEntityOfPage:
-              "https://www.hautsache-gesund.de/blog/was-ist-neurodermitis",
-          }),
-        }}
-      />
-
       {/* Quellenverzeichnis */}
       <section className="mt-14">
-        <h2 className="text-2xl font-bold mb-3">
-          Quellen &amp; weiterführende Studien
-        </h2>
+        <h2 className="text-2xl font-bold mb-3">Quellen &amp; weiterführende Studien</h2>
         <ul className="list-disc ml-5 space-y-2 text-sm">
           <li>
-            S3-Leitlinie Atopische Dermatitis (Deutschland, 2023/2024). AWMF
-            Register, Version 4.3.{" "}
-            <a
-              href="https://register.awmf.org/de/leitlinien/detail/013-027"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={accent}
-            >
-              https://register.awmf.org/de/leitlinien/detail/013-027
-            </a>{" "}
-            &amp; PDF{" "}
-            <a
-              href="https://register.awmf.org/assets/guidelines/013-027l_S3_Atopische-Dermatitis-AD-Neurodermitis-atopisches-Ekzem_2024-01.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={accent}
-            >
-              (Stand 2024-01)
-            </a>
+            S3-Leitlinie Atopische Dermatitis (AD) – AWMF (2023/2024). PDF:
+            https://register.awmf.org/assets/guidelines/013-027l_S3_Atopische-Dermatitis-AD-Neurodermitis-atopisches-Ekzem_2024-01.pdf
           </li>
           <li>
-            American Academy of Dermatology – Atopic dermatitis clinical
-            guideline (Updates).{" "}
-            <a
-              href="https://www.aad.org/member/clinical-quality/guidelines/atopic-dermatitis"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={accent}
-            >
-              https://www.aad.org/member/clinical-quality/guidelines/atopic-dermatitis
-            </a>
+            AAD – Atopic dermatitis clinical guideline (Updates 2023–2024):
+            https://www.aad.org/member/clinical-quality/guidelines/atopic-dermatitis
           </li>
           <li>
-            NHS – Atopic eczema&colon; Übersicht, Symptome, Behandlung.{" "}
-            <a
-              href="https://www.nhs.uk/conditions/atopic-eczema/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={accent}
-            >
-              https://www.nhs.uk/conditions/atopic-eczema/
-            </a>
+            AAAAI/ACAAI Joint Task Force Guideline (2023): PDF:
+            https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/JTF-Atopic-Dermatitis-Guideline-2023-07-31-2026.pdf
           </li>
           <li>
-            Mayo Clinic – Atopic dermatitis (eczema)&colon; Symptoms &amp;
-            causes (15.05.2024).{" "}
-            <a
-              href="https://www.mayoclinic.org/diseases-conditions/atopic-dermatitis-eczema/symptoms-causes/syc-20353273"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={accent}
-            >
-              https://www.mayoclinic.org/…/syc-20353273
-            </a>
+            NICE – Atopic eczema in under 12s (überarbeitet 2023):
+            https://www.nice.org.uk/guidance/cg57
           </li>
           <li>
-            Reuters – FDA erweitert Zulassung für topischen JAK-Inhibitor
-            (Opzelura) auf Kinder 2–11 Jahre (19.09.2025).{" "}
-            <a
-              href="https://www.reuters.com/business/healthcare-pharmaceuticals/us-fda-approves-incytes-eczema-treatment-pediatric-patients-2025-09-18/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={accent}
-            >
-              https://www.reuters.com/…/us-fda-approves-incytes-eczema-treatment…
-            </a>
-          </li>
-          <li>
-            StatPearls – Atopic Dermatitis&colon; Überblick zu Pathophysiologie,
-            Klinik, Management.{" "}
-            <a
-              href="https://www.ncbi.nlm.nih.gov/books/NBK448071/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={accent}
-            >
-              https://www.ncbi.nlm.nih.gov/books/NBK448071/
-            </a>
+            Cochrane Review (2024): Educational and psychological interventions
+            for managing atopic dermatitis:
+            https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD014932.pub2/abstract
           </li>
         </ul>
       </section>
+
+      {/* JSON-LD for Article */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+      />
     </article>
   );
 }
