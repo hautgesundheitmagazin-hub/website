@@ -115,20 +115,20 @@ export default function Page() {
             Deine Haut besteht aus drei Schichten: <strong>Epidermis</strong>{" "}
             (Schutzschicht), <strong>Dermis</strong> („Polster“ mit Blutgefäßen,
             Nerven, Kollagen) und <strong>Unterhaut</strong> (Fettgewebe als
-            Energiespeicher und Wärmeschutz). :contentReference[oaicite:0]{index=0}
+            Energiespeicher und Wärmeschutz). 
           </li>
           <li>
             Die <strong>Hautbarriere</strong> sitzt vor allem in der
             Hornschicht der Epidermis. Sie verhindert übermäßigen
-            Wasserverlust&nbsp;(TEWL) und hält Reizstoffe &amp; Keime draußen. :contentReference[oaicite:1]{index=1}
+            Wasserverlust&nbsp;(TEWL) und hält Reizstoffe &amp; Keime draußen. 
           </li>
           <li>
             Ein leicht <strong>saurer pH</strong> an der Oberfläche (ca. 4,5&ndash;5,5)
-            unterstützt Barriere, Enzyme und das Hautmikrobiom. :contentReference[oaicite:2]{index=2}
+            unterstützt Barriere, Enzyme und das Hautmikrobiom. 
           </li>
           <li>
             <strong>Mikrobiom</strong>: gute Hautbakterien schützen Dich und
-            interagieren eng mit Immunzellen der Haut. :contentReference[oaicite:3]{index=3}
+            interagieren eng mit Immunzellen der Haut. 
           </li>
           <li>
             Pflege-Quickwins: mild reinigen (pH-nah), regelmäßig sanft
@@ -195,7 +195,7 @@ export default function Page() {
           Deine Haut ist das größte Organ Deines Körpers. Sie schützt Dich vor
           Verletzungen, Keimen und UV-Strahlung, reguliert Temperatur, speichert
           Wasser und ermöglicht Dir Berührung, Druck, Wärme und Kälte zu fühlen.
-          Sie ist außerdem an der Bildung von Vitamin&nbsp;D beteiligt. :contentReference[oaicite:4]{index=4}
+          Sie ist außerdem an der Bildung von Vitamin&nbsp;D beteiligt. 
         </p>
       </section>
 
@@ -208,7 +208,7 @@ export default function Page() {
             <p className="m-0">
               Dünne, aber hochaktive Schicht aus Hornzellen&nbsp;(Keratinozyten)
               mit mehreren Lagen. Ganz außen liegt die <em>Hornschicht</em>
-              (Stratum corneum) als zentrale Barriere. :contentReference[oaicite:5]{index=5}
+              (Stratum corneum) als zentrale Barriere. 
             </p>
           </div>
           <div className="rounded-2xl border border-zinc-200 p-5">
@@ -216,7 +216,7 @@ export default function Page() {
             <p className="m-0">
               Reißfestes Bindegewebe mit Kollagen- und Elastinfasern, reich an
               Blutgefäßen und Nerven. Versorgt die Epidermis und gibt Stabilität
-              und Elastizität. :contentReference[oaicite:6]{index=6}
+              und Elastizität. 
             </p>
           </div>
           <div className="rounded-2xl border border-zinc-200 p-5 md:col-span-2">
@@ -224,7 +224,7 @@ export default function Page() {
             <p className="m-0">
               Vor allem Fettgewebe als Energiespeicher und Wärmedämmung, schützt
               vor Stößen und verbindet die Haut locker mit darunterliegenden
-              Strukturen. :contentReference[oaicite:7]{index=7}
+              Strukturen. 
             </p>
           </div>
         </div>
@@ -237,7 +237,7 @@ export default function Page() {
           reifen Keratinozyten heran, verhornen und werden zu einer flachen,
           dichten Hornschicht. Diese wirkt wie eine Mauer: „Ziegel“ sind die
           Hornzellen, „Mörtel“ sind Lipide (Fette) wie Ceramide. Zusammen
-          bilden sie die Barriere. :contentReference[oaicite:8]{index=8}
+          bilden sie die Barriere. 
         </p>
 
         <div className="rounded-2xl border border-zinc-200 p-5 bg-zinc-50">
@@ -267,7 +267,7 @@ export default function Page() {
           Die Dermis besteht aus einer <em>papillären</em> (feinfasrigen) und
           einer <em>retikulären</em> (derberen) Schicht. Kollagen sorgt für
           Zugfestigkeit, Elastin für Rückstellkraft. Blutgefäße versorgen die
-          Haut, Nerven machen Berührung, Schmerz und Temperatur fühlbar. :contentReference[oaicite:9]{index=9}
+          Haut, Nerven machen Berührung, Schmerz und Temperatur fühlbar. 
         </p>
 
         <div className="mt-4 rounded-2xl border border-zinc-200 overflow-hidden">
@@ -316,7 +316,7 @@ export default function Page() {
           Die Unterhaut besteht überwiegend aus Fettzellen. Sie speichert
           Energie, isoliert gegen Kälte und polstert Knochen und Muskeln gegen
           Stöße ab. Außerdem erleichtert sie die Verschieblichkeit der darüber
-          liegenden Hautschichten. :contentReference[oaicite:10]{index=10}
+          liegenden Hautschichten. 
         </p>
       </section>
 
@@ -331,12 +331,12 @@ export default function Page() {
               <strong>Transepidermaler Wasserverlust (TEWL)</strong> beschreibt,
               wie viel Wasser passiv über die Hornschicht verdunstet. Ein
               erhöhter TEWL weist oft auf eine gestörte Barriere hin; ein
-              niedriger TEWL auf eine intakte Barriere. :contentReference[oaicite:11]{index=11}
+              niedriger TEWL auf eine intakte Barriere. 
             </p>
             <p>
               Der <strong>pH-Wert</strong> der Hautoberfläche ist leicht sauer
               (häufig etwa 4,5&ndash;5,5). Dieses „Säureschutzmantel“-Milieu
-              unterstützt Barriere-Enzyme und hält das Mikrobiom im Gleichgewicht. :contentReference[oaicite:12]{index=12}
+              unterstützt Barriere-Enzyme und hält das Mikrobiom im Gleichgewicht. 
             </p>
           </div>
 
@@ -360,12 +360,12 @@ export default function Page() {
           nützlich: Sie konkurrieren mit Krankheitserregern, trainieren das
           Immunsystem und helfen, die Barriere stabil zu halten. Veränderungen
           im Mikrobiom gehen mit Hautzuständen wie Neurodermitis und Rosazea
-          einher. :contentReference[oaicite:13]{index=13}
+          einher. 
         </p>
         <p className="leading-relaxed">
           Das Hautimmunsystem sitzt nicht nur „darunter“, sondern mitten in der
           Haut: In der Epidermis patrouillieren Langerhans-Zellen, in der Dermis
-          finden sich weitere Immunzellen sowie Blut- und Lymphgefäße. :contentReference[oaicite:14]{index=14}
+          finden sich weitere Immunzellen sowie Blut- und Lymphgefäße. 
         </p>
       </section>
 
@@ -408,7 +408,7 @@ export default function Page() {
             <p>
               Die Epidermis ist je nach Region unterschiedlich dick. Handflächen
               und Fußsohlen haben eine besonders dicke Hornschicht, Gesicht und
-              Augenlider sind deutlich dünner. :contentReference[oaicite:15]{index=15}
+              Augenlider sind deutlich dünner. 
             </p>
           </div>
           <div>
@@ -416,7 +416,7 @@ export default function Page() {
             <p>
               TEWL steht für transepidermalen Wasserverlust. Er misst, wie viel
               Wasser über die Hornschicht verdunstet und ist ein objektiver
-              Hinweis auf die Barrierefunktion. :contentReference[oaicite:16]{index=16}
+              Hinweis auf die Barrierefunktion. 
             </p>
           </div>
           <div>
@@ -426,7 +426,7 @@ export default function Page() {
             <p>
               Meist liegt der pH zwischen etwa 4,5 und 5,5. Dieses saure Milieu
               unterstützt Enzyme der Barriere und das Gleichgewicht des
-              Mikrobioms. :contentReference[oaicite:17]{index=17}
+              Mikrobioms. 
             </p>
           </div>
           <div>
@@ -436,7 +436,7 @@ export default function Page() {
             <p>
               Die Epidermis ist die äußere Schutzschicht ohne Blutgefäße; die
               Dermis darunter ist gut durchblutet, enthält Kollagen, Elastin,
-              Nerven und versorgt die Epidermis. :contentReference[oaicite:18]{index=18}
+              Nerven und versorgt die Epidermis. 
             </p>
           </div>
           <div>
@@ -446,7 +446,7 @@ export default function Page() {
             <p>
               Nützliche Bakterien stärken die Barriere, konkurrieren mit
               Erregern und interagieren eng mit Immunzellen. Dysbiosen werden
-              bei z.&nbsp;B. Neurodermitis beobachtet. :contentReference[oaicite:19]{index=19}
+              bei z.&nbsp;B. Neurodermitis beobachtet. 
             </p>
           </div>
         </div>
