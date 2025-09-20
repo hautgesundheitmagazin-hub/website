@@ -8,7 +8,6 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // Klick außerhalb/ESC schließt das Menü
   useEffect(() => {
     function onDown(e: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
@@ -26,35 +25,65 @@ export default function Header() {
     };
   }, []);
 
-  // Menüpunkte (links auf Desktop)
   const items = [
     { href: "/blog", label: "Blog" },
     { href: "/glossar", label: "Glossar" },
-    { href: "/neurodermitis", label: "Neurodermitis" }, // Platzhalter
-    { href: "/rosacea", label: "Rosacea" }, // Platzhalter
-    { href: "/akne", label: "Akne" }, // Platzhalter
+    { href: "/neurodermitis", label: "Neurodermitis" },
+    { href: "/rosacea", label: "Rosacea" },
+    { href: "/akne", label: "Akne" },
   ];
 
-  // Kontakt separat: Desktop als Button rechts, Mobile im Hamburger
   const contact = { href: "/kontakt", label: "Kontakt" };
+  const primary = items.slice(0, 2);
+  const more = items.slice(2);
 
-  const primary = items.slice(0, 2); // auf Mobile sichtbar
-  const more = items.slice(2);       // im Hamburger-Menü auf Mobile (3 Punkte) + Kontakt als 4.
+  // Schema.org JSON-LD
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "Hautwissen Kompakt",
+        "url": "https://www.hautwissen-kompakt.de",
+        "logo": "https://www.hautwissen-kompakt.de/hautwissen_kompakt_logo.jpg",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "info@hautwissen-kompakt.de",
+          "contactType": "customer service"
+        }
+      },
+      {
+        "@type": "Blog",
+        "name": "Hautwissen Kompakt Blog",
+        "url": "https://www.hautwissen-kompakt.de/blog",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Hautwissen Kompakt"
+        }
+      }
+    ]
+  };
 
   return (
     <header className="w-full text-white">
-      {/* Obere Leiste: dunkler Ton + Logo */}
+      {/* Schema.org JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      />
+
+      {/* Obere Leiste */}
       <div className="bg-[#1c8e7e]">
         <div className="mx-auto flex max-w-4xl items-center px-4 py-3">
           <a
             href="/"
-            aria-label="Hautsache gesund – Startseite"
+            aria-label="Hautwissen Kompakt – Startseite"
             className="inline-flex items-center"
-            title="Hautsache gesund - Dein Blog zu Hautgesundheit"
+            title="Hautwissen Kompakt - Dein Blog zu Hautgesundheit"
           >
             <Image
-              src="/hautsache_gesund_logo.jpg"
-              alt="Hautsache Gesund – Logo"
+              src="/hautwissen_kompakt_logo.jpg"
+              alt="Hautwissen Kompakt – Logo"
               width={480}
               height={480}
               priority
@@ -65,15 +94,11 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Untere Leiste: etwas hellerer Ton + Navigation */}
+      {/* Navigation */}
       <div className="bg-[#28A392]">
         <div className="relative mx-auto max-w-4xl px-4">
-          {/* Desktop/Tablet: Links die regulären Punkte, rechts der Kontakt-Button */}
           <div className="hidden md:flex items-center justify-between py-3">
-            <nav
-              aria-label="Hauptnavigation"
-              className="flex items-center gap-6"
-            >
+            <nav aria-label="Hauptnavigation" className="flex items-center gap-6">
               {items.map((item) => (
                 <a
                   key={item.label}
@@ -85,7 +110,6 @@ export default function Header() {
               ))}
             </nav>
 
-            {/* Kontakt: umrandeter Button rechtsbündig */}
             <a
               href={contact.href}
               className="inline-flex items-center rounded-md border-2 border-white/80 px-3 py-1.5 text-sm font-semibold uppercase tracking-wide opacity-95 transition-[background,opacity] hover:opacity-100 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/60"
@@ -94,7 +118,6 @@ export default function Header() {
             </a>
           </div>
 
-          {/* Mobile: nur 2 Menüpunkte + Hamburger */}
           <div className="flex items-center justify-between py-3 md:hidden" ref={menuRef}>
             <nav aria-label="Hauptnavigation (reduziert)" className="flex items-center gap-5">
               {primary.map((item) => (
@@ -108,7 +131,6 @@ export default function Header() {
               ))}
             </nav>
 
-            {/* Hamburger öffnet die restlichen 3 Punkte + Kontakt als 4. */}
             <div className="relative">
               <button
                 type="button"
@@ -119,7 +141,6 @@ export default function Header() {
                 className="inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-white/60"
               >
                 <span className="sr-only">Weitere Menüpunkte öffnen</span>
-                {/* Icon */}
                 <svg width="24" height="24" viewBox="0 0 24 24" role="img" aria-hidden="true">
                   <path
                     d="M3 6h18M3 12h18M3 18h18"
@@ -130,7 +151,6 @@ export default function Header() {
                 </svg>
               </button>
 
-              {/* Dropdown */}
               {open && (
                 <div
                   id="mobile-more-menu"
@@ -148,7 +168,6 @@ export default function Header() {
                       {item.label}
                     </a>
                   ))}
-                  {/* 4. Punkt: Kontakt */}
                   <a
                     key={contact.label}
                     href={contact.href}
