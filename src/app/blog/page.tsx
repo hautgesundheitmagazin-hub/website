@@ -97,7 +97,7 @@ export default async function BlogIndexPage() {
   const posts = await getLatestPosts();
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-6 py-12">
+    <div className="w-full max-w-4xl mx-auto px-6 py-12">
       <header className="mb-8">
         <h1 className="text-4xl font-semibold tracking-tight font-serif">
          Unser Blog
