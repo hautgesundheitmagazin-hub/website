@@ -24,7 +24,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Gesunde Haut leben - Dein Ratgeber",
+  title: "Hautwissen Kompakt - Dein Ratgeber",
   description:
     "Entdecke fundiertes Wissen zu Neurodermitis, Hautgesundheit und all den Themen, die damit zusammenhängen.",
   icons: {
