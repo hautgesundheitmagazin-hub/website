@@ -16,8 +16,8 @@ const prettify = (s: string) =>
   s.replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
 
 async function getLatestPosts(limit?: number): Promise<PostMeta[]> {
-  const blogDir = path.join(process.cwd(), "src", "app", "glossar");
-  const entries = await fs.readdir(blogDir, { withFileTypes: true });
+  const glossarDir = path.join(process.cwd(), "src", "app", "glossar");
+  const entries = await fs.readdir(glossarDir, { withFileTypes: true });
 
   const slugs = entries.filter(e => e.isDirectory()).map(e => e.name);
 
@@ -71,7 +71,7 @@ async function getLatestPosts(limit?: number): Promise<PostMeta[]> {
       // Fallback date = folder modified time (so sorting still works)
       if (!date) {
         try {
-          const st = await fs.stat(path.join(blogDir, slug));
+          const st = await fs.stat(path.join(glossarDir, slug));
           date = st.mtime.toISOString();
         } catch {
           date = new Date(0).toISOString();
@@ -92,7 +92,7 @@ async function getLatestPosts(limit?: number): Promise<PostMeta[]> {
 
 export const revalidate = 3600; // ISR: re-build the list hourly
 
-export default async function BlogIndexPage() {
+export default async function glossarIndexPage() {
   // ohne Limit -> alle Posts
   const posts = await getLatestPosts();
 
@@ -111,7 +111,7 @@ export default async function BlogIndexPage() {
         {posts.map((p) => (
           <Link
             key={p.slug}
-            href={`/blog/${p.slug}`}
+            href={`/glossar/${p.slug}`}
             className="group block overflow-hidden rounded-2xl border border-slate-200 bg-white hover:shadow-lg transition"
           >
             {/* Cover */}
