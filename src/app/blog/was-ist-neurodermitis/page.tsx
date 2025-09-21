@@ -844,7 +844,7 @@ export default function Page() {
             →
           </span>
           <p className="text-sm text-zinc-700">
-            Überprüft von: <strong>Hautsache Gesund Redaktion</strong> – Medizin
+            Überprüft von: <strong>Hautwissen Kompakt Redaktion</strong> – Medizin
             &amp; Qualitätssicherung.
           </p>
         </div>
