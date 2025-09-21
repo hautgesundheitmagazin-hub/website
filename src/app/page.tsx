@@ -1,52 +1,38 @@
-// src/app/page.tsx
-import Image from "next/image";
-import Link from "next/link";
+// /src/app/page.tsx
 import fs from "node:fs/promises";
 import path from "node:path";
+import Image from "next/image";
+import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 // Diese Page soll NICHT statisch gecacht werden.
 export const dynamic = "force-dynamic";
 
-// --- Lokale Typen ---
-type BlogPost = {
+type PostMeta = {
   slug: string;
   title: string;
+  date: string;        // ISO-Date (nur für Sortierung)
   excerpt?: string;
-  cover?: string;
-  date: string;
+  image?: string;      // optionales Cover
   kind: "blog" | "glossar";
 };
 
-type BlogLandingProps = {
-  featured: BlogPost | null;
-  rest: BlogPost[];
-};
-
-// --- Helpers ---
+// Helper: prettify slug → Titel
 const prettify = (s: string) =>
   s.replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
 
-function sortByDateDesc<T extends { date: string }>(posts: T[]) {
-  return [...posts].sort((a, b) => {
-    const ta = new Date(a.date).getTime();
-    const tb = new Date(b.date).getTime();
-    return (Number.isFinite(tb) ? tb : 0) - (Number.isFinite(ta) ? ta : 0);
-  });
-}
+// 1) Generischer Loader – identisch zum Blog-Ansatz, nur parametrisiert für blog/glossar
+async function getLatestFrom(
+  section: "blog" | "glossar",
+  limit?: number
+): Promise<PostMeta[]> {
+  const baseDir = path.join(process.cwd(), "src", "app", section);
+  const entries = await fs.readdir(baseDir, { withFileTypes: true });
 
-async function getLatestFromDir(
-  baseDir: string,
-  importPrefix: string,
-  limit: number
-): Promise<Array<{ slug: string; title: string; excerpt: string; date: string; image?: string }>> {
-  const dir = path.join(process.cwd(), "src", "app", baseDir);
-  const entries = await fs.readdir(dir, { withFileTypes: true });
   const slugs = entries
     .filter((e) => e.isDirectory())
-    .map((e) => e.name)
-    .filter((name) => !name.startsWith("_")); // optional: versteckte/Entwurfs-Ordner ausschließen
+    .map((e) => e.name);
 
   const metas = await Promise.all(
     slugs.map(async (slug) => {
@@ -56,11 +42,13 @@ async function getLatestFromDir(
       let image: string | undefined;
 
       try {
+        // Wichtig: relative Imports genau wie in deinem funktionierenden Blog-Index
         // @ts-ignore - dynamic import at runtime
-        const maybeMeta = await import(/* webpackMode: "lazy" */ `${importPrefix}/${slug}/meta`).catch(() => null);
+        const maybeMeta = await import(/* webpackMode: "lazy" */ `./${section}/${slug}/meta`).catch(() => null);
         // @ts-ignore
-        const mod = maybeMeta ?? (await import(/* webpackMode: "lazy" */ `${importPrefix}/${slug}/page`).catch(() => null));
+        const mod = maybeMeta ?? (await import(/* webpackMode: "lazy" */ `./${section}/${slug}/page`).catch(() => null));
 
+        // mehrere akzeptierte Shapes wie im Blog
         // @ts-ignore
         const pm = mod?.postMeta ?? {};
         // @ts-ignore
@@ -73,8 +61,8 @@ async function getLatestFromDir(
           md?.openGraph?.publishedTime ??
           null;
 
-        // Bild aus pm.image oder aus openGraph.images ziehen
-        const ogImages = (md?.openGraph?.images ?? []) as any;
+        // Bild aus pm.image oder openGraph.images
+        const ogImages = md?.openGraph?.images as any;
         if (!image) {
           if (pm.image) image = pm.image;
           else if (typeof ogImages === "string") image = ogImages;
@@ -84,58 +72,51 @@ async function getLatestFromDir(
           }
         }
       } catch {
-        // ignore – wir fallen auf Ordner-mtime zurück
+        // ignore – Fallback folgt
       }
 
       if (!date) {
         try {
-          const st = await fs.stat(path.join(dir, slug));
+          const st = await fs.stat(path.join(baseDir, slug));
           date = st.mtime.toISOString();
         } catch {
           date = new Date(0).toISOString();
         }
       }
 
-      return { slug, title, excerpt, date: date!, image };
+      return {
+        slug,
+        title,
+        excerpt,
+        date: date!,
+        image,
+        kind: section,
+      };
     })
   );
 
-  const sorted = sortByDateDesc(metas);
-  return sorted.slice(0, limit);
+  metas.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  return typeof limit === "number" ? metas.slice(0, limit) : metas;
 }
 
-// 6 neueste Blogposts
-async function getLatestBlog(): Promise<BlogPost[]> {
-  const raw = await getLatestFromDir("blog", "./blog", 6);
-  return raw.map((p) => ({
-    slug: p.slug,
-    title: p.title,
-    excerpt: p.excerpt,
-    cover: p.image,
-    date: p.date,
-    kind: "blog",
-  }));
+// 2) Hol 6 Blog + 3 Glossar getrennt (gleicher Ansatz) und kombiniere
+async function getHomePosts(): Promise<PostMeta[]> {
+  const [blog6, glossar3] = await Promise.all([
+    getLatestFrom("blog", 6),
+    getLatestFrom("glossar", 3),
+  ]);
+
+  // Blog zuerst, dann Glossar
+  return [...blog6, ...glossar3];
 }
 
-// 3 neueste Glossar-Einträge
-async function getLatestGlossar(): Promise<BlogPost[]> {
-  const raw = await getLatestFromDir("glossar", "./glossar", 3);
-  return raw.map((p) => ({
-    slug: p.slug,
-    title: p.title,
-    excerpt: p.excerpt,
-    cover: p.image,
-    date: p.date,
-    kind: "glossar",
-  }));
-}
-
+// --- UI: Hero ---
 function HeroBanner() {
   return (
     <section className="w-full">
       <div className="w-full max-w-4xl mx-auto px-6 pt-6">
-        <div className="relative min-h-[320px] sm:min-h-[420px] md:min-h-[520px] rounded-2xl overflow-hidden shadow-sm">
-          {/* Bild */}
+        <div className="relative min-h-[320px] sm:minh-[420px] md:min-h-[520px] rounded-2xl overflow-hidden shadow-sm">
           <Image
             src="/hautsache_gesund_hero_banner.jpg"
             alt="Gesunde Haut – Hero"
@@ -145,8 +126,6 @@ function HeroBanner() {
             sizes="100vw"
             className="object-cover"
           />
-
-          {/* Text-Overlay: zentriert unten */}
           <div className="absolute inset-x-0 bottom-0 flex items-end justify-start pb-6 px-6">
             <div
               className="w-full max-w-xl bg-white/75 backdrop-blur border rounded-2xl shadow-md p-5 sm:p-6"
@@ -161,7 +140,6 @@ function HeroBanner() {
               >
                 Gesunde Haut beginnt hier
               </h1>
-
               <p
                 className="mt-3 max-w-2xl mx-auto text-base sm:text-lg text-left"
                 style={{ color: "var(--graphite,#243236)" }}
@@ -176,26 +154,25 @@ function HeroBanner() {
   );
 }
 
-// --- UI ---
-function BlogGrid({ posts }: { posts: BlogPost[] }) {
-  // exakt 9 Slots: 6 Blog + 3 Glossar, fehlende mit Platzhaltern füllen
+// --- UI: Grid (9 Slots → 6 Blog + 3 Glossar; fehlende = Platzhalter) ---
+function BlogGrid({ posts }: { posts: PostMeta[] }) {
   const items = posts.slice(0, 9);
   const placeholdersCount = Math.max(0, 9 - items.length);
 
-  const hrefFor = (p: BlogPost) => (p.kind === "glossar" ? `/glossar/${p.slug}` : `/blog/${p.slug}`);
+  const hrefFor = (p: PostMeta) =>
+    p.kind === "glossar" ? `/glossar/${p.slug}` : `/blog/${p.slug}`;
 
   return (
     <section className="w-full">
       <div className="w-full max-w-4xl mx-auto px-6 py-10 sm:py-14">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {/* Reale Beiträge */}
           {items.map((post) => (
             <Card key={`${post.kind}-${post.slug}`} className="overflow-hidden border" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
               {/* Bild */}
               <div className="relative aspect-[16/9] bg-white">
-                {post.cover ? (
+                {post.image ? (
                   <Image
-                    src={post.cover}
+                    src={post.image}
                     alt={post.title}
                     fill
                     unoptimized
@@ -215,9 +192,7 @@ function BlogGrid({ posts }: { posts: BlogPost[] }) {
                     fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)",
                   }}
                 >
-                  <Link href={hrefFor(post)}>
-                    {post.title}
-                  </Link>
+                  <Link href={hrefFor(post)}>{post.title}</Link>
                 </CardTitle>
 
                 {post.excerpt ? (
@@ -238,13 +213,9 @@ function BlogGrid({ posts }: { posts: BlogPost[] }) {
             </Card>
           ))}
 
-          {/* Platzhalter-Karten */}
+          {/* Platzhalter */}
           {Array.from({ length: placeholdersCount }).map((_, i) => (
-            <Card
-              key={`placeholder-${i}`}
-              className="overflow-hidden border"
-              style={{ borderColor: "var(--sage,#CDE6DF)" }}
-            >
+            <Card key={`placeholder-${i}`} className="overflow-hidden border" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
               <div className="relative aspect-[16/9] bg-slate-100" />
               <CardHeader>
                 <CardTitle
@@ -273,47 +244,20 @@ function BlogGrid({ posts }: { posts: BlogPost[] }) {
   );
 }
 
-function BlogLanding({ featured, rest }: BlogLandingProps) {
-  // Für das Grid nehmen wir alle vorhandenen Posts (inkl. featured),
-  // damit maximal 9 Karten gefüllt werden.
-  const all = [featured, ...rest].filter(Boolean) as BlogPost[];
-
-  return (
-    <main className="bg-white">
-      {/* HERO */}
-      <HeroBanner />
-
-      {/* 3x3 Grid: 6 Blog + 3 Glossar */}
-      <BlogGrid posts={all} />
-    </main>
-  );
-}
-
-// --- Datenbeschaffung ---
-// Holt 6 neueste Blogposts und 3 neueste Glossar-Einträge separat,
-// kombiniert sie (Blog zuerst), und füllt das Grid damit.
-async function getPosts(): Promise<BlogPost[]> {
-  try {
-    const [blog6, glossar3] = await Promise.all([getLatestBlog(), getLatestGlossar()]);
-
-    // Blog zuerst, dann Glossar – Reihenfolge innerhalb der Gruppen bereits nach Datum
-    const combined = [...blog6, ...glossar3];
-
-    // Sicherheitsnetz: falls weniger als 9 vorhanden sind, einfach zurückgeben (Platzhalter füllen auf)
-    return combined;
-  } catch (e) {
-    console.error("[getPosts] Fehler:", e);
-    return [];
-  }
-}
-
-// --- Default Page ---
+// --- Page ---
 export default async function Page() {
-  const posts = await getPosts();
+  const posts = await getHomePosts(); // 6 Blog + 3 Glossar
 
-  // Optional: ein Featured (erstes Element), Rest danach
+  // Optionales „Featured“ (erstes Element) + Rest
   const featured = posts[0] ?? null;
   const rest = posts.slice(1);
 
-  return <BlogLanding featured={featured} rest={rest} />;
+  const all = [featured, ...rest].filter(Boolean) as PostMeta[];
+
+  return (
+    <main className="bg-white">
+      <HeroBanner />
+      <BlogGrid posts={all} />
+    </main>
+  );
 }
