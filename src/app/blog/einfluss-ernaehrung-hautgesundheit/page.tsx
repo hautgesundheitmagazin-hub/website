@@ -826,7 +826,7 @@ export default function Page() {
         <div className="mt-4">
           <p className="text-sm text-zinc-700">
             Überprüft von;{" "}
-            <strong>Hautsache Gesund Redaktion</strong> – Medizinisch-wissenschaftliche
+            <strong>Hautwissen Kompakt Redaktion</strong> – Medizinisch-wissenschaftliche
             Qualitätssicherung.
           </p>
         </div>
