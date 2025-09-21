@@ -33,7 +33,7 @@ export default function Header() {
     { href: "/akne", label: "Akne" },
   ];
 
-  const contact = { href: "/kontakt", label: "Kontakt" };
+ const contact = { href: "mailto:info@hautwissen-kompakt.de", label: "Kontakt" };
   const primary = items.slice(0, 2);
   const more = items.slice(2);
 
