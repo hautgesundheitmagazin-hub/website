@@ -1,25 +1,38 @@
-// /src/app/blog/page.tsx
+// /src/app/page.tsx
 import fs from "node:fs/promises";
 import path from "node:path";
+import Image from "next/image";
 import Link from "next/link";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+// Diese Page soll NICHT statisch gecacht werden.
+export const dynamic = "force-dynamic";
 
 type PostMeta = {
   slug: string;
   title: string;
-  date: string;        // ISO date string (nur für Sortierung)
+  date: string;        // ISO-Date (nur für Sortierung)
   excerpt?: string;
   image?: string;      // optionales Cover
+  kind: "blog" | "glossar";
 };
 
-// Helper: make a nice title from a slug if none is provided
+// Helper: prettify slug → Titel
 const prettify = (s: string) =>
   s.replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
 
-async function getLatestPosts(limit?: number): Promise<PostMeta[]> {
-  const blogDir = path.join(process.cwd(), "src", "app", "blog");
-  const entries = await fs.readdir(blogDir, { withFileTypes: true });
+// 1) Generischer Loader – identisch zum Blog-Ansatz, nur parametrisiert für blog/glossar
+async function getLatestFrom(
+  section: "blog" | "glossar",
+  limit?: number
+): Promise<PostMeta[]> {
+  const baseDir = path.join(process.cwd(), "src", "app", section);
+  const entries = await fs.readdir(baseDir, { withFileTypes: true });
 
-  const slugs = entries.filter(e => e.isDirectory()).map(e => e.name);
+  const slugs = entries
+    .filter((e) => e.isDirectory())
+    .map((e) => e.name);
 
   const metas = await Promise.all(
     slugs.map(async (slug) => {
@@ -28,18 +41,14 @@ async function getLatestPosts(limit?: number): Promise<PostMeta[]> {
       let date: string | null = null;
       let image: string | undefined;
 
-      // Try to read metadata from either ./<slug>/meta or ./<slug>/page
       try {
-        // Prefer a dedicated meta.ts if present
+        // Wichtig: relative Imports genau wie in deinem funktionierenden Blog-Index
         // @ts-ignore - dynamic import at runtime
-        const maybeMeta = await import(/* webpackMode: "lazy" */ `./${slug}/meta`).catch(() => null);
-        // @ts-ignore - fallback to reading from the page module
-        const mod = maybeMeta ?? (await import(/* webpackMode: "lazy" */ `./${slug}/page`).catch(() => null));
+        const maybeMeta = await import(/* webpackMode: "lazy" */ `./${section}/${slug}/meta`).catch(() => null);
+        // @ts-ignore
+        const mod = maybeMeta ?? (await import(/* webpackMode: "lazy" */ `./${section}/${slug}/page`).catch(() => null));
 
-        // We accept several shapes to keep it flexible
-        // 1) export const postMeta = { title, date, excerpt, image }
-        // 2) export const metadata = { title, description, openGraph: { publishedTime, images } }
-        // 3) export const published = "YYYY-MM-DD"
+        // mehrere akzeptierte Shapes wie im Blog
         // @ts-ignore
         const pm = mod?.postMeta ?? {};
         // @ts-ignore
@@ -49,13 +58,11 @@ async function getLatestPosts(limit?: number): Promise<PostMeta[]> {
         date =
           pm.date ??
           pm.published ??
-          // common place to put article date in Next metadata
           md?.openGraph?.publishedTime ??
           null;
 
-        // Bild aus pm.image oder aus openGraph.images ziehen
-        // images kann string | string[] | {url:string}[] sein
-        let ogImages = md?.openGraph?.images as any;
+        // Bild aus pm.image oder openGraph.images
+        const ogImages = md?.openGraph?.images as any;
         if (!image) {
           if (pm.image) image = pm.image;
           else if (typeof ogImages === "string") image = ogImages;
@@ -65,90 +72,192 @@ async function getLatestPosts(limit?: number): Promise<PostMeta[]> {
           }
         }
       } catch {
-        // ignore – we'll fall back to folder mtime
+        // ignore – Fallback folgt
       }
 
-      // Fallback date = folder modified time (so sorting still works)
       if (!date) {
         try {
-          const st = await fs.stat(path.join(blogDir, slug));
+          const st = await fs.stat(path.join(baseDir, slug));
           date = st.mtime.toISOString();
         } catch {
           date = new Date(0).toISOString();
         }
       }
 
-      return { slug, title, excerpt, date, image };
+      return {
+        slug,
+        title,
+        excerpt,
+        date: date!,
+        image,
+        kind: section,
+      };
     })
   );
 
-  metas.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+  metas.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  // Wenn limit gesetzt ist, schneiden – sonst alle zurückgeben
   return typeof limit === "number" ? metas.slice(0, limit) : metas;
 }
 
-export const revalidate = 3600; // ISR: re-build the list hourly
+// 2) Hol 6 Blog + 3 Glossar getrennt (gleicher Ansatz) und kombiniere
+async function getHomePosts(): Promise<PostMeta[]> {
+  const [blog6, glossar3] = await Promise.all([
+    getLatestFrom("blog", 6),
+    getLatestFrom("glossar", 3),
+  ]);
 
-export default async function BlogIndexPage() {
-  // ohne Limit -> alle Posts
-  const posts = await getLatestPosts();
+  // Blog zuerst, dann Glossar
+  return [...blog6, ...glossar3];
+}
+
+// --- UI: Hero ---
+function HeroBanner() {
+  return (
+    <section className="w-full">
+      <div className="w-full max-w-4xl mx-auto px-6 pt-6">
+        <div className="relative min-h-[320px] sm:minh-[420px] md:min-h-[520px] rounded-2xl overflow-hidden shadow-sm">
+          <Image
+            src="/hautsache_gesund_hero_banner.jpg"
+            alt="Gesunde Haut – Hero"
+            fill
+            priority
+            unoptimized
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-x-0 bottom-0 flex items-end justify-start pb-6 px-6">
+            <div
+              className="w-full max-w-xl bg-white/75 backdrop-blur border rounded-2xl shadow-md p-5 sm:p-6"
+              style={{ borderColor: "var(--sage,#CDE6DF)" }}
+            >
+              <h1
+                className="font-highlight font-extrabold text-3xl sm:text-4xl md:text-5xl leading-tight text-left"
+                style={{
+                  color: "var(--graphite,#243236)",
+                  fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)",
+                }}
+              >
+                Gesunde Haut beginnt hier
+              </h1>
+              <p
+                className="mt-3 max-w-2xl mx-auto text-base sm:text-lg text-left"
+                style={{ color: "var(--graphite,#243236)" }}
+              >
+                Evidence-based Tipps, Routinen und Produktempfehlungen – verständlich erklärt.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// --- UI: Grid (9 Slots → 6 Blog + 3 Glossar; fehlende = Platzhalter) ---
+function BlogGrid({ posts }: { posts: PostMeta[] }) {
+  const items = posts.slice(0, 9);
+  const placeholdersCount = Math.max(0, 9 - items.length);
+
+  const hrefFor = (p: PostMeta) =>
+    p.kind === "glossar" ? `/glossar/${p.slug}` : `/blog/${p.slug}`;
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-6 py-12">
-      <header className="mb-8">
-        <h1 className="text-4xl font-semibold tracking-tight font-serif">
-         Unser Blog
-        </h1>
-        <p className="mt-2 text-slate-600">
-          Relevante Insights und Themen rund um die Haut.
-        </p>
-      </header>
+    <section className="w-full">
+      <div className="w-full max-w-4xl mx-auto px-6 py-10 sm:py-14">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((post) => (
+            <Card key={`${post.kind}-${post.slug}`} className="overflow-hidden border" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
+              {/* Bild */}
+              <div className="relative aspect-[16/9] bg-white">
+                {post.image ? (
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    unoptimized
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-slate-100" />
+                )}
+              </div>
 
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {posts.map((p) => (
-          <Link
-            key={p.slug}
-            href={`/blog/${p.slug}`}
-            className="group block overflow-hidden rounded-2xl border border-slate-200 bg-white hover:shadow-lg transition"
-          >
-            {/* Cover */}
-            <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-50">
-              {p.image ? (
-                <img
-                  src={p.image}
-                  alt={p.title}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center bg-gradient-to-r from-emerald-100 to-emerald-50">
-                  <span className="rounded-2xl border border-emerald-200 bg-white/80 px-2 py-1 text-xs text-slate-600">
-                    Kein Cover
-                  </span>
-                </div>
-              )}
-              <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/5" />
-            </div>
+              <CardHeader>
+                <CardTitle
+                  className="font-highlight text-base"
+                  style={{
+                    color: "var(--graphite,#243236)",
+                    fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)",
+                  }}
+                >
+                  <Link href={hrefFor(post)}>{post.title}</Link>
+                </CardTitle>
 
-            {/* Text */}
-            <div className="p-5">
-              {/* Datumsanzeige entfernt */}
-              <h2 className="text-lg font-semibold leading-snug">
-                {p.title}
-              </h2>
-              {p.excerpt ? (
-                <p className="mt-2 text-sm text-slate-600 line-clamp-3">
-                  {p.excerpt}
-                </p>
-              ) : null}
-              <span className="sr-only">Weiterlesen: {p.title}</span>
-            </div>
-          </Link>
-        ))}
+                {post.excerpt ? (
+                  <CardDescription className="text-[13px]" style={{ color: "var(--graphite,#243236)" }}>
+                    {post.excerpt}
+                  </CardDescription>
+                ) : null}
+              </CardHeader>
+
+              <CardContent className="flex items-center gap-2">
+                <Button asChild size="sm">
+                  <Link href={hrefFor(post)}>Lesen</Link>
+                </Button>
+                <span className="text-xs text-slate-500">
+                  {post.kind === "glossar" ? "Glossar" : "Blog"}
+                </span>
+              </CardContent>
+            </Card>
+          ))}
+
+          {/* Platzhalter */}
+          {Array.from({ length: placeholdersCount }).map((_, i) => (
+            <Card key={`placeholder-${i}`} className="overflow-hidden border" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
+              <div className="relative aspect-[16/9] bg-slate-100" />
+              <CardHeader>
+                <CardTitle
+                  className="font-highlight text-base"
+                  style={{
+                    color: "var(--graphite,#243236)",
+                    fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)",
+                  }}
+                >
+                  Beitragstitel (Platzhalter)
+                </CardTitle>
+                <CardDescription className="text-[13px]" style={{ color: "var(--graphite,#243236)" }}>
+                  Kurzer Teaser-Satz als Platzhalter für die Beschreibung.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button asChild size="sm" variant="outline">
+                  <Link href="#">Lesen</Link>
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
+  );
+}
+
+// --- Page ---
+export default async function Page() {
+  const posts = await getHomePosts(); // 6 Blog + 3 Glossar
+
+  // Optionales „Featured“ (erstes Element) + Rest
+  const featured = posts[0] ?? null;
+  const rest = posts.slice(1);
+
+  const all = [featured, ...rest].filter(Boolean) as PostMeta[];
+
+  return (
+    <main className="bg-white">
+      <HeroBanner />
+      <BlogGrid posts={all} />
+    </main>
   );
 }
