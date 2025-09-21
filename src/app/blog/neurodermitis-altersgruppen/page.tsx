@@ -942,7 +942,7 @@ export default function Page() {
           <ArrowRight className={`w-4 h-4 ${accent}`} aria-hidden="true" />
           <p className="text-sm text-zinc-700">
             Überprüft von:{" "}
-            <strong>Hautsache Gesund Redaktion</strong> – Medizinisch
+            <strong>Hautwissen Kontakt Redaktion</strong> – Medizinisch
             redaktioneller Review.
           </p>
         </div>
