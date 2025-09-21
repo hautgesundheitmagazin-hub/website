@@ -43,7 +43,10 @@ async function getLatestFromDir(
 ): Promise<Array<{ slug: string; title: string; excerpt: string; date: string; image?: string }>> {
   const dir = path.join(process.cwd(), "src", "app", baseDir);
   const entries = await fs.readdir(dir, { withFileTypes: true });
-  const slugs = entries.filter((e) => e.isDirectory()).map((e) => e.name);
+  const slugs = entries
+    .filter((e) => e.isDirectory())
+    .map((e) => e.name)
+    .filter((name) => !name.startsWith("_")); // optional: versteckte/Entwurfs-Ordner ausschließen
 
   const metas = await Promise.all(
     slugs.map(async (slug) => {
