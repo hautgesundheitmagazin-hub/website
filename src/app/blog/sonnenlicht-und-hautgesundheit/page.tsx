@@ -250,7 +250,7 @@ export default function Page() {
             hilft Dir, die Tagesgefahr einzuschätzen.
           </li>
           <li>
-            Schon ab UV-Index 3 gilt&colon; Schatten suchen, Kleidung und
+            Schon ab UV-Index 3 gilt; Schatten suchen, Kleidung und
             Sonnenbrille nutzen, unbedeckte Haut mit breitbandiger Sonnencreme
             (mind. SPF 30) schützen.
           </li>
@@ -260,7 +260,7 @@ export default function Page() {
             Schutz.
           </li>
           <li>
-            Sonnencreme wirkt nur ausreichend, wenn Du genug nimmst&colon; etwa 2&nbsp;mg
+            Sonnencreme wirkt nur ausreichend, wenn Du genug nimmst; etwa 2&nbsp;mg
             pro cm². Für den Körper eines Erwachsenen entspricht das ca. 3
             Esslöffeln pro Anwendung.
           </li>
@@ -290,22 +290,22 @@ export default function Page() {
           </li>
           <li>
             <a className={`hover:underline ${accent} font-medium`} href="#uv-index">
-              UV-Index verstehen&colon; Ab wann wird es kritisch&quest;
+              UV-Index verstehen; Ab wann wird es kritisch&quest;
             </a>
           </li>
           <li>
             <a className={`hover:underline ${accent} font-medium`} href="#nutzen">
-              Positive Effekte&colon; Vitamin D, Stimmung &amp; mehr
+              Positive Effekte; Vitamin D, Stimmung &amp; mehr
             </a>
           </li>
           <li>
             <a className={`hover:underline ${accent} font-medium`} href="#risiken">
-              Risiken&colon; Sonnenbrand, Photoaging, Hautkrebs
+              Risiken; Sonnenbrand, Photoaging, Hautkrebs
             </a>
           </li>
           <li>
             <a className={`hover:underline ${accent} font-medium`} href="#schutz">
-              Sonnenschutz in der Praxis&colon; Die 3-Säulen-Strategie
+              Sonnenschutz in der Praxis; Die 3-Säulen-Strategie
             </a>
           </li>
           <li>
@@ -315,7 +315,7 @@ export default function Page() {
           </li>
           <li>
             <a className={`hover:underline ${accent} font-medium`} href="#alltag">
-              Alltagstipps&colon; Hauttyp, Tageszeit, Jahreszeit
+              Alltagstipps; Hauttyp, Tageszeit, Jahreszeit
             </a>
           </li>
           <li>
@@ -331,26 +331,26 @@ export default function Page() {
         <h2 className="text-2xl font-bold mb-3">Was ist UV-Strahlung&quest; UVA, UVB, UVC in einfach</h2>
         <p className="leading-relaxed">
           Sonnenlicht besteht aus sichtbarem Licht, Infrarot und ultravioletter
-          Strahlung &lpar;UV&rpar;. Für die Haut sind UVA und UVB relevant&colon; UVA
+          Strahlung &lpar;UV&rpar;. Für die Haut sind UVA und UVB relevant; UVA
           dringt tiefer in die Haut ein und beschleunigt Alterungsprozesse, UVB
           ist energiereicher, verursacht Sonnenbrand und ist gleichzeitig für die
           körpereigene Vitamin-D-Bildung nötig. UVC wird von der Atmosphäre
-          abgefangen. Kurz&colon; UVB brennt, UVA altert &ndash; beides wollen wir
+          abgefangen. Kurz; UVB brennt, UVA altert &ndash; beides wollen wir
           dosieren und uns schützen.
         </p>
 
         <div className="mt-5 rounded-2xl border border-zinc-200 p-5 bg-white">
           <h3 className="text-xl font-semibold mb-2">
-            Kurzvergleich&colon; UVA vs. UVB
+            Kurzvergleich; UVA vs. UVB
           </h3>
           <div className="grid md:grid-cols-3 gap-4 text-sm">
             <div className="rounded-xl border border-zinc-200 p-4">
               <div className="font-medium mb-1">Wellenlänge</div>
-              <p>UVA&colon; ca. 320&ndash;400&nbsp;nm &nbsp;&middot;&nbsp; UVB&colon; ca. 280&ndash;320&nbsp;nm</p>
+              <p>UVA; ca. 320&ndash;400&nbsp;nm &nbsp;&middot;&nbsp; UVB; ca. 280&ndash;320&nbsp;nm</p>
             </div>
             <div className="rounded-xl border border-zinc-200 p-4">
               <div className="font-medium mb-1">Wirkung</div>
-              <p>UVA&colon; Photoaging &amp; indirekter DNA-Schaden &nbsp;&middot;&nbsp; UVB&colon; Sonnenbrand &amp; direkter DNA-Schaden</p>
+              <p>UVA; Photoaging &amp; indirekter DNA-Schaden &nbsp;&middot;&nbsp; UVB; Sonnenbrand &amp; direkter DNA-Schaden</p>
             </div>
             <div className="rounded-xl border border-zinc-200 p-4">
               <div className="font-medium mb-1">Schutz</div>
@@ -361,10 +361,10 @@ export default function Page() {
       </section>
 
       <section id="uv-index" className="mt-12">
-        <h2 className="text-2xl font-bold mb-3">UV-Index verstehen&colon; Ab wann wird es kritisch&quest;</h2>
+        <h2 className="text-2xl font-bold mb-3">UV-Index verstehen; Ab wann wird es kritisch&quest;</h2>
         <p className="leading-relaxed">
           Der UV-Index &lpar;UVI&rpar; zeigt Dir, wie stark die sonnenbrandwirksame
-          UV-Strahlung heute im Tagesmaximum ist. Faustregel&colon; Ab UVI&nbsp;3
+          UV-Strahlung heute im Tagesmaximum ist. Faustregel; Ab UVI&nbsp;3
           sind Schutzmaßnahmen sinnvoll. Je höher der Index, desto schneller
           entsteht ohne Schutz ein Sonnenbrand. In Deutschland steigt der UVI im
           Sommer zur Mittagszeit am stärksten an und ist in höheren Lagen oder
@@ -418,9 +418,9 @@ export default function Page() {
       </section>
 
       <section id="nutzen" className="mt-12">
-        <h2 className="text-2xl font-bold mb-3">Positive Effekte&colon; Vitamin D, Stimmung &amp; mehr</h2>
+        <h2 className="text-2xl font-bold mb-3">Positive Effekte; Vitamin D, Stimmung &amp; mehr</h2>
         <p className="leading-relaxed">
-          Sonnenlicht ist nicht nur Risiko&colon; Kurze, regelmäßige Aufenthalte im
+          Sonnenlicht ist nicht nur Risiko; Kurze, regelmäßige Aufenthalte im
           Freien unterstützen die Vitamin-D-Bildung &lpar;über UVB&rpar; und wirken sich
           positiv auf Wohlbefinden und Tagesrhythmus aus. Zudem wird erforscht,
           dass Sonnenlicht auch vitamin-D-unabhängige Wirkmechanismen hat, z. B.
@@ -432,7 +432,7 @@ export default function Page() {
         {/* Expertenzitat */}
         <figure className="mt-6 rounded-2xl border-l-4 border-emerald-600 bg-emerald-50 p-5">
           <blockquote className="text-lg font-medium">
-            „Kluge Sonnenroutine heißt&colon; kurze, gut getimte Dosen für die Vorteile,
+            „Kluge Sonnenroutine heißt; kurze, gut getimte Dosen für die Vorteile,
             konsequenter Schutz gegen die Risiken.“
           </blockquote>
           <figcaption className="mt-2 text-sm text-zinc-600">
@@ -462,14 +462,14 @@ export default function Page() {
             <h3 className="text-xl font-semibold mb-2">Weitere positive Effekte</h3>
             <ul className="list-disc ml-5 space-y-2 text-sm">
               <li>
-                Besserer Tagesrhythmus&colon; Tageslicht stabilisiert innere Uhr und kann
+                Besserer Tagesrhythmus; Tageslicht stabilisiert innere Uhr und kann
                 Schlafqualität unterstützen.
               </li>
               <li>
-                Stimmung&colon; Tageslicht hebt bei vielen Menschen die Laune.
+                Stimmung; Tageslicht hebt bei vielen Menschen die Laune.
               </li>
               <li>
-                Forschung&colon; NO-Freisetzung aus der Haut unter UVA kann Blutgefäße
+                Forschung; NO-Freisetzung aus der Haut unter UVA kann Blutgefäße
                 erweitern und den Blutdruck minimal senken &lpar;kein Ersatz für
                 Therapie&rpar;.
               </li>
@@ -479,7 +479,7 @@ export default function Page() {
       </section>
 
       <section id="risiken" className="mt-12">
-        <h2 className="text-2xl font-bold mb-3">Risiken&colon; Sonnenbrand, Photoaging, Hautkrebs</h2>
+        <h2 className="text-2xl font-bold mb-3">Risiken; Sonnenbrand, Photoaging, Hautkrebs</h2>
         <p className="leading-relaxed">
           UV-Strahlen verursachen akute und langfristige Hautschäden. Akut drohen
           Sonnenbrand, phototoxische oder photoallergische Reaktionen. Langfristig
@@ -490,7 +490,7 @@ export default function Page() {
         </p>
 
         <div className="mt-5 rounded-2xl border border-rose-200 bg-rose-50 p-5">
-          <h3 className="text-xl font-semibold mb-2">Achtung&colon; Risikogruppen</h3>
+          <h3 className="text-xl font-semibold mb-2">Achtung; Risikogruppen</h3>
           <ul className="list-disc ml-5 space-y-2 text-sm">
             <li>Sehr helle Hauttypen &lpar;I&ndash;II&rpar;, Sommersprossen, viele Muttermale</li>
             <li>Kinder und Jugendliche</li>
@@ -504,12 +504,12 @@ export default function Page() {
       </section>
 
       <section id="schutz" className="mt-12">
-        <h2 className="text-2xl font-bold mb-3">Sonnenschutz in der Praxis&colon; Die 3-Säulen-Strategie</h2>
+        <h2 className="text-2xl font-bold mb-3">Sonnenschutz in der Praxis; Die 3-Säulen-Strategie</h2>
         <p className="leading-relaxed">
-          Verlässlicher Schutz kombiniert drei Bausteine&colon; Meiden, Bedecken,
-          Eincremen. Reihenfolge ist wichtig&colon; Zuerst Schatten bzw. Zeitplanung,
+          Verlässlicher Schutz kombiniert drei Bausteine; Meiden, Bedecken,
+          Eincremen. Reihenfolge ist wichtig; Zuerst Schatten bzw. Zeitplanung,
           dann Kleidung und Brille, erst danach Sonnencreme als Ergänzung auf
-          unbedeckten Flächen. Breitbandiger Schutz bedeutet&colon; UVA und UVB werden
+          unbedeckten Flächen. Breitbandiger Schutz bedeutet; UVA und UVB werden
           reduziert.
         </p>
 
@@ -543,7 +543,7 @@ export default function Page() {
         <p className="leading-relaxed">
           Der angegebene Lichtschutzfaktor wird nur erreicht, wenn ausreichend
           Produkt aufgetragen wird. In Prüfverfahren gelten rund 2&nbsp;mg pro cm²
-          Haut. Praxistauglich sind Merkhilfen&colon; Für den ganzen Körper eines
+          Haut. Praxistauglich sind Merkhilfen; Für den ganzen Körper eines
           Erwachsenen etwa eine Shotglas-Füllung &lpar;~30&nbsp;ml&rpar; oder ca. 3
           Esslöffel. Fürs Gesicht empfiehlt sich etwa 1&nbsp;Teelöffel oder die
           Zwei-Finger-Regel. Nachcremen ca. alle 2&nbsp;Stunden sowie nach Schwitzen,
@@ -566,7 +566,7 @@ export default function Page() {
       </section>
 
       <section id="alltag" className="mt-12">
-        <h2 className="text-2xl font-bold mb-3">Alltagstipps&colon; Hauttyp, Tageszeit, Jahreszeit</h2>
+        <h2 className="text-2xl font-bold mb-3">Alltagstipps; Hauttyp, Tageszeit, Jahreszeit</h2>
         <div className="grid md:grid-cols-[2fr_1fr] gap-6">
           <div>
             <p className="leading-relaxed">
@@ -574,7 +574,7 @@ export default function Page() {
               Breitengrad, UVI und Reflexionen &lpar;Wasser, Schnee&rpar; ab. Hellere
               Hauttypen verbrennen schneller. In Deutschland erreicht der UVI im
               Sommer oft zwischen 11 und 15 Uhr sein Maximum. Im Frühjahr kann die
-              Haut noch „sonnenentwöhnt“ sein&colon; insbesondere langsam steigern
+              Haut noch „sonnenentwöhnt“ sein; insbesondere langsam steigern
               und Sonnenbrand strikt vermeiden.
             </p>
 
@@ -607,7 +607,7 @@ export default function Page() {
         <p className="leading-relaxed">
           <strong>Wie findest Du die richtige Balance zwischen Sonnenlicht und
             Hautschutz&quest;</strong>{" "}
-          Nutze die Sonne bewusst&colon; kurze, gut getimte Dosen für Vitamin D und
+          Nutze die Sonne bewusst; kurze, gut getimte Dosen für Vitamin D und
           Wohlbefinden, konsequenter Schutz gegen Sonnenbrand, Photoaging und
           Hautkrebsrisiko. Orientiere Dich am UV-Index, priorisiere Kleidung und
           Schatten, setze Sonnenschutzmittel großzügig und regelmäßig ein.
@@ -651,7 +651,7 @@ export default function Page() {
             </h3>
             <p>
               Nach heutigem Wissensstand gelten zugelassene Produkte als sicher.
-              Entscheidend ist die korrekte Anwendung&colon; genug Menge, rechtzeitiges
+              Entscheidend ist die korrekte Anwendung; genug Menge, rechtzeitiges
               Auftragen, regelmäßiges Nachcremen.
             </p>
           </div>
@@ -671,7 +671,7 @@ export default function Page() {
             </h3>
             <p>
               Für kurze Wege bei niedrigem UVI kann das passen. Für längere
-              Outdoor-Zeiten ist SPF&nbsp;30+ sinnvoller. Wichtig ist die Menge&colon; fürs
+              Outdoor-Zeiten ist SPF&nbsp;30+ sinnvoller. Wichtig ist die Menge; fürs
               Gesicht etwa 1&nbsp;TL.
             </p>
           </div>
@@ -781,7 +781,7 @@ export default function Page() {
               <tr className="border-t border-zinc-200">
                 <td className="p-3 font-medium text-zinc-900">UPF</td>
                 <td className="p-3 text-zinc-700">
-                  Ultraviolet Protection Factor für Textilien&colon; beschreibt, wie gut ein
+                  Ultraviolet Protection Factor für Textilien; beschreibt, wie gut ein
                   Stoff UV-Strahlen abhält.
                 </td>
               </tr>
@@ -803,7 +803,7 @@ export default function Page() {
           <div>
             <div className="font-semibold">Jennifer Krause</div>
             <div className="text-sm text-zinc-700">
-              Expertin für Hautgesundheit, Schwerpunkte&colon; Photodermatologie, sensible Haut,
+              Expertin für Hautgesundheit, Schwerpunkte; Photodermatologie, sensible Haut,
               Hautpflege bei aktiver Lebensweise.
             </div>
           </div>
@@ -811,7 +811,7 @@ export default function Page() {
 
         <div className="mt-4 flex items-center gap-3">
           <p className="text-sm text-zinc-700">
-            Überprüft von&colon; <strong>Hautsache Gesund Redaktion</strong> – Redaktion
+            Überprüft von; <strong>Hautsache Gesund Redaktion</strong> – Redaktion
             Medizin &amp; Prävention.
           </p>
         </div>
@@ -853,29 +853,29 @@ export default function Page() {
         <h2 className="text-2xl font-bold mb-3">Quellen &amp; weiterführende Studien</h2>
         <ul className="list-disc ml-5 space-y-2 text-sm">
           <li>
-            WHO&colon; Radiation &ndash; The known health effects of ultraviolet radiation
+            WHO; Radiation &ndash; The known health effects of ultraviolet radiation
             &ndash; https://www.who.int/news-room/questions-and-answers/item/radiation-the-known-health-effects-of-ultraviolet-radiation
           </li>
           <li>
-            Bundesamt für Strahlenschutz &lpar;BfS&rpar;&colon; UV-Index &amp; Schutzempfehlungen
+            Bundesamt für Strahlenschutz &lpar;BfS&rpar;; UV-Index &amp; Schutzempfehlungen
             &ndash; https://www.bfs.de/DE/themen/opt/uv/uv-index/einfuehrung/einfuehrung_node.html
           </li>
           <li>
-            BVL&colon; Sonnenschutzmittel – Mengen &amp; Anwendung &ndash; https://www.bvl.bund.de/DE/Arbeitsbereiche/03_Verbraucherprodukte/02_Verbraucher/03_Kosmetik/06_Sonnenschutzmittel/bgs_kosmetik_sonnenschutzmittel_node.html
+            BVL; Sonnenschutzmittel – Mengen &amp; Anwendung &ndash; https://www.bvl.bund.de/DE/Arbeitsbereiche/03_Verbraucherprodukte/02_Verbraucher/03_Kosmetik/06_Sonnenschutzmittel/bgs_kosmetik_sonnenschutzmittel_node.html
           </li>
           <li>
-            American Academy of Dermatology &lpar;AAD&rpar;&colon; How to apply/select sunscreen
+            American Academy of Dermatology &lpar;AAD&rpar;; How to apply/select sunscreen
             &ndash; https://www.aad.org/public/everyday-care/sun-protection/shade-clothing-sunscreen/how-to-apply-sunscreen &amp; https://www.aad.org/public/everyday-care/sun-protection/shade-clothing-sunscreen/understand-sunscreen-labels
           </li>
           <li>
-            Weller RB et&nbsp;al.&colon; Incident solar UV radiation and blood pressure &ndash;
+            Weller RB et&nbsp;al.; Incident solar UV radiation and blood pressure &ndash;
             Journal of the American Heart Association &lpar;2020&rpar; – https://www.ahajournals.org/doi/10.1161/JAHA.119.013837
           </li>
           <li>
-            Weller RB&colon; Sunlight&colon; Time for a Rethink&quest; &ndash; Journal of Investigative Dermatology &lpar;2024&rpar; – https://pubmed.ncbi.nlm.nih.gov/38661623/
+            Weller RB; Sunlight; Time for a Rethink&quest; &ndash; Journal of Investigative Dermatology &lpar;2024&rpar; – https://pubmed.ncbi.nlm.nih.gov/38661623/
           </li>
           <li>
-            BfR/BfS&colon; Sonnencreme und Co.&colon; Gibt es gesundheitliche Risiken&quest; – FAQ
+            BfR/BfS; Sonnencreme und Co.; Gibt es gesundheitliche Risiken&quest; – FAQ
             &amp; Hintergrund &lpar;2024&rpar; – https://www.bfr.bund.de/fragen-und-antworten/thema/sonnencreme-und-co-gibt-es-gesundheitliche-risiken/
           </li>
         </ul>
