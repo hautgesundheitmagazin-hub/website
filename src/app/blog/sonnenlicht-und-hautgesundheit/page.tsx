@@ -811,7 +811,7 @@ export default function Page() {
 
         <div className="mt-4 flex items-center gap-3">
           <p className="text-sm text-zinc-700">
-            Überprüft von; <strong>Hautsache Gesund Redaktion</strong> – Redaktion
+            Überprüft von; <strong>Hautwissen Kontakt Redaktion</strong> – Redaktion
             Medizin &amp; Prävention.
           </p>
         </div>
