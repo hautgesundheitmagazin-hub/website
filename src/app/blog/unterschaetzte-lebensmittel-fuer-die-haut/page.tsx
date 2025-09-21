@@ -321,7 +321,7 @@ export default function Page() {
               Faktoren, die sich in der Haut zeigen.“
             </blockquote>
             <figcaption className="mt-2 text-sm text-zinc-600">
-              &mdash; Redaktion Hautsache Gesund, indirektes Zitat aus der
+              &mdash; Redaktion Hautwissen Kontakt, indirektes Zitat aus der
               Studienlage
             </figcaption>
           </figure>
@@ -831,7 +831,7 @@ export default function Page() {
             <span className={`w-2 h-2 rounded-full ${accent}`} aria-hidden="true" />
             <p className="text-sm text-zinc-700">
               Überprüft von;{" "}
-              <strong>Hautsache Gesund Redaktion</strong> &ndash; Medizin&ndash; und
+              <strong>Hautwissen Kompakt Redaktion</strong> &ndash; Medizin&ndash; und
               Ernährungsrecherche.
             </p>
           </div>
