@@ -127,8 +127,8 @@ export default function Page() {
           </li>
           <li>
             Typische <strong>Auslöser</strong> sind Infektionen, Umweltreize
-            &lpar;Kälte, Rauch&rpar;, Stress, Allergene, Medikamente oder
-            Therapiefehler &lpar;z. B. falsche Inhalationstechnik&rpar;.
+            ;Kälte, Rauch;, Stress, Allergene, Medikamente oder
+            Therapiefehler ;z. B. falsche Inhalationstechnik;.
           </li>
           <li>
             <strong>Warnzeichen</strong>; schnelle Symptomzunahme, neue
@@ -137,7 +137,7 @@ export default function Page() {
           </li>
           <li>
             <strong>Behandlung</strong>; je nach Erkrankung Akut-Plan befolgen
-            &lpar;z. B. Inhalator, topische Therapie, Notfallmedikamente&rpar; und
+            ;z. B. Inhalator, topische Therapie, Notfallmedikamente; und
             Auslöser konsequent managen.
           </li>
           <li>
@@ -193,8 +193,8 @@ export default function Page() {
         <h2 className="text-2xl font-bold mb-3">Was bedeutet Exazerbation; eine einfache Definition</h2>
         <p className="leading-relaxed">
           Eine <strong>Exazerbation</strong> ist die deutliche, oft akute
-          Verschlechterung einer bereits bestehenden &lpar;meist
-          chronischen&rpar; Erkrankung. Sie ist so ausgeprägt, dass zusätzliche
+          Verschlechterung einer bereits bestehenden ;meist
+          chronischen; Erkrankung. Sie ist so ausgeprägt, dass zusätzliche
           Maßnahmen nötig werden – etwa stärkere oder häufigere Medikamente,
           eine ärztliche Kontrolle oder sogar eine Krankenhausbehandlung.
           Gegenbegriff ist die <em>Remission</em>; eine Phase der
@@ -266,8 +266,8 @@ export default function Page() {
             <div>
               <h3 className="font-semibold mb-2">Medikamente</h3>
               <p>
-                Einzelne Wirkstoffe &lpar;z. B. Betablocker bei Asthma, einige
-                Biologika bei AD in seltenen Fällen&rpar; können unter Umständen
+                Einzelne Wirkstoffe ;z. B. Betablocker bei Asthma, einige
+                Biologika bei AD in seltenen Fällen; können unter Umständen
                 Einfluss nehmen – ärztlich klären lassen.
               </p>
             </div>
@@ -289,12 +289,12 @@ export default function Page() {
             <h3 className="font-semibold mb-2">Typische Zeichen</h3>
             <ul className="list-disc ml-5">
               <li>Deutlich stärkere Beschwerden als üblich</li>
-              <li>Neue Symptome &lpar;z. B. Fieber, verändertes Sputum, nässende Ekzeme&rpar;</li>
+              <li>Neue Symptome ;z. B. Fieber, verändertes Sputum, nässende Ekzeme;</li>
               <li>Gewohnte Maßnahmen helfen nicht mehr ausreichend</li>
             </ul>
           </div>
           <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
-            <h3 className="font-semibold mb-2">Warnsignale &lpar;sofort handeln&rpar;</h3>
+            <h3 className="font-semibold mb-2">Warnsignale ;sofort handeln;</h3>
             <ul className="list-disc ml-5">
               <li>Ausgeprägte Atemnot, Pfeifen, Sprechen nur in kurzen Sätzen</li>
               <li>Bläuliche Lippen/Finger, Bewusstseinsstörung</li>
@@ -332,7 +332,7 @@ export default function Page() {
                   Sauerstoff bei Bedarf.
                 </td>
                 <td className="p-3">
-                  Impfungen &lpar;Influenza, Pneumokokken&rpar;&semi; Rauchstopp&semi; Schulung&semi;
+                  Impfungen ;Influenza, Pneumokokken;&semi; Rauchstopp&semi; Schulung&semi;
                   richtige Inhalationstechnik.
                 </td>
               </tr>
@@ -356,8 +356,8 @@ export default function Page() {
                   Irritationen adressieren.
                 </td>
                 <td className="p-3">
-                  Tägliche Basispflege&semi; Trigger meiden &lpar;z. B. Duftstoffe,
-                  Kratzen, Wolle&rpar;&semi; ggf. proaktive Therapie.
+                  Tägliche Basispflege&semi; Trigger meiden ;z. B. Duftstoffe,
+                  Kratzen, Wolle;&semi; ggf. proaktive Therapie.
                 </td>
               </tr>
             </tbody>
@@ -373,8 +373,8 @@ export default function Page() {
               und reduziert Komplikationen.
             </blockquote>
             <figcaption className="mt-2 text-sm text-zinc-600">
-              — Dr. med. K. Beispiel, Pneumologie &amp; Dermatologie &lpar;indirektes
-              Zitat&rpar;
+              — Dr. med. K. Beispiel, Pneumologie &amp; Dermatologie ;indirektes
+              Zitat;
             </figcaption>
           </figure>
         </section>
@@ -386,9 +386,9 @@ export default function Page() {
           <div className="rounded-2xl border border-zinc-200 p-5">
             <h3 className="font-semibold mb-2">Sofort-Checkliste</h3>
             <ul className="list-disc ml-5">
-              <li>Aktionsplan parat halten &lpar;z. B. Asthma- oder Haut-Plan&rpar;</li>
+              <li>Aktionsplan parat halten ;z. B. Asthma- oder Haut-Plan;</li>
               <li>Inhalations- oder Anwendungstechnik regelmäßig prüfen</li>
-              <li>Impfstatus checken &lpar;ärztlich beraten lassen&rpar;</li>
+              <li>Impfstatus checken ;ärztlich beraten lassen;</li>
               <li>Rauchstopp und Rauchvermeidung</li>
             </ul>
           </div>
@@ -396,9 +396,9 @@ export default function Page() {
             <h3 className="font-semibold mb-2">Trigger-Management</h3>
             <ul className="list-disc ml-5">
               <li>Duftstoffarme Pflege, milde Reinigungsprodukte</li>
-              <li>Innenraumluft optimieren &lpar;Lüften, Befeuchtung bei trockener Luft&rpar;</li>
-              <li>Stress reduzieren &lpar;Schlaf, Entspannung, Bewegung nach Maß&rpar;</li>
-              <li>Bei Allergien Exposition mindern &lpar;z. B. Pollenzeiten im Blick&rpar></li>
+              <li>Innenraumluft optimieren ;Lüften, Befeuchtung bei trockener Luft;</li>
+              <li>Stress reduzieren ;Schlaf, Entspannung, Bewegung nach Maß;</li>
+              <li>Bei Allergien Exposition mindern ;z. B. Pollenzeiten im Blick></li>
             </ul>
           </div>
         </div>
@@ -442,7 +442,7 @@ export default function Page() {
           <div>
             <h3 className="font-semibold">Hilft eine Impfung gegen Schübe bei COPD&quest;</h3>
             <p>
-              Impfungen gegen Atemwegsinfekte &lpar;Influenza, Pneumokokken&rpar; sind
+              Impfungen gegen Atemwegsinfekte ;Influenza, Pneumokokken; sind
               bei COPD ein wichtiger Baustein, um Exazerbationen zu vermeiden –
               ärztlich beraten lassen.
             </p>
@@ -651,14 +651,14 @@ export default function Page() {
               <tr className="border-t border-zinc-200">
                 <td className="p-3 font-medium text-zinc-900">Remission</td>
                 <td className="p-3 text-zinc-700">
-                  Phase der Besserung&sol;Beruhigung von Krankheitssymptomen.
+                  Phase der Besserung;Beruhigung von Krankheitssymptomen.
                 </td>
               </tr>
               <tr className="border-t border-zinc-200">
                 <td className="p-3 font-medium text-zinc-900">Trigger</td>
                 <td className="p-3 text-zinc-700">
-                  Auslöser, die einen Schub anstoßen können &lpar;z. B. Infekte,
-                  Stress, Allergene&rpar;.
+                  Auslöser, die einen Schub anstoßen können ;z. B. Infekte,
+                  Stress, Allergene;.
                 </td>
               </tr>
               <tr className="border-t border-zinc-200">
@@ -712,11 +712,11 @@ export default function Page() {
             DocCheck Flexikon; Exazerbation – https://flexikon.doccheck.com/de/Exazerbation
           </li>
           <li>
-            AWMF Nationale VersorgungsLeitlinie COPD &lpar;Version 2.0, gültig bis
-            24.06.2026&rpar; – https://register.awmf.org/de/leitlinien/detail/nvl-003
+            AWMF Nationale VersorgungsLeitlinie COPD ;Version 2.0, gültig bis
+            24.06.2026; – https://register.awmf.org/de/leitlinien/detail/nvl-003
           </li>
           <li>
-            GOLD/ars medici; COPD-Definition der Exazerbation &lpar;de&rpar; – https://www.rosenfluh.ch/media/arsmedici/2023/14-16/COPD-Revision-des-GOLD-Reports-2023.pdf
+            GOLD/ars medici; COPD-Definition der Exazerbation ;de; – https://www.rosenfluh.ch/media/arsmedici/2023/14-16/COPD-Revision-des-GOLD-Reports-2023.pdf
           </li>
           <li>
             GINA 2023 Pocket Guide – https://ginasthma.org/wp-content/uploads/2023/07/GINA-2023-Pocket-Guide-WMS.pdf
@@ -728,10 +728,10 @@ export default function Page() {
             AWMF S3-Leitlinie Atopische Dermatitis 2024 – https://register.awmf.org/assets/guidelines/013-027l_S3_Atopische-Dermatitis-AD-Neurodermitis-atopisches-Ekzem_2024-01.pdf
           </li>
           <li>
-            EuroGuiDerm Guideline Atopic Eczema &lpar;2022, Vollversion&rpar; – https://www.guidelines.edf.one/uploads/attachments/clbm6nh6x07tw0d3qtyb1ukrt-0-atopic-eczema-gl-full-version-dec-2022.pdf
+            EuroGuiDerm Guideline Atopic Eczema ;2022, Vollversion; – https://www.guidelines.edf.one/uploads/attachments/clbm6nh6x07tw0d3qtyb1ukrt-0-atopic-eczema-gl-full-version-dec-2022.pdf
           </li>
           <li>
-            Wollenberg A. et al.; Consensus-based European guidelines for treatment of atopic eczema &lpar;2018&rpar; – https://pubmed.ncbi.nlm.nih.gov/29676534/
+            Wollenberg A. et al.; Consensus-based European guidelines for treatment of atopic eczema ;2018; – https://pubmed.ncbi.nlm.nih.gov/29676534/
           </li>
           <li>
             Atemwegsliga; Informationen zu COPD-Exazerbationen – https://www.atemwegsliga.de/copd.html
@@ -740,7 +740,7 @@ export default function Page() {
             Psoriasis-Initiative; Auslöser &amp; Trigger – https://www.psoriasis-initiative-ich.de/psoriasis-ursachen-ausloeser-trigger
           </li>
           <li>
-            Wikipedia; Exazerbation &lpar;DE&rpar; – https://de.wikipedia.org/wiki/Exazerbation
+            Wikipedia; Exazerbation ;DE; – https://de.wikipedia.org/wiki/Exazerbation
           </li>
         </ul>
       </section>
