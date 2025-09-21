@@ -629,13 +629,13 @@ export default function Page() {
       <form id="sib-form" method="POST" action="https://58a8e982.sibforms.com/serve/MUIFAAu67dU7m7jHkJHnSYjaQM-Go-LEt6pCHEcflaDv_K8hQQ8emSwcEz4jEEv6iGtpPoUX2wkdM0SHScgPCHivxNEwC_pzg3wni0Rlub0NvwGHjxUEG_icVa5-RMnJcLfkCunQzIVbN6_LC3ITRul-gVn212JWZgJr8uYXi-ecIAaLwdUEZ4yOwHMcjvOQ5zveRzRGkMnD9UIo" data-type="subscription">
         <div style="padding: 8px 0;">
           <div class="sib-form-block" style="font-size:20px; text-align:left; font-weight:700; font-family:Helvetica, sans-serif; color:#090a0a; background-color:transparent; text-align:left">
-            <p>10 studienbasierte Tipps bei Neurodermitis direkt in deinem Postfach.</p>
+            <p>10 sofort umsetzbare Neurodermitis-Tipps.</p>
           </div>
         </div>
         <div style="padding: 8px 0;">
           <div class="sib-form-block" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#3C4858; background-color:transparent; text-align:left">
             <div class="sib-text-form-block">
-              <p>Der neueste Report unserer Redaktion, kostenlos für Dich.</p>
+              <p>Unsere Redaktion hat die drei neuesten Studien analysiert und für Dich in einfache Tipps heruntergebrochen.</p>
             </div>
           </div>
         </div>
