@@ -398,7 +398,7 @@ export default function Page() {
               <li>Duftstoffarme Pflege, milde Reinigungsprodukte</li>
               <li>Innenraumluft optimieren ;Lüften, Befeuchtung bei trockener Luft;</li>
               <li>Stress reduzieren ;Schlaf, Entspannung, Bewegung nach Maß;</li>
-              <li>Bei Allergien Exposition mindern ;z. B. Pollenzeiten im Blick></li>
+              <li>Bei Allergien Exposition mindern ;z. B. Pollenzeiten im Blick</li>
             </ul>
           </div>
         </div>
