@@ -1,6 +1,4 @@
-// /src/app/page.tsx
-import fs from "node:fs/promises";
-import path from "node:path";
+// src/app/page.tsx
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
@@ -9,114 +7,77 @@ import { Button } from "@/components/ui/button";
 // Diese Page soll NICHT statisch gecacht werden.
 export const dynamic = "force-dynamic";
 
-type PostMeta = {
-  slug: string;
-  title: string;
-  date: string;        // ISO-Date (nur für Sortierung)
-  excerpt?: string;
-  image?: string;      // optionales Cover
-  kind: "blog" | "glossar";
+/** ---------- Statische Blogkarten ---------- */
+type BlogCard = {
+  url: string;          // Ziel-URL (intern oder extern)
+  title: string;        // Titel
+  description: string;  // Kurzbeschreibung
+  image: string;        // Bild-URL
 };
 
-// Helper: prettify slug → Titel
-const prettify = (s: string) =>
-  s.replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
+const CARDS: BlogCard[] = [
+  {
+    url: "/blog/aufbau-der-haut",
+    title: "Wie ist die Haut aufgebaut? Einfach erklärt",
+    description: "Ein Überblick über die Hautschichten und ihre wichtigsten Funktionen.",
+    image: "/herobild_hautaufbau.jpg",
+  },
+  {
+    url: "/blog/einfluss-ernaehrung-hautgesundheit",
+    title: "Einfluss der Ernährung auf die Hautgesundheit – einfach erklärt",
+    description: "So wirkt sich deine Ernährung direkt auf die Haut aus.",
+    image: "/herobild_ernaehrung_hautgesundheit.jpg",
+  },
+  {
+    url: "/glossar/atopische-dermatitis",
+    title: "Atopische Dermatitis (Neurodermitis): Ursachen, Symptome & Behandlung",
+    description: "Alles Wichtige rund um Ursachen, Symptome und Therapien bei Neurodermitis.",
+    image: "/herobild_atopische_dermatitis.jpg",
+  },
+  {
+    url: "/blog/sonnenlicht-und-hautgesundheit",
+    title: "Einfluss von Sonnenlicht auf die Hautgesundheit: Sicher genießen, klug schützen",
+    description: "Warum Sonne wichtig ist und wie du deine Haut trotzdem schützt.",
+    image: "/herobild_sonnenlicht_hautgesundheit.jpg",
+  },
+  {
+    url: "/blog/neurodermitis-ursachen",
+    title: "Ursachen von Neurodermitis – einfach erklärt",
+    description: "Die wichtigsten Auslöser und Risikofaktoren verständlich erklärt.",
+    image: "/herobild_ursachen.jpg",
+  },
+  {
+    url: "/glossar/exazerbation",
+    title: "Exazerbation – wenn sich eine chronische Erkrankung plötzlich verschlechtert",
+    description: "Was Exazerbationen bedeuten und wie man mit ihnen umgehen kann.",
+    image: "/herobild_exazerbation.jpg",
+  },
+  {
+    url: "/blog/unterschaetzte-lebensmittel-fuer-die-haut",
+    title: "3 unterschätzte Lebensmittel für reine Haut – und warum sie sinnvoll sind",
+    description: "Diese Lebensmittel können deine Hautgesundheit überraschend unterstützen.",
+    image: "/herobild_drei_lebensmittel.jpg",
+  },
+  {
+    url: "/blog/neurodermitis-altersgruppen",
+    title: "In welchen Altersgruppen kann Neurodermitis auftreten? Einfach erklärt",
+    description: "Von Säuglingen bis Erwachsenen – Neurodermitis kennt kein bestimmtes Alter.",
+    image: "/herobild_altersgruppen_neurodermitis.jpg",
+  },
+  {
+    url: "/glossar/pruritus",
+    title: "Pruritus (Juckreiz): Definition, Ursachen, Diagnose & was wirklich hilft",
+    description: "Warum Juckreiz entsteht und welche Maßnahmen Linderung bringen.",
+    image: "/herobild_pruritus.jpg",
+  },
+];
 
-// 1) Generischer Loader – identisch zum Blog-Ansatz, nur parametrisiert für blog/glossar
-async function getLatestFrom(
-  section: "blog" | "glossar",
-  limit?: number
-): Promise<PostMeta[]> {
-  const baseDir = path.join(process.cwd(), "src", "app", section);
-  const entries = await fs.readdir(baseDir, { withFileTypes: true });
-
-  const slugs = entries
-    .filter((e) => e.isDirectory())
-    .map((e) => e.name);
-
-  const metas = await Promise.all(
-    slugs.map(async (slug) => {
-      let title = prettify(slug);
-      let excerpt = "";
-      let date: string | null = null;
-      let image: string | undefined;
-
-      try {
-        // Wichtig: relative Imports genau wie in deinem funktionierenden Blog-Index
-        // @ts-ignore - dynamic import at runtime
-        const maybeMeta = await import(/* webpackMode: "lazy" */ `./${section}/${slug}/meta`).catch(() => null);
-        // @ts-ignore
-        const mod = maybeMeta ?? (await import(/* webpackMode: "lazy" */ `./${section}/${slug}/page`).catch(() => null));
-
-        // mehrere akzeptierte Shapes wie im Blog
-        // @ts-ignore
-        const pm = mod?.postMeta ?? {};
-        // @ts-ignore
-        const md = mod?.metadata ?? {};
-        title = pm.title ?? md.title ?? title;
-        excerpt = pm.excerpt ?? pm.description ?? md.description ?? "";
-        date =
-          pm.date ??
-          pm.published ??
-          md?.openGraph?.publishedTime ??
-          null;
-
-        // Bild aus pm.image oder openGraph.images
-        const ogImages = md?.openGraph?.images as any;
-        if (!image) {
-          if (pm.image) image = pm.image;
-          else if (typeof ogImages === "string") image = ogImages;
-          else if (Array.isArray(ogImages) && ogImages.length > 0) {
-            const first = ogImages[0];
-            image = typeof first === "string" ? first : first?.url;
-          }
-        }
-      } catch {
-        // ignore – Fallback folgt
-      }
-
-      if (!date) {
-        try {
-          const st = await fs.stat(path.join(baseDir, slug));
-          date = st.mtime.toISOString();
-        } catch {
-          date = new Date(0).toISOString();
-        }
-      }
-
-      return {
-        slug,
-        title,
-        excerpt,
-        date: date!,
-        image,
-        kind: section,
-      };
-    })
-  );
-
-  metas.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-  return typeof limit === "number" ? metas.slice(0, limit) : metas;
-}
-
-// 2) Hol 6 Blog + 3 Glossar getrennt (gleicher Ansatz) und kombiniere
-async function getHomePosts(): Promise<PostMeta[]> {
-  const [blog6, glossar3] = await Promise.all([
-    getLatestFrom("blog", 6),
-    getLatestFrom("glossar", 3),
-  ]);
-
-  // Blog zuerst, dann Glossar
-  return [...blog6, ...glossar3];
-}
-
-// --- UI: Hero ---
+/** ---------- Hero ---------- */
 function HeroBanner() {
   return (
     <section className="w-full">
       <div className="w-full max-w-4xl mx-auto px-6 pt-6">
-        <div className="relative min-h-[320px] sm:minh-[420px] md:min-h-[520px] rounded-2xl overflow-hidden shadow-sm">
+        <div className="relative min-h-[320px] sm:min-h-[420px] md:min-h-[520px] rounded-2xl overflow-hidden shadow-sm">
           <Image
             src="/hautsache_gesund_hero_banner.jpg"
             alt="Gesunde Haut – Hero"
@@ -154,26 +115,24 @@ function HeroBanner() {
   );
 }
 
-// --- UI: Grid (9 Slots → 6 Blog + 3 Glossar; fehlende = Platzhalter) ---
-function BlogGrid({ posts }: { posts: PostMeta[] }) {
-  const items = posts.slice(0, 9);
-  const placeholdersCount = Math.max(0, 9 - items.length);
-
-  const hrefFor = (p: PostMeta) =>
-    p.kind === "glossar" ? `/glossar/${p.slug}` : `/blog/${p.slug}`;
-
+/** ---------- Grid mit 9 statischen Karten ---------- */
+function BlogGrid() {
   return (
     <section className="w-full">
       <div className="w-full max-w-4xl mx-auto px-6 py-10 sm:py-14">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((post) => (
-            <Card key={`${post.kind}-${post.slug}`} className="overflow-hidden border" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
-              {/* Bild */}
-              <div className="relative aspect-[16/9] bg-white">
-                {post.image ? (
+          {CARDS.map((item, idx) => (
+            <Card
+              key={idx}
+              className="overflow-hidden border"
+              style={{ borderColor: "var(--sage,#CDE6DF)" }}
+            >
+              {/* Bild in 16:6 */}
+              <div className="relative aspect-[16/6] bg-white">
+                {item.image ? (
                   <Image
-                    src={post.image}
-                    alt={post.title}
+                    src={item.image}
+                    alt={item.title}
                     fill
                     unoptimized
                     sizes="(max-width: 1024px) 100vw, 33vw"
@@ -183,7 +142,6 @@ function BlogGrid({ posts }: { posts: PostMeta[] }) {
                   <div className="w-full h-full bg-slate-100" />
                 )}
               </div>
-
               <CardHeader>
                 <CardTitle
                   className="font-highlight text-base"
@@ -192,48 +150,15 @@ function BlogGrid({ posts }: { posts: PostMeta[] }) {
                     fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)",
                   }}
                 >
-                  <Link href={hrefFor(post)}>{post.title}</Link>
-                </CardTitle>
-
-                {post.excerpt ? (
-                  <CardDescription className="text-[13px]" style={{ color: "var(--graphite,#243236)" }}>
-                    {post.excerpt}
-                  </CardDescription>
-                ) : null}
-              </CardHeader>
-
-              <CardContent className="flex items-center gap-2">
-                <Button asChild size="sm">
-                  <Link href={hrefFor(post)}>Lesen</Link>
-                </Button>
-                <span className="text-xs text-slate-500">
-                  {post.kind === "glossar" ? "Glossar" : "Blog"}
-                </span>
-              </CardContent>
-            </Card>
-          ))}
-
-          {/* Platzhalter */}
-          {Array.from({ length: placeholdersCount }).map((_, i) => (
-            <Card key={`placeholder-${i}`} className="overflow-hidden border" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
-              <div className="relative aspect-[16/9] bg-slate-100" />
-              <CardHeader>
-                <CardTitle
-                  className="font-highlight text-base"
-                  style={{
-                    color: "var(--graphite,#243236)",
-                    fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)",
-                  }}
-                >
-                  Beitragstitel (Platzhalter)
+                  <Link href={item.url}>{item.title}</Link>
                 </CardTitle>
                 <CardDescription className="text-[13px]" style={{ color: "var(--graphite,#243236)" }}>
-                  Kurzer Teaser-Satz als Platzhalter für die Beschreibung.
+                  {item.description}
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button asChild size="sm" variant="outline">
-                  <Link href="#">Lesen</Link>
+                <Button asChild size="sm">
+                  <Link href={item.url}>Lesen</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -244,20 +169,12 @@ function BlogGrid({ posts }: { posts: PostMeta[] }) {
   );
 }
 
-// --- Page ---
-export default async function Page() {
-  const posts = await getHomePosts(); // 6 Blog + 3 Glossar
-
-  // Optionales „Featured“ (erstes Element) + Rest
-  const featured = posts[0] ?? null;
-  const rest = posts.slice(1);
-
-  const all = [featured, ...rest].filter(Boolean) as PostMeta[];
-
+/** ---------- Seite ---------- */
+export default function Page() {
   return (
     <main className="bg-white">
       <HeroBanner />
-      <BlogGrid posts={all} />
+      <BlogGrid />
     </main>
   );
 }
