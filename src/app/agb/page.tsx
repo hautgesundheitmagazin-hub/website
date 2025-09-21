@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function AgbPage() {
   return (
-    <main className="mx-auto max-w-3xl px-6 py-12 prose prose-neutral">
+    <main className="mx-auto max-w-4xl px-6 py-12 prose prose-neutral">
       <h1>Allgemeine Geschäftsbedingungen (AGB)</h1>
 
       <p>
