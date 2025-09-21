@@ -774,7 +774,7 @@ export default function Page() {
 
         <div className="mt-4">
           <p className="text-sm text-zinc-700">
-            Überprüft von: <strong>Hautsache Gesund Redaktion</strong> &ndash; Medizinjournalismus und
+            Überprüft von: <strong>Hautwissen Kontakt Redaktion</strong> &ndash; Medizinjournalismus und
             Qualitätsmanagement.
           </p>
         </div>
