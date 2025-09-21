@@ -800,7 +800,7 @@ export default function Page() {
 
         <div className="mt-4">
           <p className="text-sm text-zinc-700">
-            Überprüft von: <strong>Hautsache Gesund Redaktion</strong> – Medizinische
+            Überprüft von: <strong>Hautwissen Kompakt Redaktion</strong> – Medizinische
             Redaktion &amp; Qualitätssicherung.
           </p>
         </div>
