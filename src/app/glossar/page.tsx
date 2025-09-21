@@ -1,4 +1,4 @@
-// /src/app/blog/page.tsx
+// /src/app/glossar/page.tsx
 import fs from "node:fs/promises";
 import path from "node:path";
 import Link from "next/link";
@@ -16,7 +16,7 @@ const prettify = (s: string) =>
   s.replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
 
 async function getLatestPosts(limit?: number): Promise<PostMeta[]> {
-  const blogDir = path.join(process.cwd(), "src", "app", "blog");
+  const blogDir = path.join(process.cwd(), "src", "app", "glossar");
   const entries = await fs.readdir(blogDir, { withFileTypes: true });
 
   const slugs = entries.filter(e => e.isDirectory()).map(e => e.name);
