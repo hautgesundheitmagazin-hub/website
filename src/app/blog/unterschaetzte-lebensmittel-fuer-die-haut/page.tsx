@@ -96,7 +96,7 @@ export default function Page() {
             Du willst Unreinheiten reduzieren, Rötungen beruhigen und Deine
             Hautbarriere stärken&thinsp;&ndash;&thinsp;ohne komplizierte
             Routinen&quest; Hier sind drei Alltagslebensmittel, die oft
-            übersehen werden&colon; Leinsamen, Tomatenmark und Sauerkraut.
+            übersehen werden; Leinsamen, Tomatenmark und Sauerkraut.
             Erfahre, wie sie wirken, wie viel Sinn macht &amp; wie Du sie
             lecker in Deinen Tag integrierst.
           </p>
@@ -123,7 +123,7 @@ export default function Page() {
               </picture>
             </div>
             <figcaption className="sr-only">
-              Drei alltagstaugliche Lebensmittel für gesunde Haut&colon; Leinsamen, Tomatenmark und Sauerkraut.
+              Drei alltagstaugliche Lebensmittel für gesunde Haut; Leinsamen, Tomatenmark und Sauerkraut.
             </figcaption>
           </figure>
 
@@ -131,7 +131,7 @@ export default function Page() {
           <div className="mt-6 flex items-center gap-3 text-sm text-zinc-700">
             <img
               src={author.image}
-              alt="Autorin&colon; Jennifer Krause"
+              alt="Autorin; Jennifer Krause"
               className="w-10 h-10 rounded-full object-cover"
               loading="lazy"
             />
@@ -149,31 +149,31 @@ export default function Page() {
           </h2>
           <ul className="list-disc ml-5 space-y-2 text-zinc-800">
             <li>
-              <strong>Leinsamen</strong>&colon; reich an ALA&lpar;Omega&ndash;3&rpar; und
-              Lignanen&semi; unterstützen eine ruhige, weniger entzündliche Haut und
+              <strong>Leinsamen</strong>; reich an ALA;Omega&ndash;3; und
+              Lignanen; unterstützen eine ruhige, weniger entzündliche Haut und
               eine stabile Hautbarriere. 1&ndash;2 EL geschrotet täglich sind
               praxisnah.
             </li>
             <li>
-              <strong>Tomatenmark</strong>&colon; konzentriertes Lycopin wirkt als
-              innerer UV&ndash;Co&ndash;Schutz &lpar;kein Ersatz für Sonnencreme&rpar; und kann
-              Rötungen nach UV mindern&semi; 1&ndash;2 EL in Soßen oder aufs Brot genügen
+              <strong>Tomatenmark</strong>; konzentriertes Lycopin wirkt als
+              innerer UV&ndash;Co&ndash;Schutz ;kein Ersatz für Sonnencreme; und kann
+              Rötungen nach UV mindern; 1&ndash;2 EL in Soßen oder aufs Brot genügen
               für den Start.
             </li>
             <li>
-              <strong>Sauerkraut</strong>&colon; milchsauer fermentiert, liefert
-              probiotische Kulturen und Vitamin&nbsp;C&semi; unterstützt den Darm&ndash;Haut&ndash;Axis
+              <strong>Sauerkraut</strong>; milchsauer fermentiert, liefert
+              probiotische Kulturen und Vitamin&nbsp;C; unterstützt den Darm&ndash;Haut&ndash;Axis
               und kann Unreinheiten positiv beeinflussen.
             </li>
             <li>
-              <strong>Ernährungs&ndash;Realität</strong>&colon; Regelmäßigkeit schlägt
-              Perfektion&semi; baue die drei in Mahlzeiten ein &lpar;Rezeptideen unten&rpar;,
+              <strong>Ernährungs&ndash;Realität</strong>; Regelmäßigkeit schlägt
+              Perfektion; baue die drei in Mahlzeiten ein ;Rezeptideen unten;,
               trinke ausreichend Wasser und kombiniere mit einer sanften Routine.
             </li>
             <li>
-              <strong>Sicherheit</strong>&colon; Allergien, Medikamente &amp; Unverträglichkeiten
-              beachten&semi; Tomatenmark und fermentierte Produkte sind Ergänzungen,
-              keine Therapien&semi; bei Hauterkrankungen bitte ärztlich begleiten lassen.
+              <strong>Sicherheit</strong>; Allergien, Medikamente &amp; Unverträglichkeiten
+              beachten; Tomatenmark und fermentierte Produkte sind Ergänzungen,
+              keine Therapien; bei Hauterkrankungen bitte ärztlich begleiten lassen.
             </li>
           </ul>
         </aside>
@@ -206,7 +206,7 @@ export default function Page() {
                 className={`hover:underline ${accent} font-medium`}
                 href="#leinsamen"
               >
-                Leinsamen&colon; Pflanzliche Omega&ndash;3 &amp; Lignane für weniger
+                Leinsamen; Pflanzliche Omega&ndash;3 &amp; Lignane für weniger
                 Entzündung
               </a>
             </li>
@@ -215,7 +215,7 @@ export default function Page() {
                 className={`hover:underline ${accent} font-medium`}
                 href="#tomatenmark"
               >
-                Tomatenmark&colon; Lycopin als innerer Anti&ndash;Rötungs&ndash;Support
+                Tomatenmark; Lycopin als innerer Anti&ndash;Rötungs&ndash;Support
               </a>
             </li>
             <li>
@@ -223,7 +223,7 @@ export default function Page() {
                 className={`hover:underline ${accent} font-medium`}
                 href="#sauerkraut"
               >
-                Sauerkraut&colon; Fermente für den Darm&ndash;Haut&ndash;Axis
+                Sauerkraut; Fermente für den Darm&ndash;Haut&ndash;Axis
               </a>
             </li>
             <li>
@@ -231,7 +231,7 @@ export default function Page() {
                 className={`hover:underline ${accent} font-medium`}
                 href="#alltag"
               >
-                Von der Theorie in den Alltag&colon; Portionsgrößen &amp; Rezepte
+                Von der Theorie in den Alltag; Portionsgrößen &amp; Rezepte
               </a>
             </li>
             <li>
@@ -259,24 +259,24 @@ export default function Page() {
             Warum beeinflusst Ernährung Deine Haut so stark&quest;
           </h2>
           <p className="leading-relaxed">
-            Deine Haut ist ein Stoffwechsel&ndash;Powerhouse&colon; Sie erneuert sich
+            Deine Haut ist ein Stoffwechsel&ndash;Powerhouse; Sie erneuert sich
             ständig, braucht Baustoffe &amp; Signalmoleküle und reagiert sensibel
             auf Entzündungen. Drei Mechanismen machen Ernährung für die Haut
-            so wichtig&colon; &lpar;1&rpar; <em>Antioxidativer Schutz</em> gegen
-            UV&ndash;Stress&semi; &lpar;2&rpar; <em>Entzündungsbalance</em> über Fettsäuren
-            und sekundäre Pflanzenstoffe&semi; &lpar;3&rpar; die <em>Darm&ndash;Haut&ndash;Verbindung</em>,
+            so wichtig; ;1; <em>Antioxidativer Schutz</em> gegen
+            UV&ndash;Stress; ;2; <em>Entzündungsbalance</em> über Fettsäuren
+            und sekundäre Pflanzenstoffe; ;3; die <em>Darm&ndash;Haut&ndash;Verbindung</em>,
             bei der Mikroben Metabolite bilden, die bis in Deine Haut wirken.
           </p>
 
           <div className="mt-5 rounded-2xl border border-zinc-200 p-5 bg-white">
             <h3 className="text-lg font-semibold mb-2">
-              Mini&ndash;Checkliste&colon; Woran sehe ich, dass Essen meine Haut triggert&quest;
+              Mini&ndash;Checkliste; Woran sehe ich, dass Essen meine Haut triggert&quest;
             </h3>
             <ul className="list-disc ml-5">
               <li>häufige Rötungen nach Sonne oder Stress</li>
               <li>trockene, gespannte Haut trotz Pflege</li>
               <li>pickeliger Schub nach sehr süßen oder fettigen Mahlzeiten</li>
-              <li>Blähbauch&sol;Unwohlsein &amp; zeitgleich mehr Unreinheiten</li>
+              <li>Blähbauch;Unwohlsein &amp; zeitgleich mehr Unreinheiten</li>
             </ul>
           </div>
         </section>
@@ -289,24 +289,24 @@ export default function Page() {
           <div className="grid md:grid-cols-3 gap-4">
             <div className="rounded-2xl border border-zinc-200 p-4">
               <h3 className="text-base font-semibold mb-1">
-                Leinsamen &lpar;geschrotet&rpar;
+                Leinsamen ;geschrotet;
               </h3>
               <p className="text-sm">
-                Quelle für ALA&lpar;Omega&ndash;3&rpar; und Lignane&semi; unterstützen
+                Quelle für ALA;Omega&ndash;3; und Lignane; unterstützen
                 Entzündungsbalance und Hautbarriere.
               </p>
             </div>
             <div className="rounded-2xl border border-zinc-200 p-4">
               <h3 className="text-base font-semibold mb-1">Tomatenmark</h3>
               <p className="text-sm">
-                Lycopin&ndash;Konzentration hoch&semi; Studien zeigen milde
-                Photoprotektion von innen &lpar;ergänzend zu SPF&rpar;.
+                Lycopin&ndash;Konzentration hoch; Studien zeigen milde
+                Photoprotektion von innen ;ergänzend zu SPF;.
               </p>
             </div>
             <div className="rounded-2xl border border-zinc-200 p-4">
               <h3 className="text-base font-semibold mb-1">Sauerkraut</h3>
               <p className="text-sm">
-                Fermentiert&semi; liefert lebende Kulturen &amp; Vitamin&nbsp;C und
+                Fermentiert; liefert lebende Kulturen &amp; Vitamin&nbsp;C und
                 füttert den Darm&ndash;Haut&ndash;Axis.
               </p>
             </div>
@@ -316,7 +316,7 @@ export default function Page() {
           <figure className="mt-6 rounded-2xl border-l-4 border-emerald-600 bg-emerald-50 p-5">
             <blockquote className="text-lg font-medium">
               „Kleine, regelmäßige Ernährungsimpulse wie Leinsamen,
-              Tomatenmark und Fermente sind realistische Hebel&colon; Sie beeinflussen
+              Tomatenmark und Fermente sind realistische Hebel; Sie beeinflussen
               Entzündung, Antioxidantienstatus und das Mikrobiom&thinsp;&ndash;&thinsp;alles
               Faktoren, die sich in der Haut zeigen.“
             </blockquote>
@@ -329,16 +329,16 @@ export default function Page() {
 
         <section id="leinsamen" className="mt-10">
           <h2 className="text-2xl font-bold mb-2">
-            Leinsamen&colon; Pflanzliche Omega&ndash;3 &amp; Lignane für eine ruhige, klare
+            Leinsamen; Pflanzliche Omega&ndash;3 &amp; Lignane für eine ruhige, klare
             Haut
           </h2>
           <p>
-            Leinsamen liefern Alpha&ndash;Linolensäure &lpar;ALA&rpar;, eine Omega&ndash;3&ndash;Fettsäure,
+            Leinsamen liefern Alpha&ndash;Linolensäure ;ALA;, eine Omega&ndash;3&ndash;Fettsäure,
             sowie Lignane. ALA kann im Körper zu EPA&amp;DHA umgewandelt werden
-            &lpar;begrenzte Quote, dennoch physiologisch relevant&rpar; und wirkt als
+            ;begrenzte Quote, dennoch physiologisch relevant; und wirkt als
             Gegenspieler proentzündlicher Mediatoren. In Beobachtungs&ndash; und
             Interventionsstudien sind niedrige Omega&ndash;3&ndash;Spiegel mit stärkerer
-            Akne&ndash;Aktivität assoziiert&semi; eine deutsche Kohorte fand bei vielen
+            Akne&ndash;Aktivität assoziiert; eine deutsche Kohorte fand bei vielen
             Betroffenen einen messbaren Omega&ndash;3&ndash;Mangel. Diese Daten sprechen
             dafür, die Omega&ndash;3&ndash;Zufuhr über die Ernährung zu sichern.
           </p>
@@ -354,23 +354,23 @@ export default function Page() {
             <div className="rounded-2xl border border-zinc-200 p-4">
               <h3 className="text-base font-semibold mb-1">So viel</h3>
               <p className="text-sm">
-                1&ndash;2 EL <strong>geschrotet</strong> täglich &lpar;z.&nbsp;B. im Porridge,
-                Joghurt, Salat&rpar;. Immer mit Flüssigkeit und besser frisch
+                1&ndash;2 EL <strong>geschrotet</strong> täglich ;z.&nbsp;B. im Porridge,
+                Joghurt, Salat;. Immer mit Flüssigkeit und besser frisch
                 schroten.
               </p>
             </div>
             <div className="rounded-2xl border border-zinc-200 p-4">
               <h3 className="text-base font-semibold mb-1">Praxis</h3>
               <p className="text-sm">
-                Mit Eiweiß&plus;Obst kombinieren &lpar;stabiler Blutzucker&rpar;&semi; bei
+                Mit Eiweiß&plus;Obst kombinieren ;stabiler Blutzucker;; bei
                 empfindlichem Darm Menge langsam steigern.
               </p>
             </div>
           </div>
 
           <aside className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4">
-            <strong>Hinweis</strong>&colon; ALA ist nicht identisch mit marinem
-            Omega&ndash;3&semi; Wirkung erfolgt primär über Entzündungsmodulation und
+            <strong>Hinweis</strong>; ALA ist nicht identisch mit marinem
+            Omega&ndash;3; Wirkung erfolgt primär über Entzündungsmodulation und
             Barriere&ndash;Lipide. Bei bestehenden Hauterkrankungen stets ärztlich
             begleiten lassen.
           </aside>
@@ -378,17 +378,17 @@ export default function Page() {
 
         <section id="tomatenmark" className="mt-10">
           <h2 className="text-2xl font-bold mb-2">
-            Tomatenmark&colon; Lycopin als innerer Anti&ndash;Rötungs&ndash; und
+            Tomatenmark; Lycopin als innerer Anti&ndash;Rötungs&ndash; und
             Photoprotektions&ndash;Support
           </h2>
           <p>
             Tomatenmark ist eine der konzentriertesten Lycopin&ndash;Quellen. Mehrere
-            Humanstudien zeigen&colon; Eine regelmäßige Aufnahme lycopinreicher
+            Humanstudien zeigen; Eine regelmäßige Aufnahme lycopinreicher
             Tomatenprodukte erhöht den Erythem&ndash;Schwellenwert und kann UV&ndash;bedingte
             Rötungen mildern. Berühmt ist die Intervention mit rund 40&nbsp;g
-            Tomatenmark täglich &lpar;≈16&nbsp;mg Lycopin&rpar;, die nach etwa 10 Wochen
-            einen <em>milden</em> inneren Schutz &lpar;entspricht grob SPF&nbsp;2–3&rpar;
-            zeigte. Wichtig&colon; Das ersetzt keine Sonnencreme&semi; es ist ein
+            Tomatenmark täglich ;≈16&nbsp;mg Lycopin;, die nach etwa 10 Wochen
+            einen <em>milden</em> inneren Schutz ;entspricht grob SPF&nbsp;2–3;
+            zeigte. Wichtig; Das ersetzt keine Sonnencreme; es ist ein
             additiver Basisschutz.
           </p>
 
@@ -398,16 +398,16 @@ export default function Page() {
               <ul className="text-sm list-disc ml-5">
                 <li>1–2 EL täglich in Soßen, Suppen, Dips oder aufs Brot</li>
                 <li>
-                  Fettquelle &lpar;Olivenöl&rpar; erhöht Lycopin&ndash;Aufnahme spürbar
+                  Fettquelle ;Olivenöl; erhöht Lycopin&ndash;Aufnahme spürbar
                 </li>
-                <li>Langfristig denken&colon; Effekt baut sich über Wochen auf</li>
+                <li>Langfristig denken; Effekt baut sich über Wochen auf</li>
               </ul>
             </div>
             <div className="rounded-2xl border border-zinc-200 p-4">
               <h3 className="text-base font-semibold mb-1">Extra</h3>
               <p className="text-sm">
                 Gekochte Tomatenprodukte haben bioverfügbareres Lycopin als rohe
-                Tomaten&semi; Tomatenmark ist daher besonders effizient im Alltag.
+                Tomaten; Tomatenmark ist daher besonders effizient im Alltag.
               </p>
             </div>
           </div>
@@ -415,7 +415,7 @@ export default function Page() {
 
         <section id="sauerkraut" className="mt-10">
           <h2 className="text-2xl font-bold mb-2">
-            Sauerkraut&colon; Fermente, die den Darm&ndash;Haut&ndash;Axis füttern
+            Sauerkraut; Fermente, die den Darm&ndash;Haut&ndash;Axis füttern
           </h2>
           <p>
             Fermentierte Lebensmittel wie <strong>nicht erhitztes</strong>{" "}
@@ -423,9 +423,9 @@ export default function Page() {
             Darmmikrobiom diverser machen können. Über den sogenannten
             Darm&ndash;Haut&ndash;Axis beeinflussen diese Metabolite das Immunsystem und
             entzündliche Prozesse in der Haut. Aktuelle Reviews und klinische
-            Studien zeigen&colon; Oral oder topisch eingesetzte Probiotika können
+            Studien zeigen; Oral oder topisch eingesetzte Probiotika können
             Akne&ndash;Schwere, Läsionszahlen und Hautfeuchte verbessern. Bei
-            Lebensmitteln gilt&colon; Sie sind kein Medikament, aber ein sinnvoller,
+            Lebensmitteln gilt; Sie sind kein Medikament, aber ein sinnvoller,
             risikoarmer Baustein.
           </p>
 
@@ -433,21 +433,21 @@ export default function Page() {
             <div className="rounded-2xl border border-zinc-200 p-4">
               <h3 className="text-base font-semibold mb-1">Benefit</h3>
               <p className="text-sm">
-                Unterstützt Darmbarriere &amp; Immunbalance&semi; kann reaktive Haut
+                Unterstützt Darmbarriere &amp; Immunbalance; kann reaktive Haut
                 beruhigen und die Talgbalance positiv beeinflussen.
               </p>
             </div>
             <div className="rounded-2xl border border-zinc-200 p-4">
               <h3 className="text-base font-semibold mb-1">So viel</h3>
               <p className="text-sm">
-                2–4 EL zu warmen Speisen &lpar;nicht mitkochen&rpar; oder als Beilage zu
-                Bowls&sol;Brot&semi; auf <strong>roh, unpasteurisiert</strong> achten.
+                2–4 EL zu warmen Speisen ;nicht mitkochen; oder als Beilage zu
+                Bowls;Brot; auf <strong>roh, unpasteurisiert</strong> achten.
               </p>
             </div>
             <div className="rounded-2xl border border-zinc-200 p-4">
               <h3 className="text-base font-semibold mb-1">Praxis</h3>
               <p className="text-sm">
-                Langsam steigern &lpar;Gasbildung normal&rpar;&semi; bei Histamin&ndash;Themen
+                Langsam steigern ;Gasbildung normal;; bei Histamin&ndash;Themen
                 Verträglichkeit testen und ggf. Alternativen wie Joghurt oder
                 Kefir wählen.
               </p>
@@ -457,44 +457,44 @@ export default function Page() {
 
         <section id="alltag" className="mt-10">
           <h2 className="text-2xl font-bold mb-2">
-            Von der Theorie in den Alltag&colon; Portionsgrößen, Timing &amp; simple
+            Von der Theorie in den Alltag; Portionsgrößen, Timing &amp; simple
             Rezepte
           </h2>
 
           <div className="grid md:grid-cols-3 gap-4">
             <div className="rounded-2xl border border-zinc-200 p-4">
               <h3 className="text-base font-semibold mb-1">
-                Frühstück &lpar;5&nbsp;Min.&rpar;
+                Frühstück ;5&nbsp;Min.;
               </h3>
               <p className="text-sm">
-                Skyr&sol;Joghurt mit 1 EL frisch geschroteten Leinsamen, 1 TL
+                Skyr;Joghurt mit 1 EL frisch geschroteten Leinsamen, 1 TL
                 Honig, Beeren &amp; etwas Zimt. Dazu Wasser oder ungesüßter Tee.
               </p>
             </div>
             <div className="rounded-2xl border border-zinc-200 p-4">
               <h3 className="text-base font-semibold mb-1">
-                Lunch &lpar;10&nbsp;Min.&rpar;
+                Lunch ;10&nbsp;Min.;
               </h3>
               <p className="text-sm">
-                Vollkornbrot mit Tomatenmark&plus;Olivenöl, Mozzarella, Pfeffer&sol;Salz,
-                Rucola. Beilage&colon; 3 EL Sauerkraut, nicht erhitzt.
+                Vollkornbrot mit Tomatenmark&plus;Olivenöl, Mozzarella, Pfeffer;Salz,
+                Rucola. Beilage; 3 EL Sauerkraut, nicht erhitzt.
               </p>
             </div>
             <div className="rounded-2xl border border-zinc-200 p-4">
               <h3 className="text-base font-semibold mb-1">
-                Abendessen &lpar;15&nbsp;Min.&rpar;
+                Abendessen ;15&nbsp;Min.;
               </h3>
               <p className="text-sm">
-                Schnelle Gemüsesuppe&colon; Zwiebel&plus;Knoblauch anschwitzen,
+                Schnelle Gemüsesuppe; Zwiebel&plus;Knoblauch anschwitzen,
                 Tomatenmark kurz mitrösten, Gemüsebrühe und TK&ndash;Gemüse, 8&nbsp;Min.
-                köcheln&semi; mit 1 EL Leinsamenöl &lpar;nicht mitkochen&rpar; servieren.
+                köcheln; mit 1 EL Leinsamenöl ;nicht mitkochen; servieren.
               </p>
             </div>
           </div>
 
           <div className="mt-5 rounded-2xl border border-zinc-200 p-5 bg-white">
             <h3 className="text-lg font-semibold mb-2">
-              2&ndash;zu&ndash;1 Gegenüberstellung&colon; Start vs. Optimierung
+              2&ndash;zu&ndash;1 Gegenüberstellung; Start vs. Optimierung
             </h3>
             <div className="grid md:grid-cols-3 gap-4 text-sm">
               <div className="md:col-span-2 rounded-2xl border border-zinc-200 p-4">
@@ -510,7 +510,7 @@ export default function Page() {
                 <ul className="list-disc ml-5">
                   <li>auf 2 EL Leinsamen steigern</li>
                   <li>täglich 1–2 EL Tomatenmark</li>
-                  <li>Fermente variieren &lpar;Kimchi, Kefir, Joghurt&rpar;</li>
+                  <li>Fermente variieren ;Kimchi, Kefir, Joghurt;</li>
                 </ul>
               </div>
             </div>
@@ -526,8 +526,8 @@ export default function Page() {
                 Ersetzt Tomatenmark meine Sonnencreme&quest;
               </h3>
               <p>
-                Nein&colon; Lycopin kann einen milden Grundschutz von innen
-                unterstützen &lpar;über Wochen&rpar;, aber Sonnencreme mit passendem SPF,
+                Nein; Lycopin kann einen milden Grundschutz von innen
+                unterstützen ;über Wochen;, aber Sonnencreme mit passendem SPF,
                 Schatten &amp; Kleidung bleiben Pflicht.
               </p>
             </div>
@@ -546,7 +546,7 @@ export default function Page() {
                 Reicht Joghurt statt Sauerkraut&quest;
               </h3>
               <p>
-                Joghurt liefert ebenfalls lebende Kulturen &lpar;je nach Produkt&rpar;.
+                Joghurt liefert ebenfalls lebende Kulturen ;je nach Produkt;.
                 Sauerkraut bringt zusätzliche pflanzliche Ballaststoffe und
                 organische Säuren mit. Abwechslung ist ideal.
               </p>
@@ -557,7 +557,7 @@ export default function Page() {
               </h3>
               <p>
                 Bei Lycopin werden Effekte typischerweise nach 4–10 Wochen
-                sichtbar&semi; beim Darm&ndash;Haut&ndash;Axis kann es ebenfalls einige Wochen
+                sichtbar; beim Darm&ndash;Haut&ndash;Axis kann es ebenfalls einige Wochen
                 dauern. Wichtig ist Konstanz.
               </p>
             </div>
@@ -566,9 +566,9 @@ export default function Page() {
                 Gibt es Situationen, in denen ich vorsichtig sein sollte&quest;
               </h3>
               <p>
-                Ja&colon; Bei Allergien&sol;Unverträglichkeiten, Histamin&ndash;Themen
-                &lpar;Fermente&rpar;, Gerinnungshemmern &lpar;hohe Omega&ndash;3&ndash;Zufuhr&rpar; oder
-                Reflux &lpar;Tomatenprodukte&rpar; bitte individuell prüfen und medizinisch
+                Ja; Bei Allergien;Unverträglichkeiten, Histamin&ndash;Themen
+                ;Fermente;, Gerinnungshemmern ;hohe Omega&ndash;3&ndash;Zufuhr; oder
+                Reflux ;Tomatenprodukte; bitte individuell prüfen und medizinisch
                 begleiten.
               </p>
             </div>
@@ -771,14 +771,14 @@ export default function Page() {
                 <tr className="border-t border-zinc-200">
                   <td className="p-3 font-medium text-zinc-900">ALA</td>
                   <td className="p-3 text-zinc-700">
-                    Alpha&ndash;Linolensäure&colon; pflanzliche Omega&ndash;3&ndash;Fettsäure aus
+                    Alpha&ndash;Linolensäure; pflanzliche Omega&ndash;3&ndash;Fettsäure aus
                     z.&nbsp;B. Leinsamen, die entzündungsmodulierend wirkt.
                   </td>
                 </tr>
                 <tr className="border-t border-zinc-200">
                   <td className="p-3 font-medium text-zinc-900">Lycopin</td>
                   <td className="p-3 text-zinc-700">
-                    Rotes Carotinoid aus Tomaten&semi; antioxidativ, unterstützt milden
+                    Rotes Carotinoid aus Tomaten; antioxidativ, unterstützt milden
                     UV&ndash;Schutz von innen bei regelmäßiger Aufnahme.
                   </td>
                 </tr>
@@ -792,14 +792,14 @@ export default function Page() {
                 <tr className="border-t border-zinc-200">
                   <td className="p-3 font-medium text-zinc-900">Fermentation</td>
                   <td className="p-3 text-zinc-700">
-                    Verarbeitung durch Mikroorganismen&semi; erzeugt lebende Kulturen,
+                    Verarbeitung durch Mikroorganismen; erzeugt lebende Kulturen,
                     organische Säuren und teils mehr Bioverfügbarkeit.
                   </td>
                 </tr>
                 <tr className="border-t border-zinc-200">
                   <td className="p-3 font-medium text-zinc-900">Photoprotektion</td>
                   <td className="p-3 text-zinc-700">
-                    Schutz vor UV&ndash;bedingter Hautschädigung&semi; basiert außen auf SPF
+                    Schutz vor UV&ndash;bedingter Hautschädigung; basiert außen auf SPF
                     &amp; Kleidung und innen z.&nbsp;B. auf Antioxidantien.
                   </td>
                 </tr>
@@ -821,7 +821,7 @@ export default function Page() {
             <div>
               <div className="font-semibold">Jennifer Krause</div>
               <div className="text-sm text-zinc-700">
-                Expertin für Hautgesundheit&semi; Schwerpunkte&colon; Barriere, Ernährung,
+                Expertin für Hautgesundheit; Schwerpunkte; Barriere, Ernährung,
                 Mikrobiom.
               </div>
             </div>
@@ -830,7 +830,7 @@ export default function Page() {
           <div className="mt-4 flex items-center gap-3">
             <span className={`w-2 h-2 rounded-full ${accent}`} aria-hidden="true" />
             <p className="text-sm text-zinc-700">
-              Überprüft von&colon;{" "}
+              Überprüft von;{" "}
               <strong>Hautsache Gesund Redaktion</strong> &ndash; Medizin&ndash; und
               Ernährungsrecherche.
             </p>
@@ -844,8 +844,8 @@ export default function Page() {
           </h2>
           <ul className="list-disc ml-5 space-y-2 text-sm">
             <li>
-              Zhang X. et&nbsp;al.&colon; The effect of tomato and lycopene on skin
-              photodamage &amp; photoaging &lpar;Review&rpar;. PubMed&colon;{" "}
+              Zhang X. et&nbsp;al.; The effect of tomato and lycopene on skin
+              photodamage &amp; photoaging ;Review;. PubMed;{" "}
               <a
                 href="https://pubmed.ncbi.nlm.nih.gov/36606553/"
                 target="_blank"
@@ -855,9 +855,9 @@ export default function Page() {
               </a>
             </li>
             <li>
-              Stahl W. et&nbsp;al.&colon; Dietary Tomato Paste Protects Against
+              Stahl W. et&nbsp;al.; Dietary Tomato Paste Protects Against
               Ultraviolet Light&ndash;Induced Erythema in Humans. Journal of
-              Nutrition &lpar;2001&rpar;. PDF&colon;{" "}
+              Nutrition ;2001;. PDF;{" "}
               <a
                 href="https://jn.nutrition.org/article/S0022-3166%2822%2913819-8/pdf"
                 target="_blank"
@@ -867,8 +867,8 @@ export default function Page() {
               </a>
             </li>
             <li>
-              Grether&ndash;Beck S. et&nbsp;al.&colon; Molecular evidence that oral
-              supplementation with lycopene protects human skin. BJD &lpar;2017&rpar;&colon;{" "}
+              Grether&ndash;Beck S. et&nbsp;al.; Molecular evidence that oral
+              supplementation with lycopene protects human skin. BJD ;2017;;{" "}
               <a
                 href="https://academic.oup.com/bjd/article/176/5/1231/6661085"
                 target="_blank"
@@ -878,8 +878,8 @@ export default function Page() {
               </a>
             </li>
             <li>
-              Gürtler A. et&nbsp;al.&colon; Deficit of Omega&ndash;3 Fatty Acids in Acne
-              Patients &lpar;Pilot&rpar;. PubMed&colon;{" "}
+              Gürtler A. et&nbsp;al.; Deficit of Omega&ndash;3 Fatty Acids in Acne
+              Patients ;Pilot;. PubMed;{" "}
               <a
                 href="https://pubmed.ncbi.nlm.nih.gov/38672789/"
                 target="_blank"
@@ -887,7 +887,7 @@ export default function Page() {
               >
                 https://pubmed.ncbi.nlm.nih.gov/38672789/
               </a>{" "}
-              &ndash; Überblicksarbeit LMU&colon;{" "}
+              &ndash; Überblicksarbeit LMU;{" "}
               <a
                 href="https://edoc.ub.uni-muenchen.de/34295/2/Guertler_Anne.pdf"
                 target="_blank"
@@ -897,8 +897,8 @@ export default function Page() {
               </a>
             </li>
             <li>
-              Pullar JM. et&nbsp;al.&colon; The Roles of Vitamin C in Skin Health
-              &lpar;Review&rpar;. Nutrients &lpar;2017&rpar;&colon;{" "}
+              Pullar JM. et&nbsp;al.; The Roles of Vitamin C in Skin Health
+              ;Review;. Nutrients ;2017;;{" "}
               <a
                 href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5579659/"
                 target="_blank"
@@ -908,8 +908,8 @@ export default function Page() {
               </a>
             </li>
             <li>
-              Atefi N. et&nbsp;al.&colon; Effectiveness of Probiotic Supplementation in
-              Acne &lpar;2024 Meta&ndash;Analyse&rpar;&colon;{" "}
+              Atefi N. et&nbsp;al.; Effectiveness of Probiotic Supplementation in
+              Acne ;2024 Meta&ndash;Analyse;;{" "}
               <a
                 href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11743379/"
                 target="_blank"
@@ -919,8 +919,8 @@ export default function Page() {
               </a>
             </li>
             <li>
-              Jimenez&ndash;Sanchez M. et&nbsp;al.&colon; The gut&ndash;skin axis &lpar;2025
-              Review&rpar;&colon;{" "}
+              Jimenez&ndash;Sanchez M. et&nbsp;al.; The gut&ndash;skin axis ;2025
+              Review;;{" "}
               <a
                 href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11901370/"
                 target="_blank"
@@ -930,8 +930,8 @@ export default function Page() {
               </a>
             </li>
             <li>
-              Eguren C. et&nbsp;al.&colon; Randomized clinical trial&colon; Oral probiotic
-              mixture in acne vulgaris &lpar;2024&rpar;&colon;{" "}
+              Eguren C. et&nbsp;al.; Randomized clinical trial; Oral probiotic
+              mixture in acne vulgaris ;2024;;{" "}
               <a
                 href="https://medicaljournalssweden.se/actadv/article/view/33206/46265"
                 target="_blank"
@@ -941,8 +941,8 @@ export default function Page() {
               </a>
             </li>
             <li>
-              Thieme&colon; Sonnenbrand vorbeugen &lpar;Hinweis zur inneren
-              Photoprotektion durch Lycopin&rpar;&colon;{" "}
+              Thieme; Sonnenbrand vorbeugen ;Hinweis zur inneren
+              Photoprotektion durch Lycopin;;{" "}
               <a
                 href="https://natuerlich.thieme.de/therapieverfahren/praevention/detail/sonnenbrand-vorbeugen-7-tipps-4213"
                 target="_blank"
