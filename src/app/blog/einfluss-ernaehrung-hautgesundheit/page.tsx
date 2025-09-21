@@ -247,14 +247,14 @@ export default function Page() {
         <p className="leading-relaxed">
           Deine Haut ist ein aktives Organ mit eigener Immunabwehr,
           Blutversorgung und Barriere. Ernährung beeinflusst diese Systeme
-          täglich. Drei Wege sind für dich entscheidend&colon; erstens der{" "}
+          täglich. Drei Wege sind für dich entscheidend; erstens der{" "}
           <strong>Blutzucker- und Insulinpfad</strong>, der Entzündungen
           antreiben kann. Zweitens die <strong>Fettsäure-Zusammensetzung</strong>{" "}
           deiner Ernährung, die Entzündungsbotenstoffe moduliert und die
           Hautbarriere mit Lipiden versorgt. Drittens die{" "}
-          <strong>Darm-Haut-Achse</strong>&colon; Ballaststoffe und Polyphenole
+          <strong>Darm-Haut-Achse</strong>; Ballaststoffe und Polyphenole
           nähren deine Darmflora und können systemische Entzündungen
-          runterregeln. Das Resultat&colon; ein ruhigeres Hautbild, weniger
+          runterregeln. Das Resultat; ein ruhigeres Hautbild, weniger
           Trockenheit und ein gleichmäßigerer Teint.
         </p>
 
@@ -286,19 +286,19 @@ export default function Page() {
 
       <section id="low-gi-gegen-unreinheiten" className="mt-12">
         <h2 className="text-2xl font-bold mb-3">
-          Low-Glycemic essen gegen Unreinheiten&colon; was zeigt die Evidenz?
+          Low-Glycemic essen gegen Unreinheiten; was zeigt die Evidenz?
         </h2>
         <p>
           Studien deuten darauf hin, dass eine Ernährung mit niedriger
           glykämischer Last (Low-Glycemic) Entzündungssignale und IGF-1 senken
-          kann. Für viele bedeutet das&colon; weniger Papeln und Pusteln. Praktisch
+          kann. Für viele bedeutet das; weniger Papeln und Pusteln. Praktisch
           erreichst du das mit Vollkorn, Hülsenfrüchten, Gemüse, Obst im
           Ganzen und Eiweiß zu jeder Mahlzeit.
         </p>
 
         <div className="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
           <p className="m-0">
-            <strong>Merke</strong>&colon; Je weniger schnelle Zucker und Weißmehl,
+            <strong>Merke</strong>; Je weniger schnelle Zucker und Weißmehl,
             desto stabiler bleibt dein Blutzucker – gut für dein Hautbild.
           </p>
         </div>
@@ -354,13 +354,13 @@ export default function Page() {
 
       <section id="omega3-barriere" className="mt-12">
         <h2 className="text-2xl font-bold mb-3">
-          Omega-3 &amp; Hautbarriere bei Ekzemen&colon; was ist realistisch?
+          Omega-3 &amp; Hautbarriere bei Ekzemen; was ist realistisch?
         </h2>
         <p className="leading-relaxed">
           Bei Neurodermitis ist die Hautbarriere häufig geschwächt. Omega-3
           Fettsäuren können entzündungshemmende Mediatoren fördern. Einige
           Studien berichten über weniger Juckreiz und geringere Schweregrade,
-          andere finden keine deutliche Wirkung. Realistisch ist&colon; eine gute
+          andere finden keine deutliche Wirkung. Realistisch ist; eine gute
           Grundversorgung mit Omega-3 über Ernährung, ggf. ergänzt nach
           ärztlicher Rücksprache, kann Teil eines multimodalen Managements sein.
         </p>
@@ -369,12 +369,12 @@ export default function Page() {
           <div className="rounded-2xl border border-zinc-200 p-4">
             <h3 className="font-semibold mb-2">Quellen im Alltag</h3>
             <ul className="list-disc ml-5">
-              <li>Fetter Seefisch&colon; Lachs, Makrele, Hering</li>
+              <li>Fetter Seefisch; Lachs, Makrele, Hering</li>
               <li>
-                Pflanzlich&colon; Walnüsse, Leinsamen, Chiasamen, Algenöl
+                Pflanzlich; Walnüsse, Leinsamen, Chiasamen, Algenöl
               </li>
               <li>
-                Praktisch&colon; 2 bis 3 Fischmahlzeiten pro Woche oder
+                Praktisch; 2 bis 3 Fischmahlzeiten pro Woche oder
                 Algenöl-Kapseln nach ärztlicher Rücksprache
               </li>
             </ul>
@@ -387,7 +387,7 @@ export default function Page() {
                 Bei Allergien oder Erkrankungen bitte ärztlich abklären
               </li>
               <li>
-                Erwartungsmanagement&colon; Wirkung kann individuell variieren
+                Erwartungsmanagement; Wirkung kann individuell variieren
               </li>
             </ul>
           </div>
@@ -396,7 +396,7 @@ export default function Page() {
 
       <section id="pflanzenbetont-anti-aging" className="mt-12">
         <h2 className="text-2xl font-bold mb-3">
-          Pflanzenbetont essen &amp; Anti-Aging&colon; Antioxidantien, Polyphenole,
+          Pflanzenbetont essen &amp; Anti-Aging; Antioxidantien, Polyphenole,
           Ballaststoffe
         </h2>
         <p className="leading-relaxed">
@@ -410,7 +410,7 @@ export default function Page() {
 
         <div className="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
           <p className="m-0">
-            <strong>Tipp</strong>&colon; Iss bunt nach dem Motto Regenbogen. Je
+            <strong>Tipp</strong>; Iss bunt nach dem Motto Regenbogen. Je
             mehr Farben auf dem Teller, desto breiter dein Schutz durch
             sekundäre Pflanzenstoffe.
           </p>
@@ -481,15 +481,15 @@ export default function Page() {
 
       <section id="praxis-7-regeln" className="mt-12">
         <h2 className="text-2xl font-bold mb-3">
-          Praxis&colon; 7 einfache Ess-Regeln für gesunde Haut
+          Praxis; 7 einfache Ess-Regeln für gesunde Haut
         </h2>
         <ol className="list-decimal ml-5 space-y-2">
           <li>
-            Baue pro Mahlzeit eine eiweißreiche Komponente ein&colon; Joghurt
+            Baue pro Mahlzeit eine eiweißreiche Komponente ein; Joghurt
             natur, Hüttenkäse, Tofu, Fisch, Eier oder Hülsenfrüchte.
           </li>
           <li>
-            Wähle komplexe Kohlenhydrate&colon; Vollkorn, Quinoa, Buchweizen,
+            Wähle komplexe Kohlenhydrate; Vollkorn, Quinoa, Buchweizen,
             Linsen, Kichererbsen.
           </li>
           <li>
@@ -504,11 +504,11 @@ export default function Page() {
             Tee oder infused Water.
           </li>
           <li>
-            Achte auf gesunde Fette&colon; Olivenöl, Nüsse, Saaten. Spare bei
+            Achte auf gesunde Fette; Olivenöl, Nüsse, Saaten. Spare bei
             hoch erhitzten, stark verarbeiteten Fetten.
           </li>
           <li>
-            Nutze ein hautfreundliches Tagesmuster&colon; regelmäßige Mahlzeiten,
+            Nutze ein hautfreundliches Tagesmuster; regelmäßige Mahlzeiten,
             ausreichend Schlaf, moderater Stress – dein Hormonhaushalt dankt es
             dir.
           </li>
@@ -817,7 +817,7 @@ export default function Page() {
           <div>
             <div className="font-semibold">Jennifer Krause</div>
             <div className="text-sm text-zinc-700">
-              Expertin für Hautgesundheit. Schwerpunkte&colon; Akne, Ekzem,
+              Expertin für Hautgesundheit. Schwerpunkte; Akne, Ekzem,
               Hautbarriere, Ernährung.
             </div>
           </div>
@@ -825,7 +825,7 @@ export default function Page() {
 
         <div className="mt-4">
           <p className="text-sm text-zinc-700">
-            Überprüft von&colon;{" "}
+            Überprüft von;{" "}
             <strong>Hautsache Gesund Redaktion</strong> – Medizinisch-wissenschaftliche
             Qualitätssicherung.
           </p>
@@ -837,7 +837,7 @@ export default function Page() {
         <h2 className="text-2xl font-bold mb-3">Quellen &amp; weiterführende Studien</h2>
         <ul className="list-disc ml-5 space-y-2 text-sm">
           <li>
-            Ahmed IA et&nbsp;al. Diet and skin health&colon; The good and the bad.
+            Ahmed IA et&nbsp;al. Diet and skin health; The good and the bad.
             Nutrition. 2024.{" "}
             <a
               href="https://www.sciencedirect.com/science/article/abs/pii/S0899900723003787"
@@ -859,7 +859,7 @@ export default function Page() {
             </a>
           </li>
           <li>
-            Assaf S et&nbsp;al. Nutritional Dermatology&colon; Optimizing Dietary
+            Assaf S et&nbsp;al. Nutritional Dermatology; Optimizing Dietary
             Choices for Skin Health. 2024.{" "}
             <a
               href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11723311/"
@@ -892,7 +892,7 @@ export default function Page() {
             </a>
           </li>
           <li>
-            Meixiong J et&nbsp;al. Diet and acne&colon; A systematic review. JAAD
+            Meixiong J et&nbsp;al. Diet and acne; A systematic review. JAAD
             International. 2022.{" "}
             <a
               href="https://www.jaadinternational.org/article/S2666-3287(22)00028-1/fulltext"
