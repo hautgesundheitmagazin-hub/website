@@ -8,8 +8,6 @@ import { Button } from "@/components/ui/button";
 
 // Diese Page soll NICHT statisch gecacht werden.
 export const dynamic = "force-dynamic";
-// Wichtig: Node.js-Runtime für fs()
-export const runtime = "nodejs";
 
 // --- Lokale Typen ---
 type BlogPost = {
@@ -38,11 +36,14 @@ function sortByDateDesc<T extends { date: string }>(posts: T[]) {
   });
 }
 
-// ---- Blog: 6 neueste ----
-async function getLatestBlog(): Promise<BlogPost[]> {
-  const blogDir = path.join(process.cwd(), "src", "app", "blog");
-  const entries = await fs.readdir(blogDir, { withFileTypes: true }).catch(() => []);
-  const slugs = entries.filter(e => e.isDirectory()).map(e => e.name);
+async function getLatestFromDir(
+  baseDir: string,
+  importPrefix: string,
+  limit: number
+): Promise<Array<{ slug: string; title: string; excerpt: string; date: string; image?: string }>> {
+  const dir = path.join(process.cwd(), "src", "app", baseDir);
+  const entries = await fs.readdir(dir, { withFileTypes: true });
+  const slugs = entries.filter((e) => e.isDirectory()).map((e) => e.name);
 
   const metas = await Promise.all(
     slugs.map(async (slug) => {
@@ -52,11 +53,10 @@ async function getLatestBlog(): Promise<BlogPost[]> {
       let image: string | undefined;
 
       try {
-        // KEIN variables Prefix – statischer Kontext ist wichtig!
+        // @ts-ignore - dynamic import at runtime
+        const maybeMeta = await import(/* webpackMode: "lazy" */ `${importPrefix}/${slug}/meta`).catch(() => null);
         // @ts-ignore
-        const maybeMeta = await import(/* webpackMode: "lazy" */ `./blog/${slug}/meta`).catch(() => null);
-        // @ts-ignore
-        const mod = maybeMeta ?? (await import(/* webpackMode: "lazy" */ `./blog/${slug}/page`).catch(() => null));
+        const mod = maybeMeta ?? (await import(/* webpackMode: "lazy" */ `${importPrefix}/${slug}/page`).catch(() => null));
 
         // @ts-ignore
         const pm = mod?.postMeta ?? {};
@@ -64,8 +64,13 @@ async function getLatestBlog(): Promise<BlogPost[]> {
         const md = mod?.metadata ?? {};
         title = pm.title ?? md.title ?? title;
         excerpt = pm.excerpt ?? pm.description ?? md.description ?? "";
-        date = pm.date ?? pm.published ?? md?.openGraph?.publishedTime ?? null;
+        date =
+          pm.date ??
+          pm.published ??
+          md?.openGraph?.publishedTime ??
+          null;
 
+        // Bild aus pm.image oder aus openGraph.images ziehen
         const ogImages = (md?.openGraph?.images ?? []) as any;
         if (!image) {
           if (pm.image) image = pm.image;
@@ -81,96 +86,53 @@ async function getLatestBlog(): Promise<BlogPost[]> {
 
       if (!date) {
         try {
-          const st = await fs.stat(path.join(blogDir, slug));
+          const st = await fs.stat(path.join(dir, slug));
           date = st.mtime.toISOString();
         } catch {
           date = new Date(0).toISOString();
         }
       }
 
-      return {
-        slug,
-        title,
-        excerpt,
-        date: date!,
-        cover: image,
-        kind: "blog" as const,
-      };
+      return { slug, title, excerpt, date: date!, image };
     })
   );
 
-  return sortByDateDesc(metas).slice(0, 6);
+  const sorted = sortByDateDesc(metas);
+  return sorted.slice(0, limit);
 }
 
-// ---- Glossar: 3 neueste ----
+// 6 neueste Blogposts
+async function getLatestBlog(): Promise<BlogPost[]> {
+  const raw = await getLatestFromDir("blog", "./blog", 6);
+  return raw.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    excerpt: p.excerpt,
+    cover: p.image,
+    date: p.date,
+    kind: "blog",
+  }));
+}
+
+// 3 neueste Glossar-Einträge
 async function getLatestGlossar(): Promise<BlogPost[]> {
-  const glossarDir = path.join(process.cwd(), "src", "app", "glossar");
-  const entries = await fs.readdir(glossarDir, { withFileTypes: true }).catch(() => []);
-  const slugs = entries.filter(e => e.isDirectory()).map(e => e.name);
-
-  const metas = await Promise.all(
-    slugs.map(async (slug) => {
-      let title = prettify(slug);
-      let excerpt = "";
-      let date: string | null = null;
-      let image: string | undefined;
-
-      try {
-        // KEIN variables Prefix – statischer Kontext ist wichtig!
-        // @ts-ignore
-        const maybeMeta = await import(/* webpackMode: "lazy" */ `./glossar/${slug}/meta`).catch(() => null);
-        // @ts-ignore
-        const mod = maybeMeta ?? (await import(/* webpackMode: "lazy" */ `./glossar/${slug}/page`).catch(() => null));
-
-        // @ts-ignore
-        const pm = mod?.postMeta ?? {};
-        // @ts-ignore
-        const md = mod?.metadata ?? {};
-        title = pm.title ?? md.title ?? title;
-        excerpt = pm.excerpt ?? pm.description ?? md.description ?? "";
-        date = pm.date ?? pm.published ?? md?.openGraph?.publishedTime ?? null;
-
-        const ogImages = (md?.openGraph?.images ?? []) as any;
-        if (!image) {
-          if (pm.image) image = pm.image;
-          else if (typeof ogImages === "string") image = ogImages;
-          else if (Array.isArray(ogImages) && ogImages.length > 0) {
-            const first = ogImages[0];
-            image = typeof first === "string" ? first : first?.url;
-          }
-        }
-      } catch {
-        // ignore – wir fallen auf Ordner-mtime zurück
-      }
-
-      if (!date) {
-        try {
-          const st = await fs.stat(path.join(glossarDir, slug));
-          date = st.mtime.toISOString();
-        } catch {
-          date = new Date(0).toISOString();
-        }
-      }
-
-      return {
-        slug,
-        title,
-        excerpt,
-        date: date!,
-        cover: image,
-        kind: "glossar" as const,
-      };
-    })
-  );
-
-  return sortByDateDesc(metas).slice(0, 3);
+  const raw = await getLatestFromDir("glossar", "./glossar", 3);
+  return raw.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    excerpt: p.excerpt,
+    cover: p.image,
+    date: p.date,
+    kind: "glossar",
+  }));
 }
 
 function HeroBanner() {
   return (
     <section className="w-full">
-      <div className="w-full max-w-4xl mx:auto px-6 pt-6">
+      <div className="w-full max-w-4xl mx-auto px-6 pt-6">
         <div className="relative min-h-[320px] sm:min-h-[420px] md:min-h-[520px] rounded-2xl overflow-hidden shadow-sm">
+          {/* Bild */}
           <Image
             src="/hautsache_gesund_hero_banner.jpg"
             alt="Gesunde Haut – Hero"
@@ -180,6 +142,8 @@ function HeroBanner() {
             sizes="100vw"
             className="object-cover"
           />
+
+          {/* Text-Overlay: zentriert unten */}
           <div className="absolute inset-x-0 bottom-0 flex items-end justify-start pb-6 px-6">
             <div
               className="w-full max-w-xl bg-white/75 backdrop-blur border rounded-2xl shadow-md p-5 sm:p-6"
@@ -194,6 +158,7 @@ function HeroBanner() {
               >
                 Gesunde Haut beginnt hier
               </h1>
+
               <p
                 className="mt-3 max-w-2xl mx-auto text-base sm:text-lg text-left"
                 style={{ color: "var(--graphite,#243236)" }}
@@ -220,8 +185,10 @@ function BlogGrid({ posts }: { posts: BlogPost[] }) {
     <section className="w-full">
       <div className="w-full max-w-4xl mx-auto px-6 py-10 sm:py-14">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Reale Beiträge */}
           {items.map((post) => (
             <Card key={`${post.kind}-${post.slug}`} className="overflow-hidden border" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
+              {/* Bild */}
               <div className="relative aspect-[16/9] bg-white">
                 {post.cover ? (
                   <Image
@@ -245,8 +212,11 @@ function BlogGrid({ posts }: { posts: BlogPost[] }) {
                     fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)",
                   }}
                 >
-                  <Link href={hrefFor(post)}>{post.title}</Link>
+                  <Link href={hrefFor(post)}>
+                    {post.title}
+                  </Link>
                 </CardTitle>
+
                 {post.excerpt ? (
                   <CardDescription className="text-[13px]" style={{ color: "var(--graphite,#243236)" }}>
                     {post.excerpt}
@@ -265,8 +235,13 @@ function BlogGrid({ posts }: { posts: BlogPost[] }) {
             </Card>
           ))}
 
+          {/* Platzhalter-Karten */}
           {Array.from({ length: placeholdersCount }).map((_, i) => (
-            <Card key={`placeholder-${i}`} className="overflow-hidden border" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
+            <Card
+              key={`placeholder-${i}`}
+              className="overflow-hidden border"
+              style={{ borderColor: "var(--sage,#CDE6DF)" }}
+            >
               <div className="relative aspect-[16/9] bg-slate-100" />
               <CardHeader>
                 <CardTitle
@@ -296,20 +271,33 @@ function BlogGrid({ posts }: { posts: BlogPost[] }) {
 }
 
 function BlogLanding({ featured, rest }: BlogLandingProps) {
+  // Für das Grid nehmen wir alle vorhandenen Posts (inkl. featured),
+  // damit maximal 9 Karten gefüllt werden.
   const all = [featured, ...rest].filter(Boolean) as BlogPost[];
+
   return (
     <main className="bg-white">
+      {/* HERO */}
       <HeroBanner />
+
+      {/* 3x3 Grid: 6 Blog + 3 Glossar */}
       <BlogGrid posts={all} />
     </main>
   );
 }
 
 // --- Datenbeschaffung ---
+// Holt 6 neueste Blogposts und 3 neueste Glossar-Einträge separat,
+// kombiniert sie (Blog zuerst), und füllt das Grid damit.
 async function getPosts(): Promise<BlogPost[]> {
   try {
     const [blog6, glossar3] = await Promise.all([getLatestBlog(), getLatestGlossar()]);
-    return [...blog6, ...glossar3];
+
+    // Blog zuerst, dann Glossar – Reihenfolge innerhalb der Gruppen bereits nach Datum
+    const combined = [...blog6, ...glossar3];
+
+    // Sicherheitsnetz: falls weniger als 9 vorhanden sind, einfach zurückgeben (Platzhalter füllen auf)
+    return combined;
   } catch (e) {
     console.error("[getPosts] Fehler:", e);
     return [];
@@ -319,7 +307,10 @@ async function getPosts(): Promise<BlogPost[]> {
 // --- Default Page ---
 export default async function Page() {
   const posts = await getPosts();
+
+  // Optional: ein Featured (erstes Element), Rest danach
   const featured = posts[0] ?? null;
   const rest = posts.slice(1);
+
   return <BlogLanding featured={featured} rest={rest} />;
 }
