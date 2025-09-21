@@ -28,18 +28,12 @@ async function getLatestPosts(limit?: number): Promise<PostMeta[]> {
       let date: string | null = null;
       let image: string | undefined;
 
-      // Try to read metadata from either ./<slug>/meta or ./<slug>/page
       try {
-        // Prefer a dedicated meta.ts if present
         // @ts-ignore - dynamic import at runtime
         const maybeMeta = await import(/* webpackMode: "lazy" */ `./${slug}/meta`).catch(() => null);
-        // @ts-ignore - fallback to reading from the page module
+        // @ts-ignore
         const mod = maybeMeta ?? (await import(/* webpackMode: "lazy" */ `./${slug}/page`).catch(() => null));
 
-        // We accept several shapes to keep it flexible
-        // 1) export const postMeta = { title, date, excerpt, image }
-        // 2) export const metadata = { title, description, openGraph: { publishedTime, images } }
-        // 3) export const published = "YYYY-MM-DD"
         // @ts-ignore
         const pm = mod?.postMeta ?? {};
         // @ts-ignore
@@ -49,12 +43,9 @@ async function getLatestPosts(limit?: number): Promise<PostMeta[]> {
         date =
           pm.date ??
           pm.published ??
-          // common place to put article date in Next metadata
           md?.openGraph?.publishedTime ??
           null;
 
-        // Bild aus pm.image oder aus openGraph.images ziehen
-        // images kann string | string[] | {url:string}[] sein
         let ogImages = md?.openGraph?.images as any;
         if (!image) {
           if (pm.image) image = pm.image;
@@ -68,7 +59,6 @@ async function getLatestPosts(limit?: number): Promise<PostMeta[]> {
         // ignore – we'll fall back to folder mtime
       }
 
-      // Fallback date = folder modified time (so sorting still works)
       if (!date) {
         try {
           const st = await fs.stat(path.join(glossarDir, slug));
@@ -86,14 +76,12 @@ async function getLatestPosts(limit?: number): Promise<PostMeta[]> {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
-  // Wenn limit gesetzt ist, schneiden – sonst alle zurückgeben
   return typeof limit === "number" ? metas.slice(0, limit) : metas;
 }
 
 export const revalidate = 3600; // ISR: re-build the list hourly
 
 export default async function glossarIndexPage() {
-  // ohne Limit -> alle Posts
   const posts = await getLatestPosts();
 
   return (
@@ -115,7 +103,7 @@ export default async function glossarIndexPage() {
             className="group block overflow-hidden rounded-2xl border border-slate-200 bg-white hover:shadow-lg transition"
           >
             {/* Cover */}
-            <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-50">
+            <div className="relative aspect-[16/6] w-full overflow-hidden bg-slate-50">
               {p.image ? (
                 <img
                   src={p.image}
@@ -135,7 +123,6 @@ export default async function glossarIndexPage() {
 
             {/* Text */}
             <div className="p-5">
-              {/* Datumsanzeige entfernt */}
               <h2 className="text-lg font-semibold leading-snug">
                 {p.title}
               </h2>
