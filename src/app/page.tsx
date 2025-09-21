@@ -1,6 +1,8 @@
 // src/app/page.tsx
 import Image from "next/image";
 import Link from "next/link";
+import fs from "node:fs/promises";
+import path from "node:path";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -14,6 +16,7 @@ type BlogPost = {
   excerpt?: string;
   cover?: string;
   date: string;
+  kind: "blog" | "glossar";
 };
 
 type BlogLandingProps = {
@@ -22,12 +25,106 @@ type BlogLandingProps = {
 };
 
 // --- Helpers ---
-function sortByDateDesc(posts: BlogPost[]) {
+const prettify = (s: string) =>
+  s.replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
+
+function sortByDateDesc<T extends { date: string }>(posts: T[]) {
   return [...posts].sort((a, b) => {
     const ta = new Date(a.date).getTime();
     const tb = new Date(b.date).getTime();
     return (Number.isFinite(tb) ? tb : 0) - (Number.isFinite(ta) ? ta : 0);
   });
+}
+
+async function getLatestFromDir(
+  baseDir: string,
+  importPrefix: string,
+  limit: number
+): Promise<Array<{ slug: string; title: string; excerpt: string; date: string; image?: string }>> {
+  const dir = path.join(process.cwd(), "src", "app", baseDir);
+  const entries = await fs.readdir(dir, { withFileTypes: true });
+  const slugs = entries.filter((e) => e.isDirectory()).map((e) => e.name);
+
+  const metas = await Promise.all(
+    slugs.map(async (slug) => {
+      let title = prettify(slug);
+      let excerpt = "";
+      let date: string | null = null;
+      let image: string | undefined;
+
+      try {
+        // @ts-ignore - dynamic import at runtime
+        const maybeMeta = await import(/* webpackMode: "lazy" */ `${importPrefix}/${slug}/meta`).catch(() => null);
+        // @ts-ignore
+        const mod = maybeMeta ?? (await import(/* webpackMode: "lazy" */ `${importPrefix}/${slug}/page`).catch(() => null));
+
+        // @ts-ignore
+        const pm = mod?.postMeta ?? {};
+        // @ts-ignore
+        const md = mod?.metadata ?? {};
+        title = pm.title ?? md.title ?? title;
+        excerpt = pm.excerpt ?? pm.description ?? md.description ?? "";
+        date =
+          pm.date ??
+          pm.published ??
+          md?.openGraph?.publishedTime ??
+          null;
+
+        // Bild aus pm.image oder aus openGraph.images ziehen
+        const ogImages = (md?.openGraph?.images ?? []) as any;
+        if (!image) {
+          if (pm.image) image = pm.image;
+          else if (typeof ogImages === "string") image = ogImages;
+          else if (Array.isArray(ogImages) && ogImages.length > 0) {
+            const first = ogImages[0];
+            image = typeof first === "string" ? first : first?.url;
+          }
+        }
+      } catch {
+        // ignore – wir fallen auf Ordner-mtime zurück
+      }
+
+      if (!date) {
+        try {
+          const st = await fs.stat(path.join(dir, slug));
+          date = st.mtime.toISOString();
+        } catch {
+          date = new Date(0).toISOString();
+        }
+      }
+
+      return { slug, title, excerpt, date: date!, image };
+    })
+  );
+
+  const sorted = sortByDateDesc(metas);
+  return sorted.slice(0, limit);
+}
+
+// 6 neueste Blogposts
+async function getLatestBlog(): Promise<BlogPost[]> {
+  const raw = await getLatestFromDir("blog", "./blog", 6);
+  return raw.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    excerpt: p.excerpt,
+    cover: p.image,
+    date: p.date,
+    kind: "blog",
+  }));
+}
+
+// 3 neueste Glossar-Einträge
+async function getLatestGlossar(): Promise<BlogPost[]> {
+  const raw = await getLatestFromDir("glossar", "./glossar", 3);
+  return raw.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    excerpt: p.excerpt,
+    cover: p.image,
+    date: p.date,
+    kind: "glossar",
+  }));
 }
 
 function HeroBanner() {
@@ -68,8 +165,6 @@ function HeroBanner() {
               >
                 Evidence-based Tipps, Routinen und Produktempfehlungen – verständlich erklärt.
               </p>
-
-           
             </div>
           </div>
         </div>
@@ -80,9 +175,11 @@ function HeroBanner() {
 
 // --- UI ---
 function BlogGrid({ posts }: { posts: BlogPost[] }) {
-  // bis zu 9 Karten, fehlende mit Platzhaltern füllen
+  // exakt 9 Slots: 6 Blog + 3 Glossar, fehlende mit Platzhaltern füllen
   const items = posts.slice(0, 9);
   const placeholdersCount = Math.max(0, 9 - items.length);
+
+  const hrefFor = (p: BlogPost) => (p.kind === "glossar" ? `/glossar/${p.slug}` : `/blog/${p.slug}`);
 
   return (
     <section className="w-full">
@@ -90,7 +187,7 @@ function BlogGrid({ posts }: { posts: BlogPost[] }) {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {/* Reale Beiträge */}
           {items.map((post) => (
-            <Card key={post.slug} className="overflow-hidden border" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
+            <Card key={`${post.kind}-${post.slug}`} className="overflow-hidden border" style={{ borderColor: "var(--sage,#CDE6DF)" }}>
               {/* Bild */}
               <div className="relative aspect-[16/9] bg-white">
                 {post.cover ? (
@@ -115,7 +212,9 @@ function BlogGrid({ posts }: { posts: BlogPost[] }) {
                     fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)",
                   }}
                 >
-                  <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                  <Link href={hrefFor(post)}>
+                    {post.title}
+                  </Link>
                 </CardTitle>
 
                 {post.excerpt ? (
@@ -125,10 +224,13 @@ function BlogGrid({ posts }: { posts: BlogPost[] }) {
                 ) : null}
               </CardHeader>
 
-              <CardContent>
+              <CardContent className="flex items-center gap-2">
                 <Button asChild size="sm">
-                  <Link href={`/blog/${post.slug}`}>Lesen</Link>
+                  <Link href={hrefFor(post)}>Lesen</Link>
                 </Button>
+                <span className="text-xs text-slate-500">
+                  {post.kind === "glossar" ? "Glossar" : "Blog"}
+                </span>
               </CardContent>
             </Card>
           ))}
@@ -149,7 +251,7 @@ function BlogGrid({ posts }: { posts: BlogPost[] }) {
                     fontFamily: "var(--font-montserrat, Montserrat, system-ui, sans-serif)",
                   }}
                 >
-                  Blog-Titel (Platzhalter)
+                  Beitragstitel (Platzhalter)
                 </CardTitle>
                 <CardDescription className="text-[13px]" style={{ color: "var(--graphite,#243236)" }}>
                   Kurzer Teaser-Satz als Platzhalter für die Beschreibung.
@@ -178,49 +280,24 @@ function BlogLanding({ featured, rest }: BlogLandingProps) {
       {/* HERO */}
       <HeroBanner />
 
-      {/* 3x3 Blog Grid */}
+      {/* 3x3 Grid: 6 Blog + 3 Glossar */}
       <BlogGrid posts={all} />
     </main>
   );
 }
 
 // --- Datenbeschaffung ---
+// Holt 6 neueste Blogposts und 3 neueste Glossar-Einträge separat,
+// kombiniert sie (Blog zuerst), und füllt das Grid damit.
 async function getPosts(): Promise<BlogPost[]> {
   try {
-    const base = process.env.NEXT_PUBLIC_SITE_URL;
-    const url = base ? new URL("/api/posts", base).toString() : "/api/posts";
+    const [blog6, glossar3] = await Promise.all([getLatestBlog(), getLatestGlossar()]);
 
-    const res = await fetch(url, {
-      cache: "no-store",
-      next: { revalidate: 0 },
-    });
+    // Blog zuerst, dann Glossar – Reihenfolge innerhalb der Gruppen bereits nach Datum
+    const combined = [...blog6, ...glossar3];
 
-    if (!res.ok) {
-      console.error("[getPosts] HTTP Error:", res.status, res.statusText);
-      return [];
-    }
-
-    const raw = (await res.json()) as unknown;
-
-    const arr = Array.isArray(raw) ? raw : (Array.isArray((raw as any)?.posts) ? (raw as any).posts : []);
-    const normalized: BlogPost[] = arr
-      .map((p: any): BlogPost | null => {
-        if (!p) return null;
-        const slug = String(p.slug ?? p.id ?? "").trim();
-        const title = String(p.title ?? "").trim();
-        const date = String(p.date ?? p.publishedAt ?? p.createdAt ?? "");
-        if (!slug || !title) return null;
-        return {
-          slug,
-          title,
-          excerpt: p.excerpt ?? p.summary ?? p.description ?? "",
-          cover: p.cover ?? p.image ?? p.thumbnail ?? "",
-          date,
-        };
-      })
-      .filter(Boolean) as BlogPost[];
-
-    return sortByDateDesc(normalized);
+    // Sicherheitsnetz: falls weniger als 9 vorhanden sind, einfach zurückgeben (Platzhalter füllen auf)
+    return combined;
   } catch (e) {
     console.error("[getPosts] Fehler:", e);
     return [];
@@ -231,6 +308,7 @@ async function getPosts(): Promise<BlogPost[]> {
 export default async function Page() {
   const posts = await getPosts();
 
+  // Optional: ein Featured (erstes Element), Rest danach
   const featured = posts[0] ?? null;
   const rest = posts.slice(1);
 
